@@ -1,23 +1,16 @@
-import logo from './logo.svg';
+import React from 'react'
 import './App.css';
+import MainPage from './pages/MainPage'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="text-green-600 text-4xl font-bold">
+     App js
+     <div className='flex'>
+     <MainPage/>
+
+     </div>
+    
     </div>
   );
 }
