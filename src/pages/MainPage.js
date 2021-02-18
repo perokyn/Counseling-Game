@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useRef, useState} from 'react'
 import BaseStepSquare from '../components/BaseStepSquare'
 import $ from "jquery";
 import figure from '../assets/figure.png'
@@ -10,7 +10,7 @@ const MainPage=(props)=>{
 
     
 const content=data
-    
+const rollTo= React.createRef() 
 ///get specific div step! TODO make this query in a loop and set innerhtml with timed functions
 $(function(){
     $("#step2").click(function(){
@@ -31,7 +31,7 @@ console.log("datalength",content.data.length)
     let time = 0;
 
     let interval = setInterval(function() { 
-        if (time <= content.data.length-1) { 
+        if (time <= 8) {             ///<=====set steps forward here   max step number=  content.data.length-1
       
             let  currentStep='#step'+time.toString()
 
@@ -67,7 +67,7 @@ console.log("datalength",content.data.length)
 
 
 
-    
+  console.log("Cube value", rollTo.current)
  // console.log("colors", setStep())
   
 
@@ -75,11 +75,15 @@ return(
 
 <div>
 
-    <div>
+    <div className=' flex mb-3 '>
+ <div className='p-3'>
 
-       <Cube/>
+Welcome to the game of All about You
+ </div>
+ <div className='bg-green-200 rounded-xl flex p-6'>
+       <Cube ref={rollTo}/>
     </div>
-
+</div>
     <div className='grid grid-cols-5 ' >
 
 

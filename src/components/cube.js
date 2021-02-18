@@ -2,67 +2,70 @@ import React, {useState} from 'react'
 import $ from "jquery";
 
 
-const Cube = () => {
+const Cube = React.forwardRef((props, ref)=>{
 
 const[rolling, setRolling]=useState(true)
 
+
+
+
 let incr=1
 
-    const roll= (start)=> {
-        
+    const roll= ()=> {
+      //console.log("startshow called",`show${incr}`)
+      
+      
+    
+        $('#cube').attr("class",`show${incr}`);
+    
+     
        
-      $('#cube').addClass(`show${incr}`);
-      if(incr===6) {
-        incr=1
-        
-      } else {
-          incr++
-        console.log("startshow called",incr)
-      }
-   
+        if(incr===6) {
+          incr=1
+          
+        } else {
+            incr++
+          
+        }
+       
+      
+      
     
 }
         
     
 
+
   
-    const startRoll=()=>{
-        let interval = setInterval(function() {   
 
-        roll(0)
 
-        },1000)      
-    }
-    
-   
 
-    const stopRoll=()=>{
-    
-roll(false)
-           console.log('Stop roll',rolling)
-      }
-    
-
+      $(function() {
+        
+         let timing = 400;
+        let interval
       
+        $("#start").click(function() {
+        
+          
+        interval = setInterval(function() {   
 
+          roll()
+  
+          },timing)
+         
+        });
+      
+        $("#stop").click(function() {
+     
+          clearInterval(interval);
+         
+          const className = $('#cube').attr('class');
+          console.log("current umber ",className ) 
 
-
-     /* const roll= (start)=> {
-        let incr=1
-       
-       
-        let interval = setInterval(function() {       
-
-      $('#cube').addClass(`show${incr}`);
-      if(incr===6) {
-        incr=1
-      } else {
-          incr++
-        console.log("startshow called",incr)
-      }
-      if(incr===3){clearInterval(interval)
-    incr=1}
-    },1000)*/
+        });
+         
+      });
 
 
 
@@ -76,7 +79,7 @@ roll(false)
 
     return (
 
-        <div>
+        <div ref={ref} value={8}>
             <div id="container">
                 <div id="cube" className="show1">
                     <div className="top"></div>
@@ -86,14 +89,16 @@ roll(false)
                     <div className="right"></div>
                     <div className="bottom"></div>
                 </div>
-                <div className='flex'>
-                    <button id='button' onClick={stopRoll} className='bg-green-400 text-white text-sm font semibold rounded-xl p-3 mt-3'> Stop Roll</button>
-                    <button id='button' onClick={startRoll} className='bg-green-400 text-white text-sm font semibold rounded-xl p-3 mt-3'>Roll</button>
+                
+        </div>
+
+        <div className='flex'>
+                    <button id='stop' className='bg-green-400 text-white text-sm font semibold rounded-xl p-3 mt-3'> Stop Roll</button>
+                    <button id='start'  className='bg-green-400 text-white text-sm font semibold rounded-xl p-3 mt-3'>Roll</button>
                 </div>
         </div>
-        </div>
     )
-}
+})
 
 
 export default Cube
