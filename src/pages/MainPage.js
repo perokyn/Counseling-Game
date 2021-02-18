@@ -3,6 +3,7 @@ import BaseStepSquare from '../components/BaseStepSquare'
 import $ from "jquery";
 import figure from '../assets/figure.png'
 import {data} from '../data/data'
+import Cube from '../components/cube'
 
 const MainPage=(props)=>{
 
@@ -65,14 +66,19 @@ console.log("datalength",content.data.length)
  
 
 
-const indexing=[0,1,2,3,4,9,8,7,6,5]
+
     
  // console.log("colors", setStep())
   
 
 return(
 
+<div>
 
+    <div>
+
+       <Cube/>
+    </div>
 
     <div className='grid grid-cols-5 ' >
 
@@ -103,6 +109,7 @@ return(
 ))}
 
 
+    </div>
     </div>
 )
 
