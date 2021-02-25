@@ -3,9 +3,9 @@ export const data={"data":
     [
     
 
-        {"text":"hello",
+        {"text":"START",
          "value":0,
-         "question":"how are you ?"
+         "question":"START"
         },
 
         {"text":"haho",

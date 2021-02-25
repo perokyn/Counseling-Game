@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
 import $ from "jquery";
-
+import Emitter from '../utils/SpecialEvents'
 
 const Cube = React.forwardRef((props, ref)=>{
 
-const[rolling, setRolling]=useState(true)
+
 
 
 
@@ -42,7 +42,7 @@ let incr=1
 
       $(function() {
         
-         let timing = 400;
+         let timing = 500;
         let interval
       
         $("#start").click(function() {
@@ -62,7 +62,8 @@ let incr=1
          
           const className = $('#cube').attr('class');
           console.log("current umber ",className ) 
-
+         Emitter.emit('ROLLED', className)
+          
         });
          
       });
@@ -79,7 +80,7 @@ let incr=1
 
     return (
 
-        <div ref={ref} value={8}>
+        <div ref={ref}  >
             <div id="container">
                 <div id="cube" className="show1">
                     <div className="top"></div>
@@ -92,9 +93,9 @@ let incr=1
                 
         </div>
 
-        <div className='flex'>
-                    <button id='stop' className='bg-green-400 text-white text-sm font semibold rounded-xl p-3 mt-3'> Stop Roll</button>
-                    <button id='start'  className='bg-green-400 text-white text-sm font semibold rounded-xl p-3 mt-3'>Roll</button>
+        <div className='flex jsutify-between'>
+                    <button id='stop' className='bg-purple-400 text-white text-sm font semibold rounded-xl p-3 mt-3 mx-1'> Stop Roll</button>
+                    <button id='start'  className='bg-green-400 text-white text-sm font semibold rounded-xl p-3 mt-3 mx-1' >Roll</button>
                 </div>
         </div>
     )

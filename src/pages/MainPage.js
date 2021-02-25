@@ -1,13 +1,33 @@
-import React, {useRef, useState} from 'react'
+import React, {useRef, useState, useEffect} from 'react'
 import BaseStepSquare from '../components/BaseStepSquare'
 import $ from "jquery";
 import figure from '../assets/figure.png'
 import {data} from '../data/data'
 import Cube from '../components/cube'
-
+import Emitter from '../utils/SpecialEvents'
 const MainPage=(props)=>{
 
+    const[currentRoll, setCurentRoll]=useState(0)
+    const[currentPosition, setCurentPosition]=useState(0)
 
+
+useEffect(()=>{
+
+
+    Emitter.on("ROLLED", (value)=>{
+        if(!currentRoll){
+
+            setCurentRoll(parseInt(value.slice(4,5)) )
+
+        }else(setCurentRoll( parseInt(value.slice(4,5)) ))
+        })
+   
+   // console.log("colors", setStep())
+    
+  
+
+
+})
     
 const content=data
 const rollTo= React.createRef() 
@@ -28,10 +48,10 @@ console.log("datalength",content.data.length)
  //check length of data and the number of times the interval runs, to keep figure visible on the last step
   const setStep=()=>{
     
-    let time = 0;
+    let time = 0;          ///<============this here can be the current position initialized to 0
 
     let interval = setInterval(function() { 
-        if (time <= 8) {             ///<=====set steps forward here   max step number=  content.data.length-1
+        if (time <= currentRoll) {             ///<=====set steps forward here   max step number=  content.data.length-1
       
             let  currentStep='#step'+time.toString()
 
@@ -65,11 +85,6 @@ console.log("datalength",content.data.length)
   setStep()
  
 
-
-
-  console.log("Cube value", rollTo.current)
- // console.log("colors", setStep())
-  
 
 return(
 
