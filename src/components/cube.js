@@ -6,7 +6,7 @@ const Cube = React.forwardRef((props, ref) => {
 
 
 
-
+const[timesRolled, setTimesRolled]=useState(0)
 
 
   let incr = 1
@@ -61,8 +61,10 @@ const Cube = React.forwardRef((props, ref) => {
       clearInterval(interval);
 
       const className = $('#cube').attr('class');
-      //console.log("current umber ",className ) 
-      Emitter.emit('ROLLED', className)
+      console.log("current umber ",className ) 
+      setTimesRolled(timesRolled+1)//keeping track number of rolls plus initiate re-render even if the rolled number === to value stored in currentRoll
+
+      Emitter.emit('ROLLED', [className,timesRolled])
 
     });
 
