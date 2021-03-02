@@ -9,34 +9,36 @@ const MainPage = (props) => {
 
     const [currentRoll, setCurentRoll] = useState(0)
     const [currentPosition, setCurrentPosition] = useState(0)
-    const[numofRoll, setNumofRoll]=useState(0)
+    const [numofRoll, setNumofRoll] = useState(0)
+
+    const [questionVisible, setQuestionVisible] = useState(false)
     const rollTo = useRef()
 
 
     useEffect(() => {
 
-       
+
         Emitter.on("ROLLED", (value) => {
 
-//FOR SOME REASON EVENT TRIGGERS 2 TIMES FROM CUBE!!
-           
+            //FOR SOME REASON EVENT TRIGGERS 2 TIMES FROM CUBE!!
+
 
             setCurentRoll(parseInt(value[0].slice(4, 5)))
             setNumofRoll(value[1])//keeping track number of rolls plus initiate re-render even if the rolled number === to value stored in currentRoll
 
         })
 
-       
+
 
         setSteps()//update roll number to currentPosiiton +currentRoll and call setStep() to execute fiure movement
 
-       // console.log('ROLL FOMR EFFECT', currentRoll)
-       // console.log('ROLL NUMBER FOMR EFFECT', numofRoll)
+        // console.log('ROLL FOMR EFFECT', currentRoll)
+        // console.log('ROLL NUMBER FOMR EFFECT', numofRoll)
         //remember this wont fire if the rolled number is the same as currentRoll in the state!!!!
 
     }, [currentRoll, numofRoll])//whatever you put there, when it is changing it will re run the functions inside useeffect
 
-    
+
 
 
 
@@ -44,13 +46,13 @@ const MainPage = (props) => {
     const content = data
 
     ///get specific div step! TODO make this query in a loop and set innerhtml with timed functions
-    $(function () {
-        $("#step2").click(function () {
-            alert('clicked')
-        })
-
-
-    })
+    /*  $(function () {
+          $("#q2").click(function () {
+              alert('clicked')
+          })
+  
+  
+      })*/
 
 
 
@@ -59,24 +61,24 @@ const MainPage = (props) => {
         //currentpiosition gets updated and keeps steps rolling to updated roll before new roll
         //onli update current position whem tehe is  a new roll.
         //if roll is less then current position , then current position wont get update due to the logic in setStep
-        
+
         setStep(currentPosition, currentRoll + currentPosition)
 
-      /*  if (currentPosition === currentRoll) {
-
-            // this is the first case at the begining of the game or in case this condition occurs until current position becomes greater then 6
-            setStep(currentPosition, currentRoll + currentPosition)
-            console.log("DO not initiate roll", currentPosition, currentRoll)
-
-
-            //setStep(currentPosition,updateRoll)
-        } else {
-
-
-            console.log("current pos is not equal to roll")
-
-            setStep(currentPosition, currentRoll + currentPosition)
-        }*/
+        /*  if (currentPosition === currentRoll) {
+  
+              // this is the first case at the begining of the game or in case this condition occurs until current position becomes greater then 6
+              setStep(currentPosition, currentRoll + currentPosition)
+              console.log("DO not initiate roll", currentPosition, currentRoll)
+  
+  
+              //setStep(currentPosition,updateRoll)
+          } else {
+  
+  
+              console.log("current pos is not equal to roll")
+  
+              setStep(currentPosition, currentRoll + currentPosition)
+          }*/
 
 
     }
@@ -108,7 +110,7 @@ const MainPage = (props) => {
 
                 let currentStep = '#step' + position.toString()
 
-
+                //TO DO SOMEWHERE HERE SET THE POPUP WINDOW IF CURRENTPOS IS DONE CALCULATING MAKE PUPUP VISIBLE WITH SATA
                 if (position > 0) {
                     let stepback = '#step' + (position - 1).toString()
                     $(function () {
@@ -119,19 +121,45 @@ const MainPage = (props) => {
 
                 $(function () {
                     $(currentStep).css('visibility', 'visible')
-
+                   //roll to current position on screen
+                   
+                    $(function (){
+                        $('html, body').animate({
+                            scrollTop: $(currentStep).offset().top-20
+                        }, 2000);
+                    });
+                
                 })
 
 
-                position++;
-                
+
+
                 if (position === goTo) {
-                  //  console.log("inititated AFTERROLL")
+                    //update current position
                     afterRoll(position)
+
                 }
+                //show questionmark for given step----------------------------
+                if (position > 0 && position === goTo) {
+                    let current_question = '#q' + position.toString()
+
+                    $(function () {
+                        setTimeout(() => { $(current_question).css('visibility', 'visible') }, 1000)
+                    })
+
+                    $(function () {
+                        $(current_question).click(function () {
+                            $(current_question).css('visibility', 'hidden')
+                        })
+                    })
+                }
+               //---------------------------------------------------------------
+
+                position++;
+
 
             } else {
-               // console.log("CLEAR INTERVAL")
+             
                 clearInterval(interval);
 
             }
@@ -148,7 +176,7 @@ const MainPage = (props) => {
 
     return (
 
-        <div>
+        <div className='relative'>
 
             <div className=' flex mb-3 '>
                 <div className='p-3'>
@@ -182,7 +210,12 @@ const MainPage = (props) => {
                         }} id={'step' + step.value.toString()} alt='figure' src={figure} className=' absolute -top-6 w-16 h-16 invisible'    ></img>
 
                         <div >
-                          
+
+                            <div className='relative grid justify-items-center items-center'>
+
+                                <div onClick={e => { setQuestionVisible(!questionVisible) }} className=' text-3xl flex p-10  bg-blue-400 rounded-lg z-10 cursor-pointer absolute' style={{ visibility: 'hidden' }} id={'q' + step.value.toString()}> <span className='animate-ping'>?</span></div>
+
+                            </div>
                             <BaseStepSquare value={step.value} content={step.text} question={step.question} />
                         </div>
                     </div>
@@ -192,6 +225,21 @@ const MainPage = (props) => {
 
 
             </div>
+
+            {questionVisible && <div className='absolute grid bg-green-300 w-full p-3 items-center' style={{ top: '0px',bottom:'0px',width:"100%" }}>
+             <div className='bg-blue-200 '>
+                <div className='flex justify-end items-center'>
+                    <span onClick={e => { setQuestionVisible(!questionVisible) }} className=' grid items-center  justify-items-center w-11 h-11 rounded-full bg-white text-xl cursor-pointer'>X</span>
+                </div>
+
+               MAIN question
+               
+              </div>          
+               </div>
+
+            }
+
+
         </div>
     )
 
