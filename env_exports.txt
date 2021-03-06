@@ -1,0 +1,8 @@
+$ export AIRTABLE_API_KEY=key7CMgeXJp3gxPkG
+AIRTABLE_API_KEY=key7CMgeXJp3gxPkG nodemon app.js
+
+AIRTABLE_API_KEY=key7CMgeXJp3gxPkG npm start
+
+set "AIRTABLE_API_KEY=key7CMgeXJp3gxPkG" && npm start
+
+ setQuestionVisible(!questionVisible) 

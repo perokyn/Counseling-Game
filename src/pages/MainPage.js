@@ -163,8 +163,6 @@ const MainPage = (props) => {
     }
 
 
-    //setSteps()
-
 
 
     return (
@@ -177,7 +175,7 @@ const MainPage = (props) => {
                <img alt='3d characters' src={game}></img>
                     
  </div>
-                <div className='bg-green-200 rounded-xl flex p-6 '>
+                <div className='bg-green-200 rounded-xl  p-6 '>
                     <Cube ref={rollTo} />
                 </div>
             </div>
