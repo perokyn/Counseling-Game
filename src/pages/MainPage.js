@@ -14,7 +14,7 @@ import ReactPlayer from 'react-player/youtube'
 const MainPage = (props) => {
 
     const [questions, setQuestions] = useState(props.data)
-    const[currentQuestion, setCurrentQuestion]=useState([])
+    const [currentQuestion, setCurrentQuestion] = useState([])
 
 
     const [currentRoll, setCurentRoll] = useState(0)
@@ -24,7 +24,10 @@ const MainPage = (props) => {
     const [questionVisible, setQuestionVisible] = useState(false)
     const rollTo = useRef()
 
-    console.log("data passed to main page", questions[0].fields.Name)
+
+const[cubeVisible, setCubeVisible]=useState(true)
+
+   // console.log("data passed to main page", questions[0].fields.Name)
     ///*Airtable data struct questions[0].fields.question ==>main question
     ///*Airtable data struct questions[0].fields.Name) ==>step tile
 
@@ -34,7 +37,7 @@ const MainPage = (props) => {
         Emitter.on("ROLLED", (value) => {
 
             //FOR SOME REASON EVENT TRIGGERS 2 TIMES FROM CUBE!!
-
+            
 
             setCurentRoll(parseInt(value[0].slice(4, 5)))
             setNumofRoll(value[1])//keeping track number of rolls plus initiate re-render even if the rolled number === to value stored in currentRoll
@@ -70,11 +73,11 @@ const MainPage = (props) => {
 
 
     const afterRoll = (position) => {
-
-
+      if(currentPosition>0){setCubeVisible(!cubeVisible)}
+        
         setCurrentPosition(position)///this was currentPosition +postion before, DO NOT EVER MODIFY CURRENTPOS, IT is being updated after every roll end with position++. ONLY update currentroll by adding currentposition to it!!
 
-        console.log('CURRENT POS after roll:', position,)
+        //console.log('CURRENT POS after roll:', position,)
 
 
     }
@@ -95,9 +98,14 @@ const MainPage = (props) => {
             }, 2000);
         });
 
+    }
 
 
+    const handleQuestionClose_CubeVisible=()=>{
 
+        setQuestionVisible(!questionVisible) 
+        if(currentPosition>0){setCubeVisible(!cubeVisible)}
+        
 
     }
 
@@ -171,13 +179,15 @@ const MainPage = (props) => {
 
             <div className=' flex mb-3 '>
                 <div className='p-3'>
-                Welcome to the game of All about You
+                    Welcome to the game of All about You
                <img alt='3d characters' src={game}></img>
-                    
- </div>
-                <div className='bg-green-200 rounded-xl  p-6 '>
-                    <Cube ref={rollTo} />
+
                 </div>
+        {cubeVisible && !questionVisible && <div className='bg-green-200 rounded-xl  p-6 absolute'>
+                    <Cube ref={rollTo} />
+                </div>}
+              
+
             </div>
             <div className='grid grid-cols-5 ' >
 
@@ -206,7 +216,7 @@ const MainPage = (props) => {
                             <div className='relative grid justify-items-center items-center'>
 
                                 <div onClick={e => { handleQuestionVisible(e) }}
-                                onMouseDown={()=>{setCurrentQuestion([step.fields.question,step.fields.media])}}//passing question data to popup window
+                                    onMouseDown={() => { setCurrentQuestion([step.fields.question, step.fields.media]) }}//passing question data to popup window
                                     className=' text-3xl flex p-10  bg-blue-400 rounded-lg z-10 cursor-pointer absolute'
                                     style={{ visibility: 'hidden' }}
                                     id={'q' + step.fields.id.toString()}>
@@ -228,16 +238,16 @@ const MainPage = (props) => {
                 <div className='bg-blue-200 rounded-xl p-3 shadow-2xl'>
 
                     <div id='mainquestion' className='flex justify-end items-center'>
-                        <span onClick={e => { setQuestionVisible(!questionVisible) }} className=' grid items-center  justify-items-center w-11 h-11 rounded-full bg-white hover:bg-gray-200 text-xl text-blue-500 cursor-pointer'>X</span>
+                        <span onClick={e => { handleQuestionClose_CubeVisible() }} className=' grid items-center  justify-items-center w-11 h-11 rounded-full bg-white hover:bg-gray-200 text-xl text-blue-500 cursor-pointer'>X</span>
                     </div>
 
                     <div className='grid justify-items-center'>
-       
-                 <p className=' text-gray-600 text-3xl font-semibold my-2'>{currentQuestion[0]}</p>
-                {currentQuestion[1] && <ReactPlayer url={currentQuestion[1]} />}
-                </div>
 
-              </div>
+                        <p className=' text-gray-600 text-3xl font-semibold my-2'>{currentQuestion[0]}</p>
+                        {currentQuestion[1] && <ReactPlayer url={currentQuestion[1]} />}
+                    </div>
+
+                </div>
             </div>
 
             }
