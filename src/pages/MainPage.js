@@ -25,40 +25,56 @@ const MainPage = (props) => {
     const rollTo = useRef()
 
 
-const[cubeVisible, setCubeVisible]=useState(true)
-
-   // console.log("data passed to main page", questions[0].fields.Name)
-    ///*Airtable data struct questions[0].fields.question ==>main question
-    ///*Airtable data struct questions[0].fields.Name) ==>step tile
-
-    useEffect(() => {
-
-
-        Emitter.on("ROLLED", (value) => {
-
-            //FOR SOME REASON EVENT TRIGGERS 2 TIMES FROM CUBE!!
-            
-
-            setCurentRoll(parseInt(value[0].slice(4, 5)))
-            setNumofRoll(value[1])//keeping track number of rolls plus initiate re-render even if the rolled number === to value stored in currentRoll
-
-        })
-
-
-
-        setSteps()//update roll number to currentPosiiton +currentRoll and call setStep() to execute fiure movement
-
-
-        //remember this wont fire if the rolled number is the same as currentRoll in the state!!!!
-
-    }, [currentRoll, numofRoll])//whatever you put there, when it is changing it will re run the functions inside useeffect
-
-
-
-
+    const [cubeVisible, setCubeVisible] = useState(true)
 
 
     const content = questions
+
+    // console.log("data passed to main page", questions[0].fields.Name)
+    ///*Airtable data struct questions[0].fields.question ==>main question
+    ///*Airtable data struct questions[0].fields.Name) ==>step tile
+
+    // useEffect(() => {
+
+
+    //     Emitter.on("ROLLED", (value) => {
+
+    //         //FOR SOME REASON EVENT TRIGGERS 2 TIMES FROM CUBE!!
+
+
+    //        // setCurentRoll(parseInt(value[0].slice(4, 5)))  this will slice the value from old_cube.js from now on we only pass numerical values!!
+    //        setCurentRoll(value[0])
+    //         setNumofRoll(value[1])//keeping track number of rolls plus initiate re-render even if the rolled number === to value stored in currentRoll
+
+    //     })
+
+
+
+    //     setSteps()//update roll number to currentPosiiton +currentRoll and call setStep() to execute fiure movement
+
+
+    //     //remember this wont fire if the rolled number is the same as currentRoll in the state!!!!
+
+    // })//whatever you put there, when it is changing it will re run the functions inside useeffect
+
+
+    const startRoll = () => {
+
+
+
+
+
+        setNumofRoll(numofRoll + 1)//keeping track number of rolls plus initiate re-render even if the rolled number === to value stored in currentRoll
+        setCurentRoll(Math.floor(Math.random() * 6) + 1)
+
+
+
+    }
+
+
+
+
+
 
 
 
@@ -73,11 +89,13 @@ const[cubeVisible, setCubeVisible]=useState(true)
 
 
     const afterRoll = (position) => {
-      if(currentPosition>0){setCubeVisible(!cubeVisible)}
-        
+        if (currentPosition > 0) { setCubeVisible(!cubeVisible) }
+
         setCurrentPosition(position)///this was currentPosition +postion before, DO NOT EVER MODIFY CURRENTPOS, IT is being updated after every roll end with position++. ONLY update currentroll by adding currentposition to it!!
 
         //console.log('CURRENT POS after roll:', position,)
+        // let currentLocation=document.querySelector("#step"+position)
+        // console.log("here we are",currentLocation.getBoundingClientRect().y)
 
 
     }
@@ -101,13 +119,40 @@ const[cubeVisible, setCubeVisible]=useState(true)
     }
 
 
-    const handleQuestionClose_CubeVisible=()=>{
+    const handleQuestionClose_CubeVisible = () => {
 
-        setQuestionVisible(!questionVisible) 
-        if(currentPosition>0){setCubeVisible(!cubeVisible)}
-        
+        setQuestionVisible(!questionVisible)
+        setTimeout(() => {
+            setCubeVisible(!cubeVisible)
+            //get the current position of the div where the question is showed
+            let currentLocation = document.querySelector("#step" + currentPosition)
+            console.log("here we are", currentLocation.getBoundingClientRect().y, 'and this is scroll', window.scrollY)
+            //calculate y position of currently active step and show cube there
+            const newTop = currentLocation.getBoundingClientRect().y
+            //calculate x position of currently active step and show cube there
+            const newLeft = currentLocation.getBoundingClientRect().x
+            const cubeFrame = document.querySelector('#cubeFrame')
+            cubeFrame.style.top = (newTop + window.scrollY).toString() + 'px'
+            cubeFrame.style.left = (newLeft + window.scrollX).toString() + 'px'
+            console.log("STYLE", newTop.toString() + 'px')
+
+        }, 2000)
 
     }
+
+    //TO DO  show current roll on sto roll
+    //INtegrate https://www.pubnub.com/blog/build-a-multiplayer-tic-tac-toe-game-in-react/?fbclid=IwAR1UMo0EQxKkVzpP1ypQEQpaTrBFBJD80fJpV8s_4BCQxdGty1F1tinUROE
+    //for two player game
+    ///mousedown forwarded from cube
+    const handleStopRoll = () => {
+        setTimeout(() => { setSteps() }, 1000)//TODO----solve issue of showwing figure on start-------------------------------!!!!
+        console.log("CURRENTROLL", currentRoll)
+        setTimeout(() => { setCubeVisible(!cubeVisible) }, 2000)
+    }
+
+
+
+    //===================FIGURE STEP LOGIC=============================================
 
     const setStep = (position, goTo) => {
 
@@ -120,7 +165,6 @@ const[cubeVisible, setCubeVisible]=useState(true)
 
                 let currentStep = '#step' + position.toString()
 
-                //TO DO SOMEWHERE HERE SET THE POPUP WINDOW IF CURRENTPOS IS DONE CALCULATING MAKE PUPUP VISIBLE WITH SATA
                 if (position > 0) {
                     let stepback = '#step' + (position - 1).toString()
                     $(function () {
@@ -183,10 +227,12 @@ const[cubeVisible, setCubeVisible]=useState(true)
                <img alt='3d characters' src={game}></img>
 
                 </div>
-        {cubeVisible && !questionVisible && <div className='bg-green-200 rounded-xl  p-6 absolute'>
-                    <Cube ref={rollTo} />
-                </div>}
-              
+                {cubeVisible && !questionVisible &&
+                    <div id='cubeFrame' className='bg-green-200 rounded-xl  p-6 absolute z-40 '>
+                        
+                        <Cube  currentRoll={currentRoll} onMouseDown={() => handleStopRoll()} onClick={startRoll} ref={rollTo} />
+                    </div>}
+
 
             </div>
             <div className='grid grid-cols-5 ' >
