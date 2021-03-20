@@ -30,34 +30,7 @@ const MainPage = (props) => {
 
     const content = questions
 
-    // console.log("data passed to main page", questions[0].fields.Name)
-    ///*Airtable data struct questions[0].fields.question ==>main question
-    ///*Airtable data struct questions[0].fields.Name) ==>step tile
-
-    // useEffect(() => {
-
-
-    //     Emitter.on("ROLLED", (value) => {
-
-    //         //FOR SOME REASON EVENT TRIGGERS 2 TIMES FROM CUBE!!
-
-
-    //        // setCurentRoll(parseInt(value[0].slice(4, 5)))  this will slice the value from old_cube.js from now on we only pass numerical values!!
-    //        setCurentRoll(value[0])
-    //         setNumofRoll(value[1])//keeping track number of rolls plus initiate re-render even if the rolled number === to value stored in currentRoll
-
-    //     })
-
-
-
-    //     setSteps()//update roll number to currentPosiiton +currentRoll and call setStep() to execute fiure movement
-
-
-    //     //remember this wont fire if the rolled number is the same as currentRoll in the state!!!!
-
-    // })//whatever you put there, when it is changing it will re run the functions inside useeffect
-
-
+   
     const startRoll = () => {
 
 
@@ -93,10 +66,7 @@ const MainPage = (props) => {
 
         setCurrentPosition(position)///this was currentPosition +postion before, DO NOT EVER MODIFY CURRENTPOS, IT is being updated after every roll end with position++. ONLY update currentroll by adding currentposition to it!!
 
-        //console.log('CURRENT POS after roll:', position,)
-        // let currentLocation=document.querySelector("#step"+position)
-        // console.log("here we are",currentLocation.getBoundingClientRect().y)
-
+   
 
     }
 
@@ -140,7 +110,7 @@ const MainPage = (props) => {
 
     }
 
-    //TO DO  show current roll on sto roll
+    //TO DO  
     //INtegrate https://www.pubnub.com/blog/build-a-multiplayer-tic-tac-toe-game-in-react/?fbclid=IwAR1UMo0EQxKkVzpP1ypQEQpaTrBFBJD80fJpV8s_4BCQxdGty1F1tinUROE
     //for two player game
     ///mousedown forwarded from cube
