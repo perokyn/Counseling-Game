@@ -30,16 +30,11 @@ const MainPage = (props) => {
 
     const content = questions
 
-   
+
     const startRoll = () => {
-
-
-
-
 
         setNumofRoll(numofRoll + 1)//keeping track number of rolls plus initiate re-render even if the rolled number === to value stored in currentRoll
         setCurentRoll(Math.floor(Math.random() * 6) + 1)
-
 
 
     }
@@ -53,12 +48,27 @@ const MainPage = (props) => {
 
 
     const setSteps = () => {
+       //this gets a call from handleStop roll which tsrats to animate the figure
+       //this is where maybe add  aswitch statement to handle player1 and player2 
+       //this method should also be called from use Effect when data is avaliable form player2
+//        let player='player1'
+//        switch(player){
+    
+//         case 'player1':
+
+//          setStep(currentPosition, currentRoll + currentPosition)
+//          break
+//        case'player2':
+//        setStep(currentPosition, currentRoll + currentPosition)
+//        break
+       
+
+// default: setStep(currentPosition, currentRoll + currentPosition)
+//        }
+//         setStep(currentPosition, currentRoll + currentPosition)
 
 
-        setStep(currentPosition, currentRoll + currentPosition)
-
-
-    }
+//     }
 
 
     const afterRoll = (position) => {
@@ -66,7 +76,7 @@ const MainPage = (props) => {
 
         setCurrentPosition(position)///this was currentPosition +postion before, DO NOT EVER MODIFY CURRENTPOS, IT is being updated after every roll end with position++. ONLY update currentroll by adding currentposition to it!!
 
-   
+
 
     }
 
@@ -113,9 +123,10 @@ const MainPage = (props) => {
     //TO DO  
     //INtegrate https://www.pubnub.com/blog/build-a-multiplayer-tic-tac-toe-game-in-react/?fbclid=IwAR1UMo0EQxKkVzpP1ypQEQpaTrBFBJD80fJpV8s_4BCQxdGty1F1tinUROE
     //for two player game
-    ///mousedown forwarded from cube
+
+
     const handleStopRoll = () => {
-        setTimeout(() => { setSteps() }, 1000)//TODO----solve issue of showwing figure on start-------------------------------!!!!
+        setTimeout(() => { setSteps() }, 1000)//TODO----solve issue of showwing figure on start-------------------------------!!!!    //this is where maybe add  aswitch statement to handle player1 and player2 steps
         console.log("CURRENTROLL", currentRoll)
         setTimeout(() => { setCubeVisible(!cubeVisible) }, 2000)
     }
@@ -199,8 +210,8 @@ const MainPage = (props) => {
                 </div>
                 {cubeVisible && !questionVisible &&
                     <div id='cubeFrame' className='bg-green-200 rounded-xl  p-6 absolute z-40 '>
-                        
-                        <Cube  currentRoll={currentRoll} onMouseDown={() => handleStopRoll()} onClick={startRoll} ref={rollTo} />
+
+                        <Cube currentRoll={currentRoll} onMouseDown={() => handleStopRoll()} onClick={startRoll} ref={rollTo} />
                     </div>}
 
 
