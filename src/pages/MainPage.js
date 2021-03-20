@@ -68,7 +68,7 @@ const MainPage = (props) => {
 //         setStep(currentPosition, currentRoll + currentPosition)
 
 
-//     }
+    }
 
 
     const afterRoll = (position) => {
