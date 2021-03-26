@@ -27,9 +27,44 @@ const MainPage = (props) => {
 
     const [cubeVisible, setCubeVisible] = useState(true)
 
-
     const content = questions
 
+
+//TO DO remember to learn how to set state fetures and not upodate the whole state!!!! SPREAD OPERATOR!!!{...p1State, currentPosition=position}
+
+    const [p1State, setP1State] = useState({
+
+        playing: false,
+        rolled: false,
+        currentPosition: 0,
+        currentRoll: 6,
+        setCurrentQuestion: '',
+        questionVisible: false,
+        numofRoll: 0
+
+    })
+
+
+
+
+
+    //===PLAYERE 2 LOGIC======================\\
+
+    //p2 state
+    const [p2State, setP2State] = useState({
+
+        playing: false,
+        rolled: false,
+        currentPosition: 0,
+        currentRoll: 6,
+        setCurrentQuestion: '',
+        questionVisible: false,
+        numofRoll: 0
+
+    })
+
+
+    console.log('Player2', p2State)
 
     const startRoll = () => {
 
@@ -43,31 +78,27 @@ const MainPage = (props) => {
 
 
 
-
-
-
-
     const setSteps = () => {
-       //this gets a call from handleStop roll which tsrats to animate the figure
-       //this is where maybe add  aswitch statement to handle player1 and player2 
-       //this method should also be called from use Effect when data is avaliable form player2
-//        let player='player1'
-//        switch(player){
-    
-//         case 'player1':
+        //this gets a call from handleStop roll which tsrats to animate the figure
+        //this is where maybe add  aswitch statement to handle player1 and player2 
+        //this method should also be called from use Effect when data is avaliable form player2
+        let player = 'player1'
+        switch (player) {
 
-//          setStep(currentPosition, currentRoll + currentPosition)
-//          break
-//        case'player2':
-//        setStep(currentPosition, currentRoll + currentPosition)
-//        break
-       
+            case 'player1':
 
-// default: setStep(currentPosition, currentRoll + currentPosition)
-//        }
-//         setStep(currentPosition, currentRoll + currentPosition)
+                setStep(currentPosition, currentRoll + currentPosition)
+                break
+            case 'player2':
+                setStep(p2State.currentPosition, p2State.currentRoll + p2State.currentPosition)
+                break
 
 
+            default: setStep(currentPosition, currentRoll + currentPosition)
+        }
+
+
+        //setStep(currentPosition, currentRoll + currentPosition)
     }
 
 
@@ -81,7 +112,7 @@ const MainPage = (props) => {
     }
 
 
-    //==========Roll to question idnow top
+    //==========Roll to question widnow top
     const handleQuestionVisible = (e) => {
         setQuestionVisible(!questionVisible)
 
@@ -211,7 +242,14 @@ const MainPage = (props) => {
                 {cubeVisible && !questionVisible &&
                     <div id='cubeFrame' className='bg-green-200 rounded-xl  p-6 absolute z-40 '>
 
-                        <Cube currentRoll={currentRoll} onMouseDown={() => handleStopRoll()} onClick={startRoll} ref={rollTo} />
+                        {
+                            p2State.playing ?
+                                <div>Player 2 is rolling</div> :
+                                <Cube currentRoll={currentRoll} onMouseDown={() => handleStopRoll()} onClick={startRoll} ref={rollTo} />
+                        }
+
+
+
                     </div>}
 
 
