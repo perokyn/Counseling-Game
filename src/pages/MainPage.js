@@ -5,7 +5,6 @@ import figure from '../assets/figure.png'
 import game from '../assets/game.png'
 import { data } from '../data/data'
 import Cube from '../components/cube'
-import Emitter from '../utils/SpecialEvents'
 import ReactPlayer from 'react-player/youtube'
 
 
@@ -14,12 +13,10 @@ import ReactPlayer from 'react-player/youtube'
 const MainPage = (props) => {
 
     const [questions, setQuestions] = useState(props.data)
-    const [currentQuestion, setCurrentQuestion] = useState([])
-
-
-    const [currentRoll, setCurentRoll] = useState(0)
-    const [currentPosition, setCurrentPosition] = useState(0)
-    const [numofRoll, setNumofRoll] = useState(0)
+   // const [currentQuestion, setCurrentQuestion] = useState([])
+   //const [currentRoll, setCurentRoll] = useState(0)
+  //  const [currentPosition, setCurrentPosition] = useState(0)
+   // const [numofRoll, setNumofRoll] = useState(0)
 
     const [questionVisible, setQuestionVisible] = useState(false)
     const rollTo = useRef()
@@ -37,10 +34,10 @@ const MainPage = (props) => {
         playing: false,
         rolled: false,
         currentPosition: 0,
-        currentRoll: 6,
+        currentRoll: 0,
         setCurrentQuestion: '',
         questionVisible: false,
-        numofRoll: 0
+        numofRoll: 0,
 
     })
 
@@ -64,13 +61,16 @@ const MainPage = (props) => {
     })
 
 
-    console.log('Player2', p2State)
+    console.log('Player1', p1State)
 
     const startRoll = () => {
-
-        setNumofRoll(numofRoll + 1)//keeping track number of rolls plus initiate re-render even if the rolled number === to value stored in currentRoll
-        setCurentRoll(Math.floor(Math.random() * 6) + 1)
-
+        //setP1State({...p1State, numofRoll:2})
+        //setP1State({...p1State, numofRoll:4})//<---why is this not updating????
+        console.log('NUMROLL',(p1State.numofRoll + 1))
+     //   setNumofRoll(numofRoll + 1)//keeping track number of rolls plus initiate re-render even if the rolled number === to value stored in currentRoll
+//setCurentRoll(Math.floor(Math.random() * 6) + 1)
+        setP1State({...p1State, currentRoll:(Math.floor(Math.random() * 6) + 1), numofRoll:p1State.numofRoll+1})
+       
 
     }
 
@@ -87,14 +87,14 @@ const MainPage = (props) => {
 
             case 'player1':
 
-                setStep(currentPosition, currentRoll + currentPosition)
+                setStep(p1State.currentPosition, p1State.currentRoll + p1State.currentPosition)
                 break
             case 'player2':
                 setStep(p2State.currentPosition, p2State.currentRoll + p2State.currentPosition)
                 break
 
 
-            default: setStep(currentPosition, currentRoll + currentPosition)
+            default: setStep(p1State.currentPosition, p1State.currentRoll + p1State.currentPosition)
         }
 
 
@@ -103,10 +103,10 @@ const MainPage = (props) => {
 
 
     const afterRoll = (position) => {
-        if (currentPosition > 0) { setCubeVisible(!cubeVisible) }
+        if (p1State.currentPosition > 0) { setCubeVisible(!cubeVisible) }
 
-        setCurrentPosition(position)///this was currentPosition +postion before, DO NOT EVER MODIFY CURRENTPOS, IT is being updated after every roll end with position++. ONLY update currentroll by adding currentposition to it!!
-
+     //   setCurrentPosition(position)///this was currentPosition +postion before, DO NOT EVER MODIFY CURRENTPOS, IT is being updated after every roll end with position++. ONLY update currentroll by adding currentposition to it!!
+       setP1State({...p1State, currentPosition:position})
 
 
     }
@@ -136,7 +136,7 @@ const MainPage = (props) => {
         setTimeout(() => {
             setCubeVisible(!cubeVisible)
             //get the current position of the div where the question is showed
-            let currentLocation = document.querySelector("#step" + currentPosition)
+            let currentLocation = document.querySelector("#step" + p1State.currentPosition)
             console.log("here we are", currentLocation.getBoundingClientRect().y, 'and this is scroll', window.scrollY)
             //calculate y position of currently active step and show cube there
             const newTop = currentLocation.getBoundingClientRect().y
@@ -158,7 +158,7 @@ const MainPage = (props) => {
 
     const handleStopRoll = () => {
         setTimeout(() => { setSteps() }, 1000)//TODO----solve issue of showwing figure on start-------------------------------!!!!    //this is where maybe add  aswitch statement to handle player1 and player2 steps
-        console.log("CURRENTROLL", currentRoll)
+        console.log("CURRENTROLL", p1State.currentRoll)
         setTimeout(() => { setCubeVisible(!cubeVisible) }, 2000)
     }
 
@@ -245,7 +245,7 @@ const MainPage = (props) => {
                         {
                             p2State.playing ?
                                 <div>Player 2 is rolling</div> :
-                                <Cube currentRoll={currentRoll} onMouseDown={() => handleStopRoll()} onClick={startRoll} ref={rollTo} />
+                                <Cube currentRoll={p1State.currentRoll} onMouseDown={() => handleStopRoll()} onClick={startRoll} ref={rollTo} />
                         }
 
 
@@ -281,7 +281,7 @@ const MainPage = (props) => {
                             <div className='relative grid justify-items-center items-center'>
 
                                 <div onClick={e => { handleQuestionVisible(e) }}
-                                    onMouseDown={() => { setCurrentQuestion([step.fields.question, step.fields.media]) }}//passing question data to popup window
+                                    onMouseDown={() => {setP1State({...p1State, currentQuestion:[step.fields.question, step.fields.media]})  }}//passing question data to popup window
                                     className=' text-3xl flex p-10  bg-blue-400 rounded-lg z-10 cursor-pointer absolute'
                                     style={{ visibility: 'hidden' }}
                                     id={'q' + step.fields.id.toString()}>
@@ -308,8 +308,8 @@ const MainPage = (props) => {
 
                     <div className='grid justify-items-center'>
 
-                        <p className=' text-gray-600 text-3xl font-semibold my-2'>{currentQuestion[0]}</p>
-                        {currentQuestion[1] && <ReactPlayer url={currentQuestion[1]} />}
+                        <p className=' text-gray-600 text-3xl font-semibold my-2'>{p1State.currentQuestion[0]}</p>
+                        {p1State.currentQuestion[1] && <ReactPlayer url={p1State.currentQuestion[1]} />}
                     </div>
 
                 </div>
