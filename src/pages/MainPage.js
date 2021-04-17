@@ -8,6 +8,10 @@ import Cube from '../components/cube'
 import ReactPlayer from 'react-player/youtube'
 
 
+//-ytesting scaledrone
+import TestDrone from '../components/testDrone'
+import ConnectScaledrone from '../components/cscaledrone_connect'
+
 
 
 const MainPage = (props) => {
@@ -287,7 +291,7 @@ gameStart()
 
                     </div>} */}
 
-
+<TestDrone/>
             </div>
             <div className='grid grid-cols-5 ' >
 
