@@ -63,38 +63,15 @@ const MainPage = (props) => {
 
     console.log('Player1', p1State)
 
-//================================================================================================================================
-//=======================END PLAYERS STATE SETUP====================================================================\
-//================================================================================================================================
-
-
-
-
-
-//++===ON GAME START========================
-//show cube at first step
-
-const gameStart=()=>{
-
-if(p1State.currentPosition===0 && cubeVisible){
-
-    let cube_position = '#cube' + p1State.currentPosition.toString()
-    $(cube_position).css('visibility', 'visible')
-}
-
-}
-
-
-gameStart()
-
-//==================================================================================
-
-//===============SET ROLL NUMBER FOR player1=======================================//
     const startRoll = () => {
-
+        //setP1State({...p1State, numofRoll:2})
+        //setP1State({...p1State, numofRoll:4})//<---why is this not updating????
         console.log('NUMROLL',(p1State.numofRoll + 1))
+     //   setNumofRoll(numofRoll + 1)//keeping track number of rolls plus initiate re-render even if the rolled number === to value stored in currentRoll
+//setCurentRoll(Math.floor(Math.random() * 6) + 1)
         setP1State({...p1State, currentRoll:(Math.floor(Math.random() * 6) + 1), numofRoll:p1State.numofRoll+1})
        
+
     }
 
 
@@ -126,8 +103,8 @@ gameStart()
 
 
     const afterRoll = (position) => {
-        if (p1State.currentPosition > 0) { setCubeVisible(!cubeVisible)   }
-        
+        if (p1State.currentPosition > 0) { setCubeVisible(!cubeVisible) }
+
      //   setCurrentPosition(position)///this was currentPosition +postion before, DO NOT EVER MODIFY CURRENTPOS, IT is being updated after every roll end with position++. ONLY update currentroll by adding currentposition to it!!
        setP1State({...p1State, currentPosition:position})
 
@@ -153,21 +130,26 @@ gameStart()
     }
 
 
-
-    //=========QUESTION CLOSED SHOW CUBE AT LOCATION==============
     const handleQuestionClose_CubeVisible = () => {
 
         setQuestionVisible(!questionVisible)
-        setCubeVisible(!cubeVisible)
-
-        
         setTimeout(() => {
-           //show cube after question closed
-            if(!cubeVisible){let cube_position = '#cube' + p1State.currentPosition.toString()
-              $(cube_position).css('visibility', 'visible') 
-    }
-            
-          
+            setCubeVisible(!cubeVisible)
+            let cube_position = '#cube' + p1State.currentPosition.toString()
+            setTimeout(() => { $(cube_position).css('visibility', 'visible') }, 1000)
+    
+            //get the current position of the div where the question is showed
+            let currentLocation = document.querySelector("#step" + p1State.currentPosition)
+            console.log('CUBE LOCATION:', currentLocation)
+            console.log("here we are", currentLocation.getBoundingClientRect().y, 'and this is scroll', window.scrollY)
+            //calculate y position of currently active step and show cube there
+            const newTop = currentLocation.getBoundingClientRect().y
+            //calculate x position of currently active step and show cube there
+            const newLeft = currentLocation.getBoundingClientRect().x
+            const cubeFrame = document.querySelector('#cubeFrame')
+            cubeFrame.style.top = (newTop + window.scrollY).toString() + 'px'
+            cubeFrame.style.left = (newLeft + window.scrollX).toString() + 'px'
+            console.log("STYLE", newTop.toString() + 'px')
 
         }, 2000)
 
@@ -183,15 +165,7 @@ gameStart()
         console.log("CURRENTROLL", p1State.currentRoll)
 
 
-        setTimeout(() => { setCubeVisible(!cubeVisible)
-        
-        
-            let cube_position = '#cube' + p1State.currentPosition.toString()
-            $(cube_position).css('visibility', 'hidden') 
-   
-   
-        
-        }, 2000)
+        setTimeout(() => { setCubeVisible(!cubeVisible) }, 2000)
 
       
     }
@@ -274,7 +248,7 @@ gameStart()
                <img alt='3d characters' src={game}></img>
 
                 </div>
-                {/* {cubeVisible && !questionVisible &&
+                {cubeVisible && !questionVisible &&
                     <div id='cubeFrame' className='bg-green-200 rounded-xl  p-6 absolute z-40 '>
 
                         {
@@ -285,7 +259,7 @@ gameStart()
 
 
 
-                    </div>} */}
+                    </div>}
 
 
             </div>
@@ -328,32 +302,10 @@ gameStart()
 
                                  {/*HANDLE SHOW CUBE DIV*/ }
                                  {/*Show cube at current location, id is a combination of the current locatio + cube, get the idea adn set visibility */ }
-                                <div  className='text-xl text-black absolute -top-14   ritgh-0'
+                                <div  className='text-xl text-black absolute top-2  w-16 h-16 ritgh-0'
                                   id={'cube' + step.fields.id.toString()}
                                   style={{ visibility: 'hidden' }}
-                                  > cube
-                                  
-                                  
-                                  
-                                  {cubeVisible && !questionVisible &&
-                    <div id='cubeFrame' className='bg-green-200 rounded-xl  p-6 absolute z-40 '>
-
-                        {
-                            p2State.playing ?
-                                <div>Player 2 is rolling</div> :
-                                <Cube currentRoll={p1State.currentRoll} onMouseDown={() => handleStopRoll()} onClick={startRoll} ref={rollTo} />
-                        }
-
-
-
-                    </div>}
-
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  </div>
+                                  > cube</div>
 
                             </div>
                             <BaseStepSquare value={step.fields.id} content={step.fields.question} question={step.fields.Name} />
