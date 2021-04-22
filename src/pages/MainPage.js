@@ -9,7 +9,7 @@ import ReactPlayer from 'react-player/youtube'
 
 
 //-ytesting scaledrone
-import TestDrone from '../components/testDrone'
+import TestDrone from '../components/testDrone'//REMEMBER TO NOT CALL THIS AS A COMPONENt BUT EXPORT FUNcTIONS to avoid coNITNuOUS CONNECTING at each render!!
 import ConnectScaledrone from '../components/cscaledrone_connect'
 
 
