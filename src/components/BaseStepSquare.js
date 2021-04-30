@@ -35,7 +35,6 @@ return(
     </div>
 )
 
-
 })
 
 export default BaseStepSquare
