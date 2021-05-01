@@ -2,7 +2,6 @@
 import React, { Component, useState } from "react";
 
 
-
 class ConnectScaledrone extends Component{
 
     state = {
