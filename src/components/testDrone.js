@@ -53,12 +53,6 @@ const TestDrone = () => {
 
 
 
-
-
-
-
-
-
     const sendMessage = () => {
 
 
