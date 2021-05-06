@@ -67,9 +67,6 @@ sendMessage(){
 
 }
 
-
-
-
     render(){
 return(
 
