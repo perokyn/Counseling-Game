@@ -9,8 +9,8 @@ import ReactPlayer from 'react-player/youtube'
 
 
 //-ytesting scaledrone
-import TestDrone from '../components/testDrone'//REMEMBER TO NOT CALL THIS AS A COMPONENt BUT EXPORT FUNcTIONS to avoid coNITNuOUS CONNECTING at each render!!
-import ConnectScaledrone from '../components/cscaledrone_connect'
+// import {TestDrone} from '../components/testDrone'//REMEMBER TO NOT CALL THIS AS A COMPONENt BUT EXPORT FUNcTIONS to avoid coNITNuOUS CONNECTING at each render!!
+// import ConnectScaledrone from '../components/cscaledrone_connect'
 
 
 
@@ -291,7 +291,6 @@ gameStart()
 
                     </div>} */}
 
-<TestDrone/>
             </div>
             <div className='grid grid-cols-5 ' >
 

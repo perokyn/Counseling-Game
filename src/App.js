@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import './App.css';
-import MainPage from './pages/MainPage'
-
+import HomePage from './pages/Home'
+import {TestDrone} from './components/testDrone'
 function App() {
 
   const[data, setdata]=useState()
@@ -42,9 +42,9 @@ if (data){console.log("data is in")}else{
   
   return (
     <div className="text-gray-300 text-4xl font-bold grid justify-items-center bg-gray-400">
-  
+  <TestDrone/>
      <div className='flex mx-2 p-6'>
-       {data?<MainPage data={data}/>:<div className='text-4xl text-red-200'>Loading Data from Airtable...</div>}
+       {data?<HomePage data={data}/>:<div className='text-4xl text-red-200'>Loading Data from Airtable...</div>}
      
 
      </div>
