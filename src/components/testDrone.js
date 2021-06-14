@@ -96,8 +96,11 @@ if (room){
 
 
     const sendMessage = () => {
-        if(drone){ drone.drone.publish({
-            room: 'general-chat',
+        if(drone){ 
+            
+            console.log("attempting message")
+            drone.drone.publish({
+            room: 'observable-room',
             message: {
               name: "player",
               content: "lets wrokout"
