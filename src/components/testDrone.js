@@ -5,7 +5,23 @@ import React, { Component, useState, useEffect } from "react";
 ///   TO_DO TRANSPLANT this to MainPage and connection is ready between the two players :)
 //SOLVE MULTIPLE RENDERINGS IN MAIN PAGE it causes multiple signups to scaledrone!
 //JUSt call this function and do not render it with main page
-export const TestDrone = () => {
+
+export const sendMessage_out = (drone,data) => {
+    if(drone){ 
+        
+        console.log("attempting message")
+        drone.drone.publish({
+        room: 'observable-room',
+        message: {
+          name: "player",
+          content: data
+        }
+      });}
+    }
+
+
+
+export const TestDrone = (props) => {
 
     const [room, setRoom]=useState()
     const [drone, setDrone]=useState()
@@ -95,20 +111,30 @@ if (room){
 
 
 //CONENCTION SUCCESSFUL CONTINUE FROM HERE BY PASSING ROLL NUMBERS
-    const sendMessage = () => {
-        if(drone){ 
+const sendMessage = () => {
+
+if(drone){ 
             
-            console.log("attempting message")
-            drone.drone.publish({
-            room: 'observable-room',
-            message: {
-              name: "player",
-              content: "lets wrokout"
-            }
-          });}
+    sendMessage_out(drone,props.data)
+}
+
+
+}
+
+    // const sendMessage = () => {
+    //     if(drone){ 
+            
+    //         console.log("attempting message")
+    //         drone.drone.publish({
+    //         room: 'observable-room',
+    //         message: {
+    //           name: "player",
+    //           content: "lets wrokout"
+    //         }
+    //       });}
        
 
-    }
+    // }
 
 
 

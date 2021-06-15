@@ -7,7 +7,7 @@ import { data } from '../data/data'
 import Cube from '../components/cube'
 import ReactPlayer from 'react-player/youtube'
 
-
+import {TestDrone} from '../components/testDrone'
 //-ytesting scaledrone
 // import {TestDrone} from '../components/testDrone'//REMEMBER TO NOT CALL THIS AS A COMPONENt BUT EXPORT FUNcTIONS to avoid coNITNuOUS CONNECTING at each render!!
 // import ConnectScaledrone from '../components/cscaledrone_connect'
@@ -98,7 +98,7 @@ gameStart()
 
         console.log('NUMROLL',(p1State.numofRoll + 1))
         setP1State({...p1State, currentRoll:(Math.floor(Math.random() * 6) + 1), numofRoll:p1State.numofRoll+1})
-       
+      
     }
 
 
@@ -271,7 +271,7 @@ gameStart()
     return (
 
         <div className='relative'>
-
+           <TestDrone data={`hello Propss :) ${p1State.currentRoll}`}/>
             <div className=' flex mb-3 '>
                 <div className='p-3'>
                     Welcome to the game of All about You
@@ -292,6 +292,7 @@ gameStart()
                     </div>} */}
 
             </div>
+            
             <div className='grid grid-cols-5 ' >
 
 
