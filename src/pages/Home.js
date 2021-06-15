@@ -9,19 +9,11 @@ import ConnectScaledrone from '../components/cscaledrone_connect'
 
 const HomePage = (props) => {
 
-
 return(
-
 <div>
-
 <MainPage data={props.data}/>
-
 </div>
-
-
 )
-
 }
-
    
 export default HomePage
