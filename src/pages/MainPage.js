@@ -265,9 +265,6 @@ gameStart()
 
     }
 
-
-
-
     return (
 
         <div className='relative'>
