@@ -26,7 +26,19 @@ export const TestDrone = (props) => {
     const [room, setRoom]=useState()
     const [drone, setDrone]=useState()
     const[admin, setAdmin]=useState(true)
+    const[loginComplete, setLoginComplete]=useState(true)
+    const[location, setLocation]=useState(0)
     let members=[]
+
+
+
+    useEffect(()=>{
+        console.log("updated roll", props.data)
+        if(props.data!==location){
+         console.log("Neww roll", props.data)
+            // setLocation({location:props.data})CONTINUE FROM HERE
+        }
+    })
     
     const [player, setPlayer] = useState(
 

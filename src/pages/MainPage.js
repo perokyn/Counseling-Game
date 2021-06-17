@@ -21,7 +21,7 @@ const MainPage = (props) => {
    //const [currentRoll, setCurentRoll] = useState(0)
   //  const [currentPosition, setCurrentPosition] = useState(0)
    // const [numofRoll, setNumofRoll] = useState(0)
-
+    const[loginComplete, setLoginComplete]=useState(true)
     const [questionVisible, setQuestionVisible] = useState(false)
     const rollTo = useRef()
 
@@ -267,8 +267,11 @@ gameStart()
     return (
 
         <div className='relative'>
-           <TestDrone data={`hello Propss :) ${p1State.currentRoll}`}/>
+
+            {loginComplete&&<TestDrone data={`hello Propss :) ${p1State.currentRoll}`}/>}
+           
             <div className=' flex mb-3 '>
+
                 <div className='p-3'>
                     Welcome to the game of All about You
                <img alt='3d characters' src={game}></img>
