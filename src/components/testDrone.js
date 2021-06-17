@@ -25,6 +25,7 @@ export const TestDrone = (props) => {
 
     const [room, setRoom]=useState()
     const [drone, setDrone]=useState()
+    const[admin, setAdmin]=useState(true)
     let members=[]
     
     const [player, setPlayer] = useState(
@@ -56,9 +57,22 @@ export const TestDrone = (props) => {
             player1.id = drone.clientId;
             //this.setState({member});
         });
+
+
     
          const room = drone.subscribe('observable-room');
          setRoom({room:room})
+         room.on('members', m => {
+            members = m;
+            console.log("MEMBER LIST",members)
+           if(members.length>1){
+            setAdmin(!admin)
+
+           }
+            
+           });
+
+        
 
     }
     
@@ -103,11 +117,12 @@ export const TestDrone = (props) => {
 //     });
 if (room){
     
-
         room.room.on('message', message => {
         console.log("message yaaay", message)
     });
 }
+
+
 
 
 //CONENCTION SUCCESSFUL CONTINUE FROM HERE BY PASSING ROLL NUMBERS
@@ -144,13 +159,18 @@ if(drone){
 
         <div className='p-10 bg=green-200 text-xl text-white font-bol'> Scaledrone text
             <button className='rounded-xl p-3 bg-blue-400'
-
                 onClick={(e) => { sendMessage() }}>
                 Send Message</button>
-                <button className='rounded-xl p-3 bg-blue-400'
 
-onClick={(e) => { createRoom() }}>
-createRoom</button>
+{!admin? <div>User</div>:<div>Admin</div>}
+                <button className='rounded-xl p-3 bg-blue-400'
+                 onClick={(e) => { createRoom() }}>
+                 Login</button>
+
+                
+
+
+
         </div>
     )
 }
