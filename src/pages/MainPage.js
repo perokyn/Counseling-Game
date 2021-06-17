@@ -262,7 +262,6 @@ gameStart()
         }, 1000);
 
 
-
     }
 
     return (
@@ -283,9 +282,6 @@ gameStart()
                                 <div>Player 2 is rolling</div> :
                                 <Cube currentRoll={p1State.currentRoll} onMouseDown={() => handleStopRoll()} onClick={startRoll} ref={rollTo} />
                         }
-
-
-
                     </div>} */}
 
             </div>
