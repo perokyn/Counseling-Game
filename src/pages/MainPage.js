@@ -106,6 +106,11 @@ setDrone({drone:drone})
         
        });
 }
+if (room){//CONTINUE FROM HERE--->make sure this only gets called once and not updateing every with re-render
+    room.room.on('message', message => {
+    console.log("message yaaay", message)
+});
+}
  
    const sendMessage = () => {
     if(drone){ 
