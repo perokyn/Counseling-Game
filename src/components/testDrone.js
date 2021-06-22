@@ -8,7 +8,6 @@ import React, { Component, useState, useEffect } from "react";
 
 export const sendMessage_out = (drone,data) => {
     if(drone){ 
-        
         console.log("attempting message")
         drone.drone.publish({
         room: 'observable-room',

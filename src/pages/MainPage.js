@@ -109,8 +109,8 @@ setDrone({drone:drone})
  
    const sendMessage = () => {
     if(drone){ 
-                
-        sendMessage_out(drone,props.data)
+                console.log("message reached",p1State.currentRoll)
+        sendMessage_out(drone,p1State.currentRoll)
     }
     }
 
@@ -140,14 +140,9 @@ gameStart()
 
 //===============SET ROLL NUMBER FOR player1=======================================//
     const startRoll = () => {
-
         console.log('NUMROLL',(p1State.numofRoll + 1))
         setP1State({...p1State, currentRoll:(Math.floor(Math.random() * 6) + 1), numofRoll:p1State.numofRoll+1})
-      
     }
-
-
-
 
 
     const setSteps = () => {
@@ -183,16 +178,12 @@ gameStart()
 
     }
 
-
     //==========Roll to question widnow top
     const handleQuestionVisible = (e) => {
         setQuestionVisible(!questionVisible)
-
         console.log("rolltoCalled", e.target.id)
 
-
         $(function () {
-
 
             $('html, body').animate({
                 scrollTop: $('#mainquestion').offset().top - 20
@@ -201,23 +192,16 @@ gameStart()
 
     }
 
-
-
     //=========QUESTION CLOSED SHOW CUBE AT LOCATION==============
     const handleQuestionClose_CubeVisible = () => {
-
         setQuestionVisible(!questionVisible)
         setCubeVisible(!cubeVisible)
-
-        
         setTimeout(() => {
            //show cube after question closed
             if(!cubeVisible){let cube_position = '#cube' + p1State.currentPosition.toString()
               $(cube_position).css('visibility', 'visible') 
     }
-            
-          
-
+                
         }, 2000)
 
     }
@@ -230,19 +214,11 @@ gameStart()
     const handleStopRoll = () => {
         setTimeout(() => { setSteps() }, 1000)//TODO----solve issue of showwing figure on start-------------------------------!!!!    //this is where maybe add  aswitch statement to handle player1 and player2 steps
         console.log("CURRENTROLL", p1State.currentRoll)
-
-
+        sendMessage()
         setTimeout(() => { setCubeVisible(!cubeVisible)
-        
-        
             let cube_position = '#cube' + p1State.currentPosition.toString()
             $(cube_position).css('visibility', 'hidden') 
-   
-   
-        
         }, 2000)
-
-      
     }
 
 
@@ -251,10 +227,7 @@ gameStart()
 
     const setStep = (position, goTo) => {
 
-
-
         let interval = setInterval(function () {
-
 
             if (position <= goTo) {             ///<=====set steps forward here   max step number=  content.data.length-1
 
@@ -314,7 +287,7 @@ gameStart()
         <div className='relative'>
 
             {loginComplete&&<TestDrone data={`hello Propss :) ${p1State.currentRoll}`}/>}
-           
+           <button onClick={()=>createRoom()}>Login</button>
             <div className=' flex mb-3 '>
 
                 <div className='p-3'>
@@ -428,8 +401,6 @@ gameStart()
 
         </div>
     )
-
-
 
 
 }
