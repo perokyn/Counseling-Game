@@ -1,6 +1,5 @@
 import React, { useState , SetStateAction} from 'react'
-import $ from "jquery";
-import Emitter from '../utils/SpecialEvents'
+import {TestDrone} from './testDrone_old'
 
 const Cube = React.forwardRef((props, ref) => {
 
@@ -16,7 +15,7 @@ const handleStopRoll=()=>{
   return (
 
     <div ref={ref}  >
-    
+   
     {showRoll &&
     <p style={{color:'gray'}}>
     {props.currentRoll}

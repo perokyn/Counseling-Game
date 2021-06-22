@@ -51,6 +51,7 @@ export const TestDrone = (props) => {
                 id: "player2"
             }
 
+
         }
 
     )
