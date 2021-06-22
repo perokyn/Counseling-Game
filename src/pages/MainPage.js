@@ -11,7 +11,17 @@ import {TestDrone} from '../components/testDrone'
 //-ytesting scaledrone
 // import {TestDrone} from '../components/testDrone'//REMEMBER TO NOT CALL THIS AS A COMPONENt BUT EXPORT FUNcTIONS to avoid coNITNuOUS CONNECTING at each render!!
 // import ConnectScaledrone from '../components/cscaledrone_connect'
-
+const sendMessage_out = (drone,data) => {
+    if(drone){ 
+        console.log("attempting message")
+        drone.drone.publish({
+        room: 'observable-room',
+        message: {
+          name: "player",
+          content: data
+        }
+      });}
+    }
 
 
 const MainPage = (props) => {
@@ -26,10 +36,8 @@ const MainPage = (props) => {
     const rollTo = useRef()
     const [cubeVisible, setCubeVisible] = useState(true)
     const content = questions
-
 //TO DO remember to learn how to set state fetures and not upodate the whole state!!!! SPREAD OPERATOR!!!{...p1State, currentPosition=position}
     const [p1State, setP1State] = useState({
-
         playing: false,
         rolled: false,
         currentPosition: 0,
@@ -37,7 +45,6 @@ const MainPage = (props) => {
         setCurrentQuestion: '',
         questionVisible: false,
         numofRoll: 0,
-
     })
     //===PLAYERE 2 LOGIC======================\\
     //p2 state
@@ -53,6 +60,21 @@ const MainPage = (props) => {
 
     })
     console.log('Player1', p1State)
+
+//DRONE STATES=========================
+    const [room, setRoom]=useState()
+    const [drone, setDrone]=useState()
+    const[admin, setAdmin]=useState(true)
+    let members=[]
+    const [player, setPlayer] = useState(
+    {
+        player: {
+
+            id: "player2"
+        }
+    }
+)
+ 
 //================================================================================================================================
 //=======================END PLAYERS STATE SETUP====================================================================\
 //================================================================================================================================
@@ -61,8 +83,36 @@ const MainPage = (props) => {
 //=========================DRONE SETUP============================================================================================
 //================================================================================================================================
 
-
-
+const createRoom=()=>{
+    const drone = new window.Scaledrone("DJHRuXNgQyi58qY0", { 
+    });
+setDrone({drone:drone})
+    drone.on('open', error => {
+        if (error) {
+            return console.error(error);
+        }
+        const player1 = { ...player.player };
+        player1.id = drone.clientId;
+        //this.setState({member});
+    });
+    const room = drone.subscribe('observable-room');
+     setRoom({room:room})
+     room.on('members', m => {
+        members = m;
+        console.log("MEMBER LIST",members)
+       if(members.length>1){
+        setAdmin(!admin)
+       }
+        
+       });
+}
+ 
+   const sendMessage = () => {
+    if(drone){ 
+                
+        sendMessage_out(drone,props.data)
+    }
+    }
 
 
 

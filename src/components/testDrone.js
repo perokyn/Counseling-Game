@@ -55,11 +55,9 @@ export const TestDrone = (props) => {
 
 
     const createRoom=()=>{
-        const drone = new window.Scaledrone("DJHRuXNgQyi58qY0", {
-           
+        const drone = new window.Scaledrone("DJHRuXNgQyi58qY0", { 
         });
     setDrone({drone:drone})
-
         drone.on('open', error => {
             if (error) {
                 return console.error(error);
@@ -68,64 +66,19 @@ export const TestDrone = (props) => {
             player1.id = drone.clientId;
             //this.setState({member});
         });
-
-
-    
-         const room = drone.subscribe('observable-room');
+        const room = drone.subscribe('observable-room');
          setRoom({room:room})
          room.on('members', m => {
             members = m;
             console.log("MEMBER LIST",members)
            if(members.length>1){
             setAdmin(!admin)
-
            }
             
            });
-
-        
-
     }
     
-    // const drone = new window.Scaledrone("DJHRuXNgQyi58qY0", {
-    //     data: player.player
-    // });
-
-
-
-
-
-
-    // drone.on('open', error => {
-    //     if (error) {
-    //         return console.error(error);
-    //     }
-    //     const player1 = { ...player.player };
-    //     player1.id = drone.clientId;
-    //     //this.setState({member});
-    // });
-
-    // const room = drone.subscribe('observable-room');
-
-    // List of currently online members, emitted once
-//   room.on('members', m => {
-//     members = m;
-//     // updateMembersDOM(); uncomment later
-//     console.log("MEMBER LIST",members)
-//    });
-
-//     room.on('open', error => {
-//         if (error) {
-//             return console.error(error);
-//         }else if(members.length>2){
-//             return console.log("There are", members,"users!!!!")
-//         }
-//         return members// Connected to room
-//     });
-
-//     room.on('message', message => {
-//         console.log("message yaaay", message)
-//     });
+   
 if (room){
     
         room.room.on('message', message => {
@@ -138,13 +91,10 @@ if (room){
 
 //CONENCTION SUCCESSFUL CONTINUE FROM HERE BY PASSING ROLL NUMBERS
 const sendMessage = () => {
-
 if(drone){ 
             
     sendMessage_out(drone,props.data)
 }
-
-
 }
 
     // const sendMessage = () => {
