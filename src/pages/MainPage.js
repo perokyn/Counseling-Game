@@ -24,15 +24,10 @@ const MainPage = (props) => {
     const[loginComplete, setLoginComplete]=useState(true)
     const [questionVisible, setQuestionVisible] = useState(false)
     const rollTo = useRef()
-
-
     const [cubeVisible, setCubeVisible] = useState(true)
-
     const content = questions
 
-
 //TO DO remember to learn how to set state fetures and not upodate the whole state!!!! SPREAD OPERATOR!!!{...p1State, currentPosition=position}
-
     const [p1State, setP1State] = useState({
 
         playing: false,
@@ -44,13 +39,7 @@ const MainPage = (props) => {
         numofRoll: 0,
 
     })
-
-
-
-
-
     //===PLAYERE 2 LOGIC======================\\
-
     //p2 state
     const [p2State, setP2State] = useState({
 
@@ -63,13 +52,19 @@ const MainPage = (props) => {
         numofRoll: 0
 
     })
-
-
     console.log('Player1', p1State)
-
 //================================================================================================================================
 //=======================END PLAYERS STATE SETUP====================================================================\
 //================================================================================================================================
+
+//================================================================================================================================
+//=========================DRONE SETUP============================================================================================
+//================================================================================================================================
+
+
+
+
+
 
 
 

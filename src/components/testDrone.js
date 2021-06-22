@@ -44,15 +44,12 @@ export const TestDrone = (props) => {
     },[])
     
     const [player, setPlayer] = useState(
-
         {
             player: {
 
                 id: "player2"
             }
-
         }
-
     )
 
 
