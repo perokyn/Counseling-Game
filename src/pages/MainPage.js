@@ -60,7 +60,6 @@ const MainPage = (props) => {
 
     })
     console.log('Player1', p1State)
-
 //DRONE STATES=========================
     const [room, setRoom]=useState()
     const [drone, setDrone]=useState()
@@ -74,7 +73,6 @@ const MainPage = (props) => {
         }
     }
 )
- 
 //================================================================================================================================
 //=======================END PLAYERS STATE SETUP====================================================================\
 //================================================================================================================================
@@ -105,12 +103,15 @@ setDrone({drone:drone})
        }
         
        });
+    room.on('message', message => {//maybe add get message function on question closed
+        console.log("message yaaay", message)
+    });
 }
-if (room){//CONTINUE FROM HERE--->make sure this only gets called once and not updateing every with re-render
-    room.room.on('message', message => {
-    console.log("message yaaay", message)
-});
-}
+// if (room){//CONTINUE FROM HERE--->make sure this only gets called once and not updateing every with re-render
+//     room.room.on('message', message => {//maybe add get message function on question closed
+//     console.log("message yaaay", message)
+// });
+// }
  
    const sendMessage = () => {
     if(drone){ 
