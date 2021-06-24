@@ -108,7 +108,7 @@ setDrone({drone:drone})
     });
 }
 // if (room){//CONTINUE FROM HERE--->make sure this only gets called once and not updateing every with re-render
-//     room.room.on('message', message => {//maybe add get message function on question closed
+//     room.room.on('message', message => {//maybe add get message function on question closed ISSUE SOLVED :) MOVED CODE TO createRoom()
 //     console.log("message yaaay", message)
 // });
 // }
@@ -215,8 +215,6 @@ gameStart()
     //TO DO  
     //INtegrate https://www.pubnub.com/blog/build-a-multiplayer-tic-tac-toe-game-in-react/?fbclid=IwAR1UMo0EQxKkVzpP1ypQEQpaTrBFBJD80fJpV8s_4BCQxdGty1F1tinUROE
     //for two player game
-
-
     const handleStopRoll = () => {
         setTimeout(() => { setSteps() }, 1000)//TODO----solve issue of showwing figure on start-------------------------------!!!!    //this is where maybe add  aswitch statement to handle player1 and player2 steps
         console.log("CURRENTROLL", p1State.currentRoll)
@@ -226,11 +224,7 @@ gameStart()
             $(cube_position).css('visibility', 'hidden') 
         }, 2000)
     }
-
-
-
     //===================FIGURE STEP LOGIC=============================================
-
     const setStep = (position, goTo) => {
 
         let interval = setInterval(function () {
