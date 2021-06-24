@@ -38,6 +38,7 @@ const MainPage = (props) => {
     const content = questions
 //TO DO remember to learn how to set state fetures and not upodate the whole state!!!! SPREAD OPERATOR!!!{...p1State, currentPosition=position}
     const [p1State, setP1State] = useState({
+        id:'',
         playing: false,
         rolled: false,
         currentPosition: 0,
@@ -49,7 +50,7 @@ const MainPage = (props) => {
     //===PLAYERE 2 LOGIC======================\\
     //p2 state
     const [p2State, setP2State] = useState({
-
+        id:'',
         playing: false,
         rolled: false,
         currentPosition: 0,
@@ -69,7 +70,7 @@ const MainPage = (props) => {
     {
         player: {
 
-            id: "player2"
+            id: "player2"///CONTINUE FROM HEER TO SET ADMIN ID
         }
     }
 )
@@ -150,38 +151,27 @@ gameStart()
         setP1State({...p1State, currentRoll:(Math.floor(Math.random() * 6) + 1), numofRoll:p1State.numofRoll+1})
     }
 
-
     const setSteps = () => {
         //this gets a call from handleStop roll which tsrats to animate the figure
         //this is where maybe add  aswitch statement to handle player1 and player2 
         //this method should also be called from use Effect when data is avaliable form player2
         let player = 'player1'
         switch (player) {
-
             case 'player1':
-
                 setStep(p1State.currentPosition, p1State.currentRoll + p1State.currentPosition)
                 break
             case 'player2':
                 setStep(p2State.currentPosition, p2State.currentRoll + p2State.currentPosition)
                 break
-
-
             default: setStep(p1State.currentPosition, p1State.currentRoll + p1State.currentPosition)
         }
-
-
-        //setStep(currentPosition, currentRoll + currentPosition)
     }
-
 
     const afterRoll = (position) => {
         if (p1State.currentPosition > 0) { setCubeVisible(!cubeVisible)   }
         
      //   setCurrentPosition(position)///this was currentPosition +postion before, DO NOT EVER MODIFY CURRENTPOS, IT is being updated after every roll end with position++. ONLY update currentroll by adding currentposition to it!!
        setP1State({...p1State, currentPosition:position})
-
-
     }
 
     //==========Roll to question widnow top
@@ -286,8 +276,12 @@ gameStart()
 
         <div className='relative'>
 
-            {loginComplete&&<TestDrone data={`hello Propss :) ${p1State.currentRoll}`}/>}
-           <button onClick={()=>createRoom()}>Login</button>
+            {loginComplete&& 
+            <div className='absolute bg-green-300'>
+            <button onClick={()=>createRoom()}>Login</button>
+            </div>
+            }
+          
             <div className=' flex mb-3 '>
 
                 <div className='p-3'>
@@ -362,8 +356,6 @@ gameStart()
                                 <Cube currentRoll={p1State.currentRoll} onMouseDown={() => handleStopRoll()} onClick={startRoll} ref={rollTo} />
                         }
 
-
-
                     </div>}
  
                                                              
@@ -397,7 +389,6 @@ gameStart()
             </div>
 
             }
-
 
         </div>
     )
