@@ -236,8 +236,6 @@ gameStart()
 
                 })
 
-
-
                 if (position === goTo) {
                     //update current position
                     afterRoll(position)
@@ -245,12 +243,9 @@ gameStart()
                 //show questionmark for given step----------------------------
                 if (position > 0 && position === goTo) {
                     let current_question = '#q' + position.toString()
-               
-
                     $(function () {
                         setTimeout(() => { $(current_question).css('visibility', 'visible') }, 1000)
                     })
-
                     $(function () {
                         $(current_question).click(function () {
                             $(current_question).css('visibility', 'hidden')
@@ -258,22 +253,14 @@ gameStart()
                     })
                 }
                 //---------------------------------------------------------------
-
                 position++;
-
-
             } else {
-
                 clearInterval(interval);
-
             }
         }, 1000);
-
-
     }
 
     return (
-
         <div className='relative'>
 
             {loginComplete&& 
