@@ -81,9 +81,9 @@ const MainPage = (props) => {
 //================================================================================================================================
 //=========================DRONE SETUP============================================================================================
 //================================================================================================================================
-
+//was conusleiong room DJHRuXNgQyi58qY0 now game
 const createRoom=()=>{
-    const drone = new window.Scaledrone("DJHRuXNgQyi58qY0", { 
+    const drone = new window.Scaledrone("sYoK5pOn8DZhOPRJ", { 
     });
 setDrone({drone:drone})
     drone.on('open', error => {
@@ -94,7 +94,7 @@ setDrone({drone:drone})
         player1.id = drone.clientId;
         //this.setState({member});
     });
-    const room = drone.subscribe('observable-room');
+    const room = drone.subscribe('observable-room'); //<---CONTINUE FROM EHRE BY SETTING UP ROOMNAME FROM Login as code 6/26/2021
      setRoom({room:room})
      room.on('members', m => {
         members = m;
@@ -107,6 +107,8 @@ setDrone({drone:drone})
     room.on('message', message => {//maybe add get message function on question closed
         console.log("message yaaay", message)
     });
+
+    setLoginComplete(!loginComplete)
 }
 // if (room){//CONTINUE FROM HERE--->make sure this only gets called once and not updateing every with re-render
 //     room.room.on('message', message => {//maybe add get message function on question closed ISSUE SOLVED :) MOVED CODE TO createRoom()
@@ -258,11 +260,13 @@ gameStart()
         }, 1000);
     }
     return (
-        <div className='relative'>
+        <div className='relative grid justify-items-stretch'>
 
             {loginComplete&& 
-            <div className='absolute bg-green-300'>
-            <button onClick={()=>createRoom()}>Login</button>
+            <div className=' flex flex-col absolute bg-green-300 p-8 rounded-xl justify-self-center'>
+                <textarea placeholder="player " className=" p-2 text-sm h-10  rounded-xl mb-3"></textarea>
+                <textarea placeholder="code " className=" p-2 text-sm h-10  rounded-xl mb-3"></textarea>
+            <button className='p-3 bg-blue-200 rounded-xl  text-xl text-white' onClick={()=>createRoom()}>Login</button>
             </div>
             }
           
