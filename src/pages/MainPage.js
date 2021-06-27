@@ -115,19 +115,12 @@ setDrone({drone:drone})
 //     console.log("message yaaay", message)
 // });
 // }
- 
    const sendMessage = () => {
     if(drone){ 
                 console.log("message reached",p1State.currentRoll)
         sendMessage_out(drone,p1State.currentRoll)
     }
     }
-
-
-
-
-
-
 
 //++===ON GAME START========================
 //show cube at first step
