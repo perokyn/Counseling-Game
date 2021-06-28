@@ -126,15 +126,12 @@ setDrone({drone:drone})
 //show cube at first step
 
 const gameStart=()=>{
-
 if(p1State.currentPosition===0 && cubeVisible){
-
     let cube_position = '#cube' + p1State.currentPosition.toString()
     $(cube_position).css('visibility', 'visible')
 }
 
 }
-
 
 gameStart()
 
@@ -180,7 +177,6 @@ gameStart()
                 scrollTop: $('#mainquestion').offset().top - 20
             }, 2000);
         });
-
     }
 
     //=========QUESTION CLOSED SHOW CUBE AT LOCATION==============
@@ -279,9 +275,8 @@ gameStart()
                                 <Cube currentRoll={p1State.currentRoll} onMouseDown={() => handleStopRoll()} onClick={startRoll} ref={rollTo} />
                         }
                     </div>} */}
-
             </div>
-            
+        
             <div className='grid grid-cols-5 ' >
 
                 {content.map(step => (
