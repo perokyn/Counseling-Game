@@ -276,7 +276,6 @@ gameStart()
                         }
                     </div>} */}
             </div>
-        
             <div className='grid grid-cols-5 ' >
 
                 {content.map(step => (
@@ -287,7 +286,6 @@ gameStart()
 
                         <div style={step.fields.id === 9 || step.fields.id === 19 || step.fields.id === 29 || step.fields.id === 39 || step.fields.id === 49 ?
                             { backgroundColor: 'green', height: '2rem', borderTopLeftRadius: '3rem' } : { display: "hidden" }}></div>
-
 
                         <img style={{
                             marginTop: step.fields.id === 4 || step.fields.id === 14 || step.fields.id === 24 || step.fields.id === 34 || step.fields.id === 44 || step.fields.id === 9 || step.fields.id === 19 || step.fields.id === 29 || step.fields.id === 39 || step.fields.id === 49 ?
