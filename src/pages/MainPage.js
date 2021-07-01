@@ -321,22 +321,16 @@ gameStart()
                                 <Cube currentRoll={p1State.currentRoll} onMouseDown={() => handleStopRoll()} onClick={startRoll} ref={rollTo} />
                         }
 
-                    </div>}
- 
-                                                             
+                    </div>}                                   
                                   </div>
 
                             </div>
                             <BaseStepSquare value={step.fields.id} content={step.fields.question} question={step.fields.Name} />
                         </div>
                     </div>
-
-
                 ))}
 
-
             </div>
-
             {questionVisible && <div className='absolute grid bg-blue-500 w-full p-3 items-center' style={{ top: '0px', bottom: '0px', width: "100%" }}>
                 <div className='bg-blue-200 rounded-xl p-3 shadow-2xl'>
 
@@ -357,8 +351,6 @@ gameStart()
 
         </div>
     )
-
-
 }
 
 export default MainPage
