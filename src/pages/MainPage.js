@@ -307,22 +307,20 @@ gameStart()
 
                                  {/*HANDLE SHOW CUBE DIV*/ }
                                  {/*Show cube at current location, id is a combination of the current locatio + cube, get the idea adn set visibility */ }
-                                <div  className='text-xl text-black absolute -top-14   ritgh-0'
+                            <div  className='text-xl text-black absolute -top-14   ritgh-0'
                                   id={'cube' + step.fields.id.toString()}
                                   style={{ visibility: 'hidden' }}
                                   > cube                                  
                                   
                                   {cubeVisible && !questionVisible &&
-                    <div id='cubeFrame' className='bg-green-200 rounded-xl  p-6 absolute z-40 '>
-
-                        {
-                            p2State.playing ?
-                                <div>Player 2 is rolling</div> :
-                                <Cube currentRoll={p1State.currentRoll} onMouseDown={() => handleStopRoll()} onClick={startRoll} ref={rollTo} />
-                        }
-
-                    </div>}                                   
-                                  </div>
+                                    <div id='cubeFrame' className='bg-green-200 rounded-xl  p-6 absolute z-40 '>
+                                  {
+                                   p2State.playing ?
+                                   <div>Player 2 is rolling</div> :
+                                   <Cube currentRoll={p1State.currentRoll} onMouseDown={() => handleStopRoll()} onClick={startRoll} ref={rollTo} />
+                                  }
+                                   </div>}                                   
+                            </div>
 
                             </div>
                             <BaseStepSquare value={step.fields.id} content={step.fields.question} question={step.fields.Name} />
