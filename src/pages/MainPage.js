@@ -304,7 +304,6 @@ gameStart()
                                     id={'q' + step.fields.id.toString()}>
                                     <span className='animate-ping'>?</span>
                                 </div>
-
                                  {/*HANDLE SHOW CUBE DIV*/ }
                                  {/*Show cube at current location, id is a combination of the current locatio + cube, get the idea adn set visibility */ }
                             <div  className='text-xl text-black absolute -top-14   ritgh-0'
@@ -321,7 +320,6 @@ gameStart()
                                   }
                                    </div>}                                   
                             </div>
-
                             </div>
                             <BaseStepSquare value={step.fields.id} content={step.fields.question} question={step.fields.Name} />
                         </div>
