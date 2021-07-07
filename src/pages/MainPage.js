@@ -121,28 +121,22 @@ setDrone({drone:drone})
         sendMessage_out(drone,p1State.currentRoll)
     }
     }
-
 //++===ON GAME START========================
 //show cube at first step
-
 const gameStart=()=>{
 if(p1State.currentPosition===0 && cubeVisible){
     let cube_position = '#cube' + p1State.currentPosition.toString()
     $(cube_position).css('visibility', 'visible')
 }
-
 }
-
 gameStart()
 
 //==================================================================================
-
 //===============SET ROLL NUMBER FOR player1=======================================//
     const startRoll = () => {
         console.log('NUMROLL',(p1State.numofRoll + 1))
         setP1State({...p1State, currentRoll:(Math.floor(Math.random() * 6) + 1), numofRoll:p1State.numofRoll+1})
     }
-
     const setSteps = () => {
         //this gets a call from handleStop roll which tsrats to animate the figure
         //this is where maybe add  aswitch statement to handle player1 and player2 
