@@ -172,7 +172,6 @@ gameStart()
             }, 2000);
         });
     }
-
     //=========QUESTION CLOSED SHOW CUBE AT LOCATION==============
     const handleQuestionClose_CubeVisible = () => {
         setQuestionVisible(!questionVisible)
@@ -186,7 +185,6 @@ gameStart()
         }, 2000)
 
     }
-
     //TO DO  
     //INtegrate https://www.pubnub.com/blog/build-a-multiplayer-tic-tac-toe-game-in-react/?fbclid=IwAR1UMo0EQxKkVzpP1ypQEQpaTrBFBJD80fJpV8s_4BCQxdGty1F1tinUROE
     //for two player game
