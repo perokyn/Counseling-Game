@@ -9,13 +9,14 @@ import ReactPlayer from 'react-player/youtube'
 //-ytesting scaledrone
 // import {TestDrone} from '../components/testDrone'//REMEMBER TO NOT CALL THIS AS A COMPONENt BUT EXPORT FUNcTIONS to avoid coNITNuOUS CONNECTING at each render!!
 // import ConnectScaledrone from '../components/cscaledrone_connect'
-const sendMessage_out = (drone,data) => {
+const sendMessage_out = (drone,player,data) => {
+    
     if(drone){ 
         console.log("attempting message")
         drone.drone.publish({
         room: 'observable-room',
         message: {
-          name: "player",
+          name: player,
           content: data
         }
       });}
@@ -25,10 +26,6 @@ const sendMessage_out = (drone,data) => {
 const MainPage = (props) => {
 
     const [questions, setQuestions] = useState(props.data)
-   // const [currentQuestion, setCurrentQuestion] = useState([])
-   //const [currentRoll, setCurentRoll] = useState(0)
-  //  const [currentPosition, setCurrentPosition] = useState(0)
-   // const [numofRoll, setNumofRoll] = useState(0)
     const[loginComplete, setLoginComplete]=useState(true)
     const [questionVisible, setQuestionVisible] = useState(false)
     const rollTo = useRef()
@@ -58,20 +55,21 @@ const MainPage = (props) => {
         numofRoll: 0
 
     })
-    console.log('Player1', p1State)
+    
 //DRONE STATES=========================
     const [room, setRoom]=useState()
     const [drone, setDrone]=useState()
     const[admin, setAdmin]=useState(true)
     let members=[]
-    const [player, setPlayer] = useState(
-    {
-        player: {
+    const [player, setPlayer] = useState({})
 
-            id: "player2"///CONTINUE FROM HEER TO SET ADMIN ID
-        }
+const setPlayerName= e=> {
+    setPlayer({
+    player: {
+        id: e.target.value///CONTINUE FROM HEER TO SET ADMIN ID
     }
-)
+})
+}
 //================================================================================================================================
 //=======================END PLAYERS STATE SETUP====================================================================\
 //================================================================================================================================
@@ -81,6 +79,7 @@ const MainPage = (props) => {
 //================================================================================================================================
 //was conusleiong room DJHRuXNgQyi58qY0 now game
 const createRoom=()=>{
+    
     const drone = new window.Scaledrone("sYoK5pOn8DZhOPRJ", { 
     });
 setDrone({drone:drone})
@@ -88,8 +87,18 @@ setDrone({drone:drone})
         if (error) {
             return console.error(error);
         }
-        const player1 = { ...player.player };
-        player1.id = drone.clientId;
+        if(player.player.id.toString()==="Csilla")
+        {setAdmin(admin)
+            const player1 = { ...player.player };
+            player1.id = drone.clientId;
+        }else
+        {
+               setAdmin(!admin)
+                const player2 = { ...player.player };
+                player2.id = drone.clientId;
+
+        }
+        
         //this.setState({member});
     });
     const room = drone.subscribe('observable-room'); //<---CONTINUE FROM EHRE BY SETTING UP ROOMNAME FROM Login as code 6/26/2021
@@ -102,8 +111,14 @@ setDrone({drone:drone})
        }
         
        });
-    room.on('message', message => {//maybe add get message function on question closed
-        console.log("message yaaay", message)
+    room.on('message', message => {//maybe add get message function on question closed-->get the player name form the current client and compare it tothe data in the messgae
+        console.log("message yaaay", message, "Sender Name",message.data.name.player.id)
+       if(player.player.id!==message.data.name.player.id)
+       {console.log("PLAYER2 is playng yaaay") 
+       //setP2State({...p2State, playing:!p2State.playing})
+        //SET p2 sette here to get roll and current positin and move figure
+            // setP2State({})
+       }
     });
 
     setLoginComplete(!loginComplete)
@@ -113,10 +128,20 @@ setDrone({drone:drone})
 //     console.log("message yaaay", message)
 // });
 // }
-   const sendMessage = () => {
+   const sendMessage = (player) => {
     if(drone){ 
                 console.log("message reached",p1State.currentRoll)
-        sendMessage_out(drone,p1State.currentRoll)
+                if(admin)
+                {
+                    console.log("This is ADMIN client sending message")
+                    sendMessage_out(drone,player,p1State)
+                }
+                else if(!admin)
+                {
+                    console.log("This is a non admin client sending message")
+                    sendMessage_out(drone,player,p2State)
+                }
+        
     }
     }
 //++===ON GAME START========================
@@ -132,19 +157,25 @@ gameStart()
 //==================================================================================
 //===============SET ROLL NUMBER FOR player1=======================================//
     const startRoll = () => {
-        console.log('NUMROLL',(p1State.numofRoll + 1))
-        setP1State({...p1State, currentRoll:(Math.floor(Math.random() * 6) + 1), numofRoll:p1State.numofRoll+1})
+        //console.log('NUMROLL',(p1State.numofRoll + 1))
+        if(admin)
+        {
+            setP1State({...p1State, currentRoll:(Math.floor(Math.random() * 6) + 1), numofRoll:p1State.numofRoll+1})
+        }
+        else if(!admin)
+        {
+            setP1State({...p2State, currentRoll:(Math.floor(Math.random() * 6) + 1), numofRoll:p2State.numofRoll+1})
+        }  
     }
     const setSteps = () => {
         //this gets a call from handleStop roll which tsrats to animate the figure
         //this is where maybe add  aswitch statement to handle player1 and player2 
         //this method should also be called from use Effect when data is avaliable form player2
-        let player = 'player1'
         switch (player) {
-            case 'player1':
+            case admin:
                 setStep(p1State.currentPosition, p1State.currentRoll + p1State.currentPosition)
                 break
-            case 'player2':
+            case !admin:
                 setStep(p2State.currentPosition, p2State.currentRoll + p2State.currentPosition)
                 break
             default: setStep(p1State.currentPosition, p1State.currentRoll + p1State.currentPosition)
@@ -152,9 +183,8 @@ gameStart()
     }
 
     const afterRoll = (position) => {
-        if (p1State.currentPosition > 0) { setCubeVisible(!cubeVisible)   }
-        
-     //   setCurrentPosition(position)///this was currentPosition +postion before, DO NOT EVER MODIFY CURRENTPOS, IT is being updated after every roll end with position++. ONLY update currentroll by adding currentposition to it!!
+        if (p1State.currentPosition > 0) { setCubeVisible(!cubeVisible)   }   
+     //setCurrentPosition(position)///this was currentPosition +postion before, DO NOT EVER MODIFY CURRENTPOS, IT is being updated after every roll end with position++. ONLY update currentroll by adding currentposition to it!!
        setP1State({...p1State, currentPosition:position})
     }
 
@@ -164,7 +194,6 @@ gameStart()
         console.log("rolltoCalled", e.target.id)
 
         $(function () {
-
             $('html, body').animate({
                 scrollTop: $('#mainquestion').offset().top - 20
             }, 2000);
@@ -172,6 +201,17 @@ gameStart()
     }
     //=========QUESTION CLOSED SHOW CUBE AT LOCATION==============
     const handleQuestionClose_CubeVisible = () => {
+        if(!admin)
+        {
+            setP2State({...p2State,playing:!p2State.playing})
+        }
+        else if(admin)
+        {
+            setP1State({...p1State,playing:!p1State.playing})
+        }
+        ///CONTINUE FROM HERE 07/10 !!! send state with updated playing or not playing and update message
+
+        sendMessage(player)//-->send signal to change player rolling message to your turn CONTINUE FROM HERE
         setQuestionVisible(!questionVisible)
         setCubeVisible(!cubeVisible)
         setTimeout(() => {
@@ -183,13 +223,12 @@ gameStart()
         }, 2000)
 
     }
-    //TO DO  
-    //INtegrate https://www.pubnub.com/blog/build-a-multiplayer-tic-tac-toe-game-in-react/?fbclid=IwAR1UMo0EQxKkVzpP1ypQEQpaTrBFBJD80fJpV8s_4BCQxdGty1F1tinUROE
+   
     //for two player game
     const handleStopRoll = () => {
         setTimeout(() => { setSteps() }, 1000)//TODO----solve issue of showwing figure on start-------------------------------!!!!    //this is where maybe add  aswitch statement to handle player1 and player2 steps
         console.log("CURRENTROLL", p1State.currentRoll)
-        sendMessage()
+        sendMessage(player)
         setTimeout(() => { setCubeVisible(!cubeVisible)
             let cube_position = '#cube' + p1State.currentPosition.toString()
             $(cube_position).css('visibility', 'hidden') 
@@ -243,7 +282,7 @@ gameStart()
 
             {loginComplete&& 
             <div className=' flex flex-col absolute bg-green-300 p-8 rounded-xl justify-self-center'>
-                <textarea placeholder="player " className=" p-2 text-sm h-10  rounded-xl mb-3"></textarea>
+                <textarea id="playerName"placeholder="player " className=" p-2 text-sm h-10  rounded-xl mb-3" onChange={e=>{setPlayerName(e)}}></textarea>
                 <textarea placeholder="code " className=" p-2 text-sm h-10  rounded-xl mb-3"></textarea>
             <button className='p-3 bg-blue-200 rounded-xl  text-xl text-white' onClick={()=>createRoom()}>Login</button>
             </div>
