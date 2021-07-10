@@ -3,11 +3,9 @@ import BaseStepSquare from '../components/BaseStepSquare'
 import $ from "jquery";
 import figure from '../assets/figure.png'
 import game from '../assets/game.png'
-import { data } from '../data/data'
 import Cube from '../components/cubeTest'
 import ReactPlayer from 'react-player/youtube'
 
-import {TestDrone} from '../components/testDrone'
 //-ytesting scaledrone
 // import {TestDrone} from '../components/testDrone'//REMEMBER TO NOT CALL THIS AS A COMPONENt BUT EXPORT FUNcTIONS to avoid coNITNuOUS CONNECTING at each render!!
 // import ConnectScaledrone from '../components/cscaledrone_connect'
