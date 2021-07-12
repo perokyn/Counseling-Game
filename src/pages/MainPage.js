@@ -210,7 +210,6 @@ gameStart()
             setP1State({...p1State,playing:!p1State.playing})
         }
         ///CONTINUE FROM HERE 07/10 !!! send state with updated playing or not playing and update message
-
         sendMessage(player)//-->send signal to change player rolling message to your turn CONTINUE FROM HERE
         setQuestionVisible(!questionVisible)
         setCubeVisible(!cubeVisible)
@@ -223,7 +222,6 @@ gameStart()
         }, 2000)
 
     }
-   
     //for two player game
     const handleStopRoll = () => {
         setTimeout(() => { setSteps() }, 1000)//TODO----solve issue of showwing figure on start-------------------------------!!!!    //this is where maybe add  aswitch statement to handle player1 and player2 steps
@@ -322,7 +320,6 @@ gameStart()
                         }} id={'step' + step.fields.id.toString()} alt='figure' src={figure} className=' absolute -top-6 w-16 h-16 invisible'    ></img>
 
                         <div >
-
                                {/*HANDLE SHOW QUESTION DIV*/ }
                             <div className='relative grid justify-items-center items-center'>
      
