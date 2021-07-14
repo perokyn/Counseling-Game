@@ -11,11 +11,8 @@ const handleStopRoll=()=>{
   setShowDice(!showDice)
 }
 
-
   return (
-
     <div ref={ref}  >
-   
     {showRoll &&
     <p style={{color:'gray'}}>
     {props.currentRoll}
@@ -27,7 +24,6 @@ rolling dice
     </p>  :<p></p>
     }
     
-
       <div className='flex jsutify-between'>
       {showDice &&
     <button onMouseDown={props.onMouseDown} onClick={handleStopRoll} id='stop'
