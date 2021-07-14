@@ -2,15 +2,12 @@ import React, { useState , SetStateAction} from 'react'
 import {TestDrone} from './testDrone_old'
 
 const Cube = React.forwardRef((props, ref) => {
-
 const[showRoll, setShowRoll]=useState(false)
 const[showDice, setShowDice]=useState(false)
-
 const handleStopRoll=()=>{
   setShowRoll(!showRoll)
   setShowDice(!showDice)
 }
-
   return (
     <div ref={ref}  >
     {showRoll &&
@@ -32,14 +29,12 @@ rolling dice
     </button>  
     }
         
-       
        {!showDice&& !showRoll&&
        <button onMouseUp={()=>setTimeout(()=>{setShowDice(!showDice)},1000)}  id='start' 
         className='bg-green-400 text-white text-sm font semibold rounded-xl p-3 mt-3 mx-1'  
         onClick={props.onClick}>
           Roll
           </button>
-
        
        }
         
