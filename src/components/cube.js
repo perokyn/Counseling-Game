@@ -38,7 +38,6 @@ rolling dice
        
        }
         
-
       </div>
     </div>
   )
