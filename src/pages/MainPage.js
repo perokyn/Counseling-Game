@@ -113,12 +113,43 @@ setDrone({drone:drone})
        });
     room.on('message', message => {//maybe add get message function on question closed-->get the player name form the current client and compare it tothe data in the messgae
         console.log("message yaaay", message, "Sender Name",message.data.name.player.id)
-       if(player.player.id!==message.data.name.player.id)
-       {console.log("PLAYER2 is playng yaaay") 
-       //setP2State({...p2State, playing:!p2State.playing})
+       if(player.player.id!==message.data.name.player.id && !message.data.content.playing)
+       {
+           
+        console.log("PLAYER2 is playng yaaay",message.data.content.playing) 
+
+    //    setP2State({...p2State, playing:!p2State.playing})
         //SET p2 sette here to get roll and current positin and move figure
             // setP2State({})
        }
+
+       if(message.data.name.player.id.toString()==="Csilla"&& !message.data.content.playing)
+       {
+        console.log("Csilla is  NOT playing yaaay",message.data.content.playing) 
+
+        setP1State({...p1State, playing:false})
+        setP2State({...p2State, playing:true})
+
+       }else if(message.data.name.player.id.toString()==="Csilla"&& message.data.content.playing)
+       {
+        console.log("Csilla is Playing yaaay",message.data.content.playing) 
+        setP1State({...p1State, playing:true})
+        setP2State({...p2State, playing:false})
+       }
+
+       if(message.data.name.player.id.toString()!=="Csilla"&& !message.data.content.playing)
+       {
+        console.log("Client is  NOT playing yaaay",message.data.content.playing) 
+        setP2State({...p2State, playing:false})
+        setP1State({...p1State, playing:true})
+       }else if(message.data.name.player.id.toString()==="Csilla"&& message.data.content.playing)
+       {
+        console.log("Client is  Playing yaaay",message.data.content.playing) 
+        setP2State({...p2State, playing:true})
+        setP1State({...p1State, playing:false})
+       }
+
+
     });
 
     setLoginComplete(!loginComplete)
@@ -164,7 +195,7 @@ gameStart()
         }
         else if(!admin)
         {
-            setP1State({...p2State, currentRoll:(Math.floor(Math.random() * 6) + 1), numofRoll:p2State.numofRoll+1})
+            setP2State({...p2State, currentRoll:(Math.floor(Math.random() * 6) + 1), numofRoll:p2State.numofRoll+1})
         }  
     }
     const setSteps = () => {
@@ -201,13 +232,16 @@ gameStart()
     }
     //=========QUESTION CLOSED SHOW CUBE AT LOCATION==============
     const handleQuestionClose_CubeVisible = () => {
-        if(!admin)
+        if(!admin)//if not admin client closed teh wuestion set it status to not playing and set Admin client statops to playing
         {
-            setP2State({...p2State,playing:!p2State.playing})
+            setP2State({...p2State,playing:false})
+            setP1State({...p1State,playing:true})
+
         }
         else if(admin)
         {
-            setP1State({...p1State,playing:!p1State.playing})
+            setP2State({...p2State,playing:true})
+            setP1State({...p1State,playing:false})
         }
         ///CONTINUE FROM HERE 07/10 !!! send state with updated playing or not playing and update message
         sendMessage(player)//-->send signal to change player rolling message to your turn CONTINUE FROM HERE
