@@ -49,7 +49,7 @@ const MainPage = (props) => {
         playing: false,
         rolled: false,
         currentPosition: 0,
-        currentRoll: 6,
+        currentRoll: 0,
         setCurrentQuestion: '',
         questionVisible: false,
         numofRoll: 0
@@ -98,7 +98,6 @@ setDrone({drone:drone})
                 player2.id = drone.clientId;
 
         }
-        
         //this.setState({member});
     });
     const room = drone.subscribe('observable-room'); //<---CONTINUE FROM EHRE BY SETTING UP ROOMNAME FROM Login as code 6/26/2021
@@ -192,10 +191,12 @@ gameStart()
         if(admin)
         {
             setP1State({...p1State, currentRoll:(Math.floor(Math.random() * 6) + 1), numofRoll:p1State.numofRoll+1})
+            console.log("ROLLED  ADMIN")
         }
         else if(!admin)
         {
             setP2State({...p2State, currentRoll:(Math.floor(Math.random() * 6) + 1), numofRoll:p2State.numofRoll+1})
+        console.log("ROLLED NON ADMIN")
         }  
     }
     const setSteps = () => {
@@ -408,5 +409,4 @@ gameStart()
         </div>
     )
 }
-
 export default MainPage
