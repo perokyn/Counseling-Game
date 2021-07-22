@@ -22,7 +22,6 @@ const sendMessage_out = (drone,player,data) => {
       });}
     }
 
-
 const MainPage = (props) => {
 
     const [questions, setQuestions] = useState(props.data)
@@ -320,7 +319,6 @@ gameStart()
             <button className='p-3 bg-blue-200 rounded-xl  text-xl text-white' onClick={()=>createRoom()}>Login</button>
             </div>
             }
-          
             <div className=' flex mb-3 '>
 
                 <div className='p-3'>
