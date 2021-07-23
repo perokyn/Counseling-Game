@@ -152,11 +152,7 @@ setDrone({drone:drone})
 
     setLoginComplete(!loginComplete)
 }
-// if (room){//CONTINUE FROM HERE--->make sure this only gets called once and not updateing every with re-render
-//     room.room.on('message', message => {//maybe add get message function on question closed ISSUE SOLVED :) MOVED CODE TO createRoom()
-//     console.log("message yaaay", message)
-// });
-// }
+
    const sendMessage = (player) => {
     if(drone){ 
                 console.log("message reached",p1State.currentRoll)
