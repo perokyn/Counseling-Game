@@ -185,12 +185,12 @@ gameStart()
         //console.log('NUMROLL',(p1State.numofRoll + 1))
         if(admin)
         {
-            setP1State({...p1State, currentRoll:(Math.floor(Math.random() * 6) + 1), numofRoll:p1State.numofRoll+1})
+            setP1State({...p1State, currentRoll:(Math.floor(Math.random() * (6 - 1) + 1)), numofRoll:p1State.numofRoll+1})
             console.log("ROLLED  ADMIN")
         }
         else if(!admin)
         {
-            setP2State({...p2State, currentRoll:(Math.floor(Math.random() * 6) + 1), numofRoll:p2State.numofRoll+1})
+            setP2State({...p2State, currentRoll:(Math.floor(Math.random() * (6 - 1) + 1)), numofRoll:p2State.numofRoll+1})
         console.log("ROLLED NON ADMIN")
         }  
     }
