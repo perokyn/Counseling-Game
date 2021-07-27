@@ -3,7 +3,6 @@ import MainPage from './MainPage'
 
 const HomePage = (props) => {
 
-
 return(
 <div>
 <MainPage data={props.data}/>
