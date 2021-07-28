@@ -5,7 +5,6 @@ import figure from '../assets/figure.png'
 import game from '../assets/game.png'
 import Cube from '../components/cubeTest'
 import ReactPlayer from 'react-player/youtube'
-
 //-ytesting scaledrone
 // import {TestDrone} from '../components/testDrone'//REMEMBER TO NOT CALL THIS AS A COMPONENt BUT EXPORT FUNcTIONS to avoid coNITNuOUS CONNECTING at each render!!
 // import ConnectScaledrone from '../components/cscaledrone_connect'
