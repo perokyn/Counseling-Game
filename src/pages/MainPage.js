@@ -51,7 +51,6 @@ const MainPage = (props) => {
         setCurrentQuestion: '',
         questionVisible: false,
         numofRoll: 0
-
     })
     
 //DRONE STATES=========================
