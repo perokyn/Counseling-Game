@@ -5,7 +5,7 @@ const HomePage = (props) => {
 
 return(
 <div>
-<MainPage data={props.data}/>
+<MainPage data={props.data} location={props.location}/>
 </div>
 )
 

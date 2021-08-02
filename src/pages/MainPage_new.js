@@ -23,9 +23,21 @@ const sendMessage_out = (drone,player,data) => {
     const MainPage1=(props)=>{
 
      //set who is playing
-      const[userStarts, setUserStarts]=useState('Admin starts')
+    const[userStarts, setUserStarts]=useState('Admin starts')
     //code for client
     const[clientCode, setClientCode]=useState('code')
+    const[admin, setAdmin]=useState(true)
+    //check url code for client code do deremine current cleints status and update UI accordingly
+    
+    const getLocation=()=>{
+        const localUrl=props.location.toString()
+        if(localUrl.indexOf('?')>0){
+            const linkCode=localUrl.slice(localUrl.indexOf('?')+1,localUrl.length)
+            console.log("CLIENT side:",linkCode)//compare this code against clientCode
+          }
+    }
+    getLocation()
+    
         return(
       <div>
 
