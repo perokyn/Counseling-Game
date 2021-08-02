@@ -24,7 +24,8 @@ const sendMessage_out = (drone,player,data) => {
 
      //set who is playing
       const[userStarts, setUserStarts]=useState('Admin starts')
-
+    //code for client
+    const[clientCode, setClientCode]=useState('code')
         return(
       <div>
 

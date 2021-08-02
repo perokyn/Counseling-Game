@@ -31,6 +31,8 @@ const MainPage = (props) => {
     const rollTo = useRef()
     const [cubeVisible, setCubeVisible] = useState(true)
     const content = questions
+
+    const[clientCode, setClientCode]=useState('code')
 //TO DO remember to learn how to set state fetures and not upodate the whole state!!!! SPREAD OPERATOR!!!{...p1State, currentPosition=position}
     const [p1State, setP1State] = useState({
         id:'',
@@ -73,6 +75,15 @@ const setPlayerName= e=> {
 //================================================================================================================================
 //=======================END PLAYERS STATE SETUP====================================================================\
 //================================================================================================================================
+
+//Generate code for client
+
+const generateCode=()=>{
+
+    const clientCode=(Math.floor(Math.random() * (6 - 1) + 1))
+ setClientCode((Math.floor(Math.random() * (10 - 1) + 1)),(Math.floor(Math.random() * (6 - 1) + 1)))
+}
+
 
 
 
@@ -314,7 +325,8 @@ gameStart()
             {loginComplete&& 
             <div className=' flex flex-col absolute bg-green-300 p-8 rounded-xl justify-self-center'>
                 <textarea id="playerName"placeholder="player " className=" p-2 text-sm h-10  rounded-xl mb-3" onChange={e=>{setPlayerName(e)}}></textarea>
-                <textarea placeholder="code " className=" p-2 text-sm h-10  rounded-xl mb-3"></textarea>
+                <button className='p-3 bg-gray-500 rounded-xl mb-3 text-xl text-white mt-3' onClick={()=>generateCode()}>Generate code</button>
+                <textarea placeholder={clientCode} value={clientCode} className=" p-2 text-sm h-10  rounded-xl mb-3"></textarea>
                <div className='flex'>
                 <label className="switch">
                    <input type="checkbox" onChange={()=>userStarts==="Admin starts" ? setUserStarts("Client starts"):setUserStarts("Admin starts") }></input>
