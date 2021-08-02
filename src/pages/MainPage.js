@@ -81,7 +81,7 @@ const setPlayerName= e=> {
 const generateCode=()=>{
 
     const clientCode=(Math.floor(Math.random() * (6 - 1) + 1))
- setClientCode((Math.floor(Math.random() * (10 - 1) + 1)),(Math.floor(Math.random() * (6 - 1) + 1)))
+ setClientCode([(Math.floor(Math.random() * (10 - 1) + 1)),(Math.floor(Math.random() * (6 - 1) + 1))])
 }
 
 
