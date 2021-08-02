@@ -5,8 +5,11 @@ import figure from '../assets/figure.png'
 import game from '../assets/game.png'
 import Cube from '../components/cubeTest'
 import ReactPlayer from 'react-player/youtube'
-
+//-ytesting scaledrone
+// import {TestDrone} from '../components/testDrone'//REMEMBER TO NOT CALL THIS AS A COMPONENt BUT EXPORT FUNcTIONS to avoid coNITNuOUS CONNECTING at each render!!
+// import ConnectScaledrone from '../components/cscaledrone_connect'
 const sendMessage_out = (drone,player,data) => {
+    
     if(drone){ 
         console.log("attempting message")
         drone.drone.publish({
@@ -23,62 +26,39 @@ const MainPage = (props) => {
     const localUrl=props.location.toString()
     const[userStarts, setUserStarts]=useState('Admin starts')
     const [questions, setQuestions] = useState(props.data)
-    const[loginComplete, setLoginComplete]=useState(false)
+    const[loginComplete, setLoginComplete]=useState(true)
     const [questionVisible, setQuestionVisible] = useState(false)
     const rollTo = useRef()
     const [cubeVisible, setCubeVisible] = useState(true)
     const content = questions
-    const[clientLink, setclientLink]=useState('Generate link and forward it to your client')
-    const[clientCode, setCode]=useState(0)
-    const [room, setRoom]=useState()
-    const [drone, setDrone]=useState()
-    const[admin, setAdmin]=useState(true)
-    const[othePlayerPlaying, setOthePlayerPlaying]=useState(false)
-    let members=[]
 
-const setClientCode=(e)=>{
+    const[clientCode, setClientCode]=useState('code')
+//DRONE STATES=========================
+const [room, setRoom]=useState()
+const [drone, setDrone]=useState()
+const[admin, setAdmin]=useState(true)
+let members=[]
+const [player, setPlayer] = useState({})
 
-    setCode(e.target.value)
+const setPlayerName= e=> {
+setPlayer({
+player: {
+    id: e.target.value///CONTINUE FROM HEER TO SET ADMIN ID
+}
+})
 }
 
-    const [player, setPlayer] = useState({})
-           const setPlayerName= e=> {
-            setPlayer({
-                      player: {
-                      id: e.target.value
-                      }
-                        })
-                      }
 
-
-    //Generate link and code for client
-const generateCode=()=>{
-    let start //variable to check by client to show the cube or not
-    if(userStarts==="Admin starts"){
-     start=1 
-    }else{start=0}
-     setclientLink(props.location +'?'+ (Math.floor(Math.random() * 10000) + 10000).toString().substring(1)+start)
-    }
-    
-    //compare client and url code to complete login                    
-    const compareCode=()=>{
+    const getLocation=()=>{
+        
         if(localUrl.indexOf('?')>0){
+           
             const linkCode=localUrl.slice(localUrl.indexOf('?')+1,localUrl.length)
-              if(clientCode.toString()!==linkCode){
-                console.log("You cant login! Client code: ",clientCode, "location code:",linkCode)
-              } 
-               if(clientCode.toString()===linkCode&& localUrl.slice(localUrl.indexOf('?')+5,localUrl.length)==='1'){
-                setOthePlayerPlaying(!othePlayerPlaying) //show other player is playing instead cube 
-                console.log("You have successfully logged in")
-                setLoginComplete(!loginComplete)   }
-
-               if(clientCode.toString()===linkCode&&localUrl.slice(localUrl.indexOf('?')+5,localUrl.length)==='0'){
-                    console.log("You have successfully logged in")
-                  setLoginComplete(!loginComplete)
-                }  
+            console.log("CLIENT side:",linkCode)
           }
+    
     }
-  
+    getLocation()
 //TO DO remember to learn how to set state fetures and not upodate the whole state!!!! SPREAD OPERATOR!!!{...p1State, currentPosition=position}
     const [p1State, setP1State] = useState({
         id:'',
@@ -109,51 +89,95 @@ const generateCode=()=>{
 //=======================END PLAYERS STATE SETUP====================================================================\
 //================================================================================================================================
 
+//Generate code for client
+
+const generateCode=()=>{
+console.log("location", props.location)
+    const clientCode=(Math.floor(Math.random() * (6 - 1) + 1))
+ setClientCode(props.location +'?'+ (Math.floor(Math.random() * 10000) + 10000).toString().substring(1))
+}
+
+
+
 
 //================================================================================================================================
 //=========================DRONE SETUP============================================================================================
 //================================================================================================================================
 //was conusleiong room DJHRuXNgQyi58qY0 now game
 const createRoom=()=>{
-//set admin/not admin based on url code also later on call the compare location code method    
-if(localUrl.indexOf('?')>0){
-    setAdmin(!admin)
-    compareCode()
-}else(setAdmin(admin))
-
-//put this below into condiitional statement to prvent multiple logins when client code fails
+    
     const drone = new window.Scaledrone("sYoK5pOn8DZhOPRJ", { 
     });
-  setDrone({drone:drone})
+setDrone({drone:drone})
     drone.on('open', error => {
         if (error) {
             return console.error(error);
         }
-        if(admin)
-        {
+        if(player.player.id.toString()==="Csilla")
+        {setAdmin(admin)
             const player1 = { ...player.player };
             player1.id = drone.clientId;
         }else
         {
+               setAdmin(!admin)
                 const player2 = { ...player.player };
                 player2.id = drone.clientId;
+
         }
-        
+        //this.setState({member});
     });
     const room = drone.subscribe('observable-room'); //<---CONTINUE FROM EHRE BY SETTING UP ROOMNAME FROM Login as code 6/26/2021
      setRoom({room:room})
      room.on('members', m => {
         members = m;
         console.log("MEMBER LIST",members)
+       if(members.length>1){
+        setAdmin(!admin)
+       }
+        
        });
-
     room.on('message', message => {//maybe add get message function on question closed-->get the player name form the current client and compare it tothe data in the messgae
         console.log("message yaaay", message, "Sender Name",message.data.name.player.id)
-    //Add message check statements heer
+       if(player.player.id!==message.data.name.player.id && !message.data.content.playing)
+       {
+           
+        console.log("PLAYER2 is playng yaaay",message.data.content.playing) 
+
+    //    setP2State({...p2State, playing:!p2State.playing})
+        //SET p2 sette here to get roll and current positin and move figure
+            // setP2State({})
+       }
+
+       if(message.data.name.player.id.toString()==="Csilla"&& !message.data.content.playing)
+       {
+        console.log("Csilla is  NOT playing yaaay",message.data.content.playing) 
+
+        setP1State({...p1State, playing:false})
+        setP2State({...p2State, playing:true})
+
+       }else if(message.data.name.player.id.toString()==="Csilla"&& message.data.content.playing)
+       {
+        console.log("Csilla is Playing yaaay",message.data.content.playing) 
+        setP1State({...p1State, playing:true})
+        setP2State({...p2State, playing:false})
+       }
+
+       if(message.data.name.player.id.toString()!=="Csilla"&& !message.data.content.playing)
+       {
+        console.log("Client is  NOT playing yaaay",message.data.content.playing) 
+        setP2State({...p2State, playing:false})
+        setP1State({...p1State, playing:true})
+       }else if(message.data.name.player.id.toString()==="Csilla"&& message.data.content.playing)
+       {
+        console.log("Client is  Playing yaaay",message.data.content.playing) 
+        setP2State({...p2State, playing:true})
+        setP1State({...p1State, playing:false})
+       }
+
 
     });
 
-   if(admin&&localUrl.indexOf('?')<0){setLoginComplete(!loginComplete)}
+    setLoginComplete(!loginComplete)
 }
 
    const sendMessage = (player) => {
@@ -169,6 +193,7 @@ if(localUrl.indexOf('?')>0){
                     console.log("This is a non admin client sending message")
                     sendMessage_out(drone,player,p2State)
                 }
+        
     }
     }
 //++===ON GAME START========================
@@ -310,31 +335,43 @@ gameStart()
     return (
         <div className='relative grid justify-items-stretch'>
 
-            {!loginComplete&& 
+            {loginComplete&& 
             <div className=' flex flex-col absolute bg-green-300 p-8 rounded-xl justify-self-center'>
                { localUrl.indexOf('?')<0? <div className='flex flex-col'>
-               <textarea id="playerName"placeholder="player name " className=" p-2 text-sm h-10  rounded-xl mb-3" onChange={e=>{setPlayerName(e)}}></textarea>
-                <div className='flex'>
-                   <label className="switch">
+                    <div className='flex'>
+                  <label className="switch">
                    <input type="checkbox" onChange={()=>userStarts==="Admin starts" ? setUserStarts("Client starts"):setUserStarts("Admin starts") }></input>
-                    <span className="slider round"></span>
-                   </label>
-                    <div className='text-sm text-white pl-3 text-align-center'>{userStarts}</div>
+                  <span className="slider round"></span>
+                </label>
+                <div className='text-sm text-white pl-3 text-align-center'>{userStarts}</div>
                 </div>
                 <button className='p-3 bg-gray-500 rounded-xl mb-3 text-xl text-white mt-3' onClick={()=>generateCode()}>Generate link</button>
-                <textarea placeholder={clientLink} value={clientLink} readOnly={true} className=" p-2 text-sm h-30  rounded-xl mb-3"></textarea>
+                <textarea placeholder={clientCode} value={clientCode} readOnly={true} className=" p-2 text-sm h-30  rounded-xl mb-3"></textarea>
                 </div>:<div className=' flex flex-col '><textarea id="playerName"placeholder="player " className=" p-2 text-sm h-10  rounded-xl mb-3" onChange={e=>{setPlayerName(e)}}></textarea>
-                <textarea id="clientLink"placeholder="your code " className=" p-2 text-sm h-10  rounded-xl mb-3" onChange={e=>setClientCode(e)} ></textarea></div>}
-                <button className='p-3 bg-blue-200 rounded-xl  text-xl text-white mt-3' onClick={()=>createRoom()}>Login</button>
+                <textarea id="clientCode"placeholder="your code " className=" p-2 text-sm h-10  rounded-xl mb-3" ></textarea></div>}
+                
+                
+               
+            <button className='p-3 bg-blue-200 rounded-xl  text-xl text-white mt-3' onClick={()=>createRoom()}>Login</button>
             </div>
             }
             <div className=' flex mb-3 '>
+
                 <div className='p-3'>
                     Welcome to the game of All about You
                <img alt='3d characters' src={game}></img>
+
                 </div>
+                {/* {cubeVisible && !questionVisible &&
+                    <div id='cubeFrame' className='bg-green-200 rounded-xl  p-6 absolute z-40 '>
+
+                        {
+                            p2State.playing ?
+                                <div>Player 2 is rolling</div> :
+                                <Cube currentRoll={p1State.currentRoll} onMouseDown={() => stopRoll()} onClick={startRoll} ref={rollTo} />
+                        }
+                    </div>} */}
             </div>
-            {/* //game grid */}
             <div className='grid grid-cols-5 ' >
 
                 {content.map(step => (
@@ -372,7 +409,7 @@ gameStart()
                                   {cubeVisible && !questionVisible &&
                                     <div id='cubeFrame' className='bg-green-200 rounded-xl  p-6 absolute z-40 '>
                                   {
-                                   othePlayerPlaying ?
+                                   p2State.playing ?
                                    <div>Player 2 is rolling</div> :
                                    <Cube currentRoll={p1State.currentRoll} onMouseDown={() => stopRoll()} onClick={startRoll} ref={rollTo} />
                                   }
