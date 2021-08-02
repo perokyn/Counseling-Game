@@ -23,6 +23,8 @@ const sendMessage_out = (drone,player,data) => {
 
 const MainPage = (props) => {
 
+    const[userStarts, setUserStarts]=useState('Admin starts')
+
     const [questions, setQuestions] = useState(props.data)
     const[loginComplete, setLoginComplete]=useState(true)
     const [questionVisible, setQuestionVisible] = useState(false)
@@ -241,7 +243,7 @@ gameStart()
             setP1State({...p1State,playing:false})
         }
         ///CONTINUE FROM HERE 07/10 !!! send state with updated playing or not playing and update message
-        sendMessage(player)//-->send signal to change player rolling message to your turn CONTINUE FROM HERE
+      //  sendMessage(player)//-->send signal to change player rolling message to your turn CONTINUE FROM HERE
         setQuestionVisible(!questionVisible)
         setCubeVisible(!cubeVisible)
         setTimeout(() => {
@@ -254,10 +256,10 @@ gameStart()
 
     }
     //for two player game
-    const handleStopRoll = () => {
+    const stopRoll = () => {
         setTimeout(() => { setSteps() }, 1000)//TODO----solve issue of showwing figure on start-------------------------------!!!!    //this is where maybe add  aswitch statement to handle player1 and player2 steps
         console.log("CURRENTROLL", p1State.currentRoll)
-        sendMessage(player)
+        //sendMessage(player)
         setTimeout(() => { setCubeVisible(!cubeVisible)
             let cube_position = '#cube' + p1State.currentPosition.toString()
             $(cube_position).css('visibility', 'hidden') 
@@ -313,7 +315,14 @@ gameStart()
             <div className=' flex flex-col absolute bg-green-300 p-8 rounded-xl justify-self-center'>
                 <textarea id="playerName"placeholder="player " className=" p-2 text-sm h-10  rounded-xl mb-3" onChange={e=>{setPlayerName(e)}}></textarea>
                 <textarea placeholder="code " className=" p-2 text-sm h-10  rounded-xl mb-3"></textarea>
-            <button className='p-3 bg-blue-200 rounded-xl  text-xl text-white' onClick={()=>createRoom()}>Login</button>
+               <div className='flex'>
+                <label className="switch">
+                   <input type="checkbox" onChange={()=>userStarts==="Admin starts" ? setUserStarts("Client starts"):setUserStarts("Admin starts") }></input>
+                  <span className="slider round"></span>
+                </label>
+                <div className='text-sm color-white'>{userStarts}</div>
+                </div>
+            <button className='p-3 bg-blue-200 rounded-xl  text-xl text-white mt-3' onClick={()=>createRoom()}>Login</button>
             </div>
             }
             <div className=' flex mb-3 '>
@@ -329,7 +338,7 @@ gameStart()
                         {
                             p2State.playing ?
                                 <div>Player 2 is rolling</div> :
-                                <Cube currentRoll={p1State.currentRoll} onMouseDown={() => handleStopRoll()} onClick={startRoll} ref={rollTo} />
+                                <Cube currentRoll={p1State.currentRoll} onMouseDown={() => stopRoll()} onClick={startRoll} ref={rollTo} />
                         }
                     </div>} */}
             </div>
@@ -372,7 +381,7 @@ gameStart()
                                   {
                                    p2State.playing ?
                                    <div>Player 2 is rolling</div> :
-                                   <Cube currentRoll={p1State.currentRoll} onMouseDown={() => handleStopRoll()} onClick={startRoll} ref={rollTo} />
+                                   <Cube currentRoll={p1State.currentRoll} onMouseDown={() => stopRoll()} onClick={startRoll} ref={rollTo} />
                                   }
                                    </div>}                                   
                             </div>
