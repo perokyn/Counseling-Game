@@ -320,7 +320,7 @@ gameStart()
                    <input type="checkbox" onChange={()=>userStarts==="Admin starts" ? setUserStarts("Client starts"):setUserStarts("Admin starts") }></input>
                   <span className="slider round"></span>
                 </label>
-                <div className='text-sm color-white'>{userStarts}</div>
+                <div className='text-sm text-white pl-3 text-align-center'>{userStarts}</div>
                 </div>
             <button className='p-3 bg-blue-200 rounded-xl  text-xl text-white mt-3' onClick={()=>createRoom()}>Login</button>
             </div>
