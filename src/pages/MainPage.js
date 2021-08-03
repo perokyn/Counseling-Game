@@ -38,11 +38,11 @@ const MainPage = (props) => {
     const [drone, setDrone]=useState()
     const[admin, setAdmin]=useState(true)
     const[othePlayerPlaying, setOthePlayerPlaying]=useState(false)
-   
-   const refresh=useRef()
-    const simulateClick=(e)=>{
-        e.click()
-    }
+   const[update, setUpdate]=useState("")
+//    const refresh=useRef()
+//     const simulateClick=(e)=>{//CONTINUE FOR HERE TO SIMULATE CLICK
+//         e.click()
+//     }
     let members=[]
 
 const setClientCode=(e)=>{
@@ -162,10 +162,14 @@ if(localUrl.indexOf('?')>0){
         console.log("Other players current question:", message.data.content.currentQuestion, "Other players LOCATION",message.data.content.currentPosition)
     //Add message check statements heer message.data.name.player.id
     if(message.data.name.player.id!==player.player.id && !message.data.content.playing){
+         
+        console.log('Other pLayer palying1:', othePlayerPlaying)
         console.log("Othe people palying should be closed")
-        setTimeout(()=>{simulateClick()},1000)
+        setTimeout(()=>{setOthePlayerPlaying(!othePlayerPlaying)
+            setUpdate("updated")
+        console.log('Other pLayer palying:', othePlayerPlaying)},1000)
         }
-            console.log('Other pLayer palying:', othePlayerPlaying)
+            
 
     });
 
@@ -216,21 +220,18 @@ gameStart()
         //this gets a call from handleStop roll which tsrats to animate the figure
         //this is where maybe add  aswitch statement to handle player1 and player2 
         //this method should also be called from use Effect when data is avaliable form player2
-        switch (player) {
-            case admin:
-                setStep(p1State.currentPosition, p1State.currentRoll + p1State.currentPosition)
-                break
-            case !admin:
-                setStep(p2State.currentPosition, p2State.currentRoll + p2State.currentPosition)
-                break
-            default: setStep(p1State.currentPosition, p1State.currentRoll + p1State.currentPosition)
-        }
+      if(admin){setStep(p1State.currentPosition, p1State.currentRoll + p1State.currentPosition)}
+      else if(!admin){setStep(p2State.currentPosition, p2State.currentRoll + p2State.currentPosition)
+        console.log("not admin case evaluated",p2State.currentRoll + p2State.currentPosition)}
+           
+        
     }
 
     const afterRoll = (position) => {
         if (p1State.currentPosition > 0) { setCubeVisible(!cubeVisible)   }   
      //setCurrentPosition(position)///this was currentPosition +postion before, DO NOT EVER MODIFY CURRENTPOS, IT is being updated after every roll end with position++. ONLY update currentroll by adding currentposition to it!!
        setP1State({...p1State, currentPosition:position})
+       setP2State({...p2State, currentPosition:position})
     }
 
     //==========Roll to question widnow top
@@ -252,9 +253,9 @@ gameStart()
       console.log("playe robject: ",player)
        sendMessage(player)
         setQuestionVisible(!questionVisible)
-         setCubeVisible(!cubeVisible)
-
-        setOthePlayerPlaying(!othePlayerPlaying)
+        setCubeVisible(!cubeVisible)
+        setOthePlayerPlaying(othePlayerPlaying)//Check settings for the first time! otherwise it works!!:)
+        setUpdate("")
         setTimeout(() => {
            //show cube after question closed
             if(!cubeVisible){let cube_position = '#cube' + p1State.currentPosition.toString()
@@ -267,8 +268,8 @@ gameStart()
     //for two player game
     const stopRoll = () => {
         setTimeout(() => { setSteps() }, 1000)//TODO----solve issue of showwing figure on start-------------------------------!!!!    //this is where maybe add  aswitch statement to handle player1 and player2 steps
-        console.log("CURRENTROLL", p1State.currentRoll)
-        //sendMessage(player)
+        console.log("CURRENTROLL", p1State.currentRoll,"p2roll",p2State.currentRoll)
+      
         setTimeout(() => { setCubeVisible(!cubeVisible)
             let cube_position = '#cube' + p1State.currentPosition.toString()
             $(cube_position).css('visibility', 'hidden') 
@@ -344,7 +345,7 @@ gameStart()
                <img alt='3d characters' src={game}></img>
                 </div>
             </div>
-            <div className='' ref={refresh} onClick={()=> console.log('clicked')}>tset</div>
+            
             {/* //game grid */}
             <div className='grid grid-cols-5 ' >
 
@@ -383,9 +384,10 @@ gameStart()
                                   {cubeVisible && !questionVisible &&
                                     <div id='cubeFrame' className='bg-green-200 rounded-xl  p-6 absolute z-40 '>
                                   {
-                                   othePlayerPlaying ?
-                                   <div>Player 2 is rolling</div> :
-                                   <Cube currentRoll={p1State.currentRoll} onMouseDown={() => stopRoll()} onClick={startRoll} ref={rollTo} />
+                                   othePlayerPlaying &&update!=="updated" ?
+                                   <div>Player 2 is rolling
+                                   </div> :
+                                   <Cube currentRoll={admin?p1State.currentRoll:p2State.currentRoll} onMouseDown={() => stopRoll()} onClick={startRoll} ref={rollTo} />
                                   }
                                    </div>}                                   
                             </div>
