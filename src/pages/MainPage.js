@@ -17,6 +17,10 @@ const sendMessage_out = (drone,player,data) => {
         }
       });}
     }
+    const ForceOthePlayerPlayingUpdate=()=>{
+        const[othePlayerPlaying, setOthePlayerPlaying]=useState(false)
+        return ()=>setOthePlayerPlaying(!othePlayerPlaying)
+    }
 
 const MainPage = (props) => {
    
@@ -34,6 +38,11 @@ const MainPage = (props) => {
     const [drone, setDrone]=useState()
     const[admin, setAdmin]=useState(true)
     const[othePlayerPlaying, setOthePlayerPlaying]=useState(false)
+   
+   const refresh=useRef()
+    const simulateClick=(e)=>{
+        e.click()
+    }
     let members=[]
 
 const setClientCode=(e)=>{
@@ -81,7 +90,7 @@ const generateCode=()=>{
   
 //TO DO remember to learn how to set state fetures and not upodate the whole state!!!! SPREAD OPERATOR!!!{...p1State, currentPosition=position}
     const [p1State, setP1State] = useState({
-        id:'',
+        id:'1',
         playing: false,
         rolled: false,
         currentPosition: 0,
@@ -93,7 +102,7 @@ const generateCode=()=>{
     //===PLAYERE 2 LOGIC======================\\
     //p2 state
     const [p2State, setP2State] = useState({
-        id:'',
+        id:'2',
         playing: false,
         rolled: false,
         currentPosition: 0,
@@ -148,8 +157,15 @@ if(localUrl.indexOf('?')>0){
        });
 
     room.on('message', message => {//maybe add get message function on question closed-->get the player name form the current client and compare it tothe data in the messgae
-        console.log("message yaaay", message, "Sender Name",message.data.name.player.id)
-    //Add message check statements heer
+        console.log("message yaaay", message, "Is playing after close question",message.data.content.playing)
+        console.log("player name", message.data.name.player.id, "Local Player ID",player.player.id)
+        console.log("Other players current question:", message.data.content.currentQuestion, "Other players LOCATION",message.data.content.currentPosition)
+    //Add message check statements heer message.data.name.player.id
+    if(message.data.name.player.id!==player.player.id && !message.data.content.playing){
+        console.log("Othe people palying should be closed")
+        setTimeout(()=>{simulateClick()},1000)
+        }
+            console.log('Other pLayer palying:', othePlayerPlaying)
 
     });
 
@@ -230,21 +246,15 @@ gameStart()
     }
     //=========QUESTION CLOSED SHOW CUBE AT LOCATION==============
     const handleQuestionClose_CubeVisible = () => {
-        if(!admin)//if not admin client closed teh wuestion set it status to not playing and set Admin client statops to playing
-        {
-            setP2State({...p2State,playing:false})
-            setP1State({...p1State,playing:true})
-
-        }
-        else if(admin)
-        {
-            setP2State({...p2State,playing:true})
-            setP1State({...p1State,playing:false})
-        }
+       
         ///CONTINUE FROM HERE 07/10 !!! send state with updated playing or not playing and update message
       //  sendMessage(player)//-->send signal to change player rolling message to your turn CONTINUE FROM HERE
+      console.log("playe robject: ",player)
+       sendMessage(player)
         setQuestionVisible(!questionVisible)
-        setCubeVisible(!cubeVisible)
+         setCubeVisible(!cubeVisible)
+
+        setOthePlayerPlaying(!othePlayerPlaying)
         setTimeout(() => {
            //show cube after question closed
             if(!cubeVisible){let cube_position = '#cube' + p1State.currentPosition.toString()
@@ -334,6 +344,7 @@ gameStart()
                <img alt='3d characters' src={game}></img>
                 </div>
             </div>
+            <div className='' ref={refresh} onClick={()=> console.log('clicked')}>tset</div>
             {/* //game grid */}
             <div className='grid grid-cols-5 ' >
 
