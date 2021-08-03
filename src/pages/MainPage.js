@@ -17,10 +17,7 @@ const sendMessage_out = (drone,player,data) => {
         }
       });}
     }
-    const ForceOthePlayerPlayingUpdate=()=>{
-        const[othePlayerPlaying, setOthePlayerPlaying]=useState(false)
-        return ()=>setOthePlayerPlaying(!othePlayerPlaying)
-    }
+    
 
 const MainPage = (props) => {
    
@@ -178,7 +175,7 @@ if(localUrl.indexOf('?')>0){
 
    const sendMessage = (player) => {
     if(drone){ 
-                console.log("message reached",p1State.currentRoll)
+                console.log("message reached",p1State.currentRoll,"P1STATE playing:",p1State.playing, "P2STATEPLAYING", p2State.playing)
                 if(admin)
                 {
                     console.log("This is ADMIN client sending message")
@@ -207,12 +204,12 @@ gameStart()
         //console.log('NUMROLL',(p1State.numofRoll + 1))
         if(admin)
         {
-            setP1State({...p1State, currentRoll:(Math.floor(Math.random() * (6 - 1) + 1)), numofRoll:p1State.numofRoll+1})
+            setP1State({...p1State, currentRoll:(Math.floor(Math.random() * (6 - 1) + 1)), numofRoll:p1State.numofRoll+1,playing:true})
             console.log("ROLLED  ADMIN")
         }
         else if(!admin)
         {
-            setP2State({...p2State, currentRoll:(Math.floor(Math.random() * (6 - 1) + 1)), numofRoll:p2State.numofRoll+1})
+            setP2State({...p2State, currentRoll:(Math.floor(Math.random() * (6 - 1) + 1)), numofRoll:p2State.numofRoll+1, playing:true})
         console.log("ROLLED NON ADMIN")
         }  
     }
@@ -232,6 +229,7 @@ gameStart()
      //setCurrentPosition(position)///this was currentPosition +postion before, DO NOT EVER MODIFY CURRENTPOS, IT is being updated after every roll end with position++. ONLY update currentroll by adding currentposition to it!!
        setP1State({...p1State, currentPosition:position})
        setP2State({...p2State, currentPosition:position})
+       
     }
 
     //==========Roll to question widnow top
@@ -247,10 +245,11 @@ gameStart()
     }
     //=========QUESTION CLOSED SHOW CUBE AT LOCATION==============
     const handleQuestionClose_CubeVisible = () => {
-       
+      
         ///CONTINUE FROM HERE 07/10 !!! send state with updated playing or not playing and update message
       //  sendMessage(player)//-->send signal to change player rolling message to your turn CONTINUE FROM HERE
       console.log("playe robject: ",player)
+      
        sendMessage(player)
         setQuestionVisible(!questionVisible)
         setCubeVisible(!cubeVisible)
@@ -269,7 +268,12 @@ gameStart()
     const stopRoll = () => {
         setTimeout(() => { setSteps() }, 1000)//TODO----solve issue of showwing figure on start-------------------------------!!!!    //this is where maybe add  aswitch statement to handle player1 and player2 steps
         console.log("CURRENTROLL", p1State.currentRoll,"p2roll",p2State.currentRoll)
-      
+       
+       
+setTimeout(()=>{ 
+    console.log("PLAYER!state?",p1State.playing)
+    sendMessage(player)}, 500)
+     
         setTimeout(() => { setCubeVisible(!cubeVisible)
             let cube_position = '#cube' + p1State.currentPosition.toString()
             $(cube_position).css('visibility', 'hidden') 
