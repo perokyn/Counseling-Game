@@ -40,7 +40,7 @@ const MainPage = (props) => {
 //     const simulateClick=(e)=>{//CONTINUE FOR HERE TO SIMULATE CLICK
 //         e.click()
 //     }
-    let members=[]
+let members=[]
 
 const setClientCode=(e)=>{
 
@@ -55,7 +55,12 @@ const setClientCode=(e)=>{
                       }
                         })
                       }
-
+const switchPlayers=()=>{
+    userStarts==="Admin starts" ? setUserStarts("Client starts"):setUserStarts("Admin starts") 
+    if(admin&&userStarts==="Client starts"){
+        setOthePlayerPlaying(!othePlayerPlaying)
+    }
+}
 
     //Generate link and code for client
 const generateCode=()=>{
@@ -108,8 +113,6 @@ const generateCode=()=>{
         questionVisible: false,
         numofRoll: 0
     })
-    
-
 
 //================================================================================================================================
 //=======================END PLAYERS STATE SETUP====================================================================\
@@ -141,8 +144,8 @@ if(localUrl.indexOf('?')>0){
             player1.id = drone.clientId;
         }else
         {
-                const player2 = { ...player.player };
-                player2.id = drone.clientId;
+             const player2 = { ...player.player };
+            player2.id = drone.clientId;
         }
         
     });
@@ -165,8 +168,7 @@ if(localUrl.indexOf('?')>0){
         setTimeout(()=>{setOthePlayerPlaying(!othePlayerPlaying)
             setUpdate("updated")
         console.log('Other pLayer palying:', othePlayerPlaying)},1000)
-        }
-            
+        } 
 
     });
 
@@ -245,16 +247,24 @@ gameStart()
       
         ///CONTINUE FROM HERE 07/10 !!! send state with updated playing or not playing and update message
       //  sendMessage(player)//-->send signal to change player rolling message to your turn CONTINUE FROM HERE
-      console.log("playe robject: ",player)
-        sendMessage(player)
+     
+      if(admin){ console.log(" ADMIN UPDATE CLOSE QUESTION REACHED","update:",update)
+          p1State.playing=false
+          p1State.id="yess"
+       }else if(!admin){console.log(" CLIENT UPDATE CLOSE QUESTION REACHED")
+       p2State.playing=false
+          p2State.id="ii"
+       }
         setQuestionVisible(!questionVisible)
         setCubeVisible(!cubeVisible)
-        setOthePlayerPlaying(othePlayerPlaying)//Check settings for the first time! otherwise it works!!:)
+        setOthePlayerPlaying(true)//Always use boolean values and not just a variable itself!)
         setUpdate("")
         setTimeout(() => {
            //show cube after question closed
             if(!cubeVisible){let cube_position = '#cube' + p1State.currentPosition.toString()
               $(cube_position).css('visibility', 'visible') 
+              sendMessage(player)
+              console.log("PLAYER robject: ",p1State,"UPDATED:",update,"Othe rpeople:",othePlayerPlaying)
     }
                 
         }, 2000)
@@ -326,7 +336,7 @@ gameStart()
                <textarea id="playerName"placeholder="player name " className=" p-2 text-sm h-10  rounded-xl mb-3" onChange={e=>{setPlayerName(e)}}></textarea>
                 <div className='flex'>
                    <label className="switch">
-                   <input type="checkbox" onChange={()=>userStarts==="Admin starts" ? setUserStarts("Client starts"):setUserStarts("Admin starts") }></input>
+                   <input type="checkbox" onChange={()=>switchPlayers()}></input>
                     <span className="slider round"></span>
                    </label>
                     <div className='text-sm text-white pl-3 text-align-center'>{userStarts}</div>
