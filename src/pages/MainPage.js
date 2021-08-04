@@ -219,9 +219,7 @@ gameStart()
         //this method should also be called from use Effect when data is avaliable form player2
       if(admin){setStep(p1State.currentPosition, p1State.currentRoll + p1State.currentPosition)}
       else if(!admin){setStep(p2State.currentPosition, p2State.currentRoll + p2State.currentPosition)
-        console.log("not admin case evaluated",p2State.currentRoll + p2State.currentPosition)}
-           
-        
+        console.log("not admin case evaluated",p2State.currentRoll + p2State.currentPosition)}  
     }
 
     const afterRoll = (position) => {
@@ -229,7 +227,6 @@ gameStart()
      //setCurrentPosition(position)///this was currentPosition +postion before, DO NOT EVER MODIFY CURRENTPOS, IT is being updated after every roll end with position++. ONLY update currentroll by adding currentposition to it!!
        setP1State({...p1State, currentPosition:position})
        setP2State({...p2State, currentPosition:position})
-       
     }
 
     //==========Roll to question widnow top
@@ -249,8 +246,7 @@ gameStart()
         ///CONTINUE FROM HERE 07/10 !!! send state with updated playing or not playing and update message
       //  sendMessage(player)//-->send signal to change player rolling message to your turn CONTINUE FROM HERE
       console.log("playe robject: ",player)
-      
-       sendMessage(player)
+        sendMessage(player)
         setQuestionVisible(!questionVisible)
         setCubeVisible(!cubeVisible)
         setOthePlayerPlaying(othePlayerPlaying)//Check settings for the first time! otherwise it works!!:)
@@ -269,10 +265,9 @@ gameStart()
         setTimeout(() => { setSteps() }, 1000)//TODO----solve issue of showwing figure on start-------------------------------!!!!    //this is where maybe add  aswitch statement to handle player1 and player2 steps
         console.log("CURRENTROLL", p1State.currentRoll,"p2roll",p2State.currentRoll)
        
-       
-setTimeout(()=>{ 
-    console.log("PLAYER!state?",p1State.playing)
-    sendMessage(player)}, 500)
+        setTimeout(()=>{ 
+             console.log("PLAYER!state?",p1State.playing)
+             sendMessage(player)}, 500)
      
         setTimeout(() => { setCubeVisible(!cubeVisible)
             let cube_position = '#cube' + p1State.currentPosition.toString()
