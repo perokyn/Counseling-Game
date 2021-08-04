@@ -168,7 +168,12 @@ if(localUrl.indexOf('?')>0){
         setTimeout(()=>{setOthePlayerPlaying(!othePlayerPlaying)
             setUpdate("updated")
         console.log('Other pLayer palying:', othePlayerPlaying)},1000)
-        } 
+        // }else if(message.data.name.player.id!==player.player.id && message.data.content.playing===true ){
+        //     console.log('PLAYING STOP ROLL PRESSED')
+        //CONTINUE FROM HERE 08/07
+            
+        //initate second player steps 
+    }
 
     });
 
