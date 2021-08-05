@@ -35,7 +35,8 @@ const MainPage = (props) => {
     const [drone, setDrone]=useState()
     const[admin, setAdmin]=useState(true)
     const[othePlayerPlaying, setOthePlayerPlaying]=useState(false)
-   const[update, setUpdate]=useState("")
+    const[update, setUpdate]=useState("")
+    const[otherPlayerQ,setotherPLayerQ]=useState(false)
 //    const refresh=useRef()
 //     const simulateClick=(e)=>{//CONTINUE FOR HERE TO SIMULATE CLICK
 //         e.click()
@@ -157,22 +158,45 @@ if(localUrl.indexOf('?')>0){
        });
 
     room.on('message', message => {//maybe add get message function on question closed-->get the player name form the current client and compare it tothe data in the messgae
-        console.log("message yaaay", message, "Is playing after close question",message.data.content.playing)
-        console.log("player name", message.data.name.player.id, "Local Player ID",player.player.id)
-        console.log("Other players current question:", message.data.content.currentQuestion, "Other players LOCATION",message.data.content.currentPosition)
+        // console.log("message yaaay", message, "Is playing after close question",message.data.content.playing)
+        // console.log("player name", message.data.name.player.id, "Local Player ID",player.player.id)
+        // console.log("Other players current question:", message.data.content.currentQuestion, "Other players LOCATION",message.data.content.currentPosition)
     //Add message check statements heer message.data.name.player.id
-    if(message.data.name.player.id!==player.player.id && !message.data.content.playing){
+    // if(message.data.name.player.id!==player.player.id && !message.data.content.playing){
          
-        console.log('Other pLayer palying1:', othePlayerPlaying)
-        console.log("Othe people palying should be closed")
-        setTimeout(()=>{setOthePlayerPlaying(!othePlayerPlaying)
-            setUpdate("updated")
-        console.log('Other pLayer palying:', othePlayerPlaying)},1000)
-        // }else if(message.data.name.player.id!==player.player.id && message.data.content.playing===true ){
-        //     console.log('PLAYING STOP ROLL PRESSED')
-        //CONTINUE FROM HERE 08/07
+    //     console.log('Other pLayer palying1:', othePlayerPlaying)
+    //     console.log("Othe people palying should be closed")
+    //     setTimeout(()=>{setOthePlayerPlaying(!othePlayerPlaying)
+    //         setUpdate("updated")
+    //     console.log('Other pLayer palying:', othePlayerPlaying)},1000)
+    //     // }else if(message.data.name.player.id!==player.player.id && message.data.content.playing===true ){
+    //     //     console.log('PLAYING STOP ROLL PRESSED')
+    //     //CONTINUE FROM HERE 08/07
             
-        //initate second player steps 
+    //     //initate second player steps 
+    // }
+    if(message.data.name.player.id!==player.player.id ){
+    switch (message.data.content.playing) {
+        case true:
+          console.log('PLAYING TRUE: STart P2steps to:', message.data.content.currentPosition);
+          console.log('SET STEPS P2steps to:', (message.data.content.currentPosition+message.data.content.currentRoll));
+          setotherPLayerQ(!otherPlayerQ)
+         
+           
+          setStep(message.data.content.currentPosition, message.data.content.currentPosition+message.data.content.currentRoll)
+
+          break
+        case false:
+          console.log('PLAYING FALSE');
+       
+          setTimeout(()=>{setOthePlayerPlaying(!othePlayerPlaying)
+          setUpdate("updated")
+                console.log('CLOSE OTHER PLayer info:', otherPlayerQ)},1000)
+
+          break;
+        default:
+          console.log("NO CASE EXECUTED");
+      }
     }
 
     });
@@ -224,9 +248,11 @@ gameStart()
         //this gets a call from handleStop roll which tsrats to animate the figure
         //this is where maybe add  aswitch statement to handle player1 and player2 
         //this method should also be called from use Effect when data is avaliable form player2
-      if(admin){setStep(p1State.currentPosition, p1State.currentRoll + p1State.currentPosition)}
-      else if(!admin){setStep(p2State.currentPosition, p2State.currentRoll + p2State.currentPosition)
-        console.log("not admin case evaluated",p2State.currentRoll + p2State.currentPosition)}  
+     
+      if(admin){setStep(p1State.currentPosition, p1State.currentRoll + p1State.currentPosition)   
+    }
+      else if(!admin){setStep(p2State.currentPosition, p2State.currentRoll + p2State.currentPosition)} 
+      
     }
 
     const afterRoll = (position) => {
@@ -249,16 +275,16 @@ gameStart()
     }
     //=========QUESTION CLOSED SHOW CUBE AT LOCATION==============
     const handleQuestionClose_CubeVisible = () => {
-      
+        setotherPLayerQ(!otherPlayerQ)
         ///CONTINUE FROM HERE 07/10 !!! send state with updated playing or not playing and update message
       //  sendMessage(player)//-->send signal to change player rolling message to your turn CONTINUE FROM HERE
      
       if(admin){ console.log(" ADMIN UPDATE CLOSE QUESTION REACHED","update:",update)
           p1State.playing=false
-          p1State.id="yess"
+         
        }else if(!admin){console.log(" CLIENT UPDATE CLOSE QUESTION REACHED")
        p2State.playing=false
-          p2State.id="ii"
+          
        }
         setQuestionVisible(!questionVisible)
         setCubeVisible(!cubeVisible)
@@ -382,12 +408,14 @@ gameStart()
                             <div className='relative grid justify-items-center items-center'>
      
                                 <div onClick={e => { handleQuestionVisible(e) }}
-                                    onMouseDown={() => {setP1State({...p1State, currentQuestion:[step.fields.question, step.fields.media]})  }}//passing question data to popup window
+                                    onMouseDown={() => { setP1State({...p1State, currentQuestion:[step.fields.question, step.fields.media]})}}//passing question data to popup window
                                     className=' text-3xl flex p-10  bg-blue-400 rounded-lg z-10 cursor-pointer absolute'
                                     style={{ visibility: 'hidden' }}
                                     id={'q' + step.fields.id.toString()}>
                                     <span className='animate-ping'>?</span>
+                                    {otherPlayerQ? <span>this is other question</span>:<span></span>}
                                 </div>
+
                                  {/*HANDLE SHOW CUBE DIV*/ }
                                  {/*Show cube at current location, id is a combination of the current locatio + cube, get the idea adn set visibility */ }
                             <div  className='text-xl text-black absolute -top-14   ritgh-0'
