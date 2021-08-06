@@ -11,12 +11,12 @@ const handleStopRoll=()=>{
   return (
     <div ref={ref}  >
     {showRoll &&
-    <p style={{color:'gray'}}>
+    <p style={{color:'gray',backgroundColor:"whitesmoke"}}>
     {props.currentRoll}
     </p>  
     }
 {showDice ?
-    <p style={{color:'gray'}}>
+    <p style={{color:'black',backgroundColor:"whitesmoke"}}>
 rolling dice
     </p>  :<p></p>
     }

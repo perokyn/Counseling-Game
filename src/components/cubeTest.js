@@ -107,12 +107,12 @@ const sendMessage = () => {
     <div ref={ref}  >
    
     {showRoll &&
-    <p style={{color:'gray'}}>
+    <p className="color-black bg-white rounded xl p-3">
     {props.currentRoll}
     </p>  
     }
 {showDice ?
-    <p style={{color:'gray'}}>
+    <p style={{color:'black',backgroundColor:"whitesmoke",padding:'2px'}}>
 rolling dice
     </p>  :<p></p>
     }
