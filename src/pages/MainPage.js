@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import BaseStepSquare from '../components/BaseStepSquare'
 import $ from "jquery";
 import figure from '../assets/figure.png'
+import figure2 from '../assets/figure2.png'
 import game from '../assets/game.png'
 import Cube from '../components/cubeTest'
 import ReactPlayer from 'react-player/youtube'
@@ -181,9 +182,8 @@ if(localUrl.indexOf('?')>0){
           console.log('PLAYING TRUE: STart P2steps to:', message.data.content.currentPosition);
           console.log('SET STEPS P2steps to:', (message.data.content.currentPosition+message.data.content.currentRoll));
           setotherPLayerQ(!otherPlayerQ)
-         
-           
-          setStep(message.data.content.currentPosition, message.data.content.currentPosition+message.data.content.currentRoll)
+          console.log("CLIENT POSITION BEFORE Roll:", p2State.currentPosition, p2State.currentRoll)
+          setStep2(message.data.content.currentPosition, message.data.content.currentPosition+message.data.content.currentRoll)
 
           break
         case false:
@@ -192,7 +192,6 @@ if(localUrl.indexOf('?')>0){
           setTimeout(()=>{setOthePlayerPlaying(!othePlayerPlaying)
           setUpdate("updated")
                 console.log('CLOSE OTHER PLayer info:', otherPlayerQ)},1000)
-
           break;
         default:
           console.log("NO CASE EXECUTED");
@@ -230,7 +229,7 @@ if(p1State.currentPosition===0 && cubeVisible){
 gameStart()
 
 //==================================================================================
-//===============SET ROLL NUMBER FOR player1=======================================//
+//================USER ACTIONS=====================================================//
     const startRoll = () => {
         //console.log('NUMROLL',(p1State.numofRoll + 1))
         if(admin)
@@ -245,13 +244,12 @@ gameStart()
         }  
     }
     const setSteps = () => {
-        //this gets a call from handleStop roll which tsrats to animate the figure
-        //this is where maybe add  aswitch statement to handle player1 and player2 
-        //this method should also be called from use Effect when data is avaliable form player2
-     
+      
       if(admin){setStep(p1State.currentPosition, p1State.currentRoll + p1State.currentPosition)   
     }
-      else if(!admin){setStep(p2State.currentPosition, p2State.currentRoll + p2State.currentPosition)} 
+      else if(!admin){
+          console.log("CLIENT POSITION after Roll:", p2State.currentPosition, p2State.currentRoll)
+        setStep(p2State.currentPosition, p2State.currentRoll + p2State.currentPosition)} 
       
     }
 
@@ -265,26 +263,20 @@ gameStart()
     //==========Roll to question widnow top
     const handleQuestionVisible = (e) => {
         setQuestionVisible(!questionVisible)
-        console.log("rolltoCalled", e.target.id)
-
+        // console.log("rolltoCalled", e.target.id)
         $(function () {
             $('html, body').animate({
                 scrollTop: $('#mainquestion').offset().top - 20
             }, 2000);
         });
     }
-    //=========QUESTION CLOSED SHOW CUBE AT LOCATION==============
+    //========Update visnility state for cube and questions
     const handleQuestionClose_CubeVisible = () => {
-        setotherPLayerQ(!otherPlayerQ)
-        ///CONTINUE FROM HERE 07/10 !!! send state with updated playing or not playing and update message
-      //  sendMessage(player)//-->send signal to change player rolling message to your turn CONTINUE FROM HERE
-     
+          setotherPLayerQ(!otherPlayerQ)
       if(admin){ console.log(" ADMIN UPDATE CLOSE QUESTION REACHED","update:",update)
           p1State.playing=false
-         
        }else if(!admin){console.log(" CLIENT UPDATE CLOSE QUESTION REACHED")
        p2State.playing=false
-          
        }
         setQuestionVisible(!questionVisible)
         setCubeVisible(!cubeVisible)
@@ -296,20 +288,18 @@ gameStart()
               $(cube_position).css('visibility', 'visible') 
               sendMessage(player)
               console.log("PLAYER robject: ",p1State,"UPDATED:",update,"Othe rpeople:",othePlayerPlaying)
-    }
-                
+            }     
         }, 2000)
 
     }
-    //for two player game
+
     const stopRoll = () => {
         setTimeout(() => { setSteps() }, 1000)//TODO----solve issue of showwing figure on start-------------------------------!!!!    //this is where maybe add  aswitch statement to handle player1 and player2 steps
         console.log("CURRENTROLL", p1State.currentRoll,"p2roll",p2State.currentRoll)
-       
+
         setTimeout(()=>{ 
-             console.log("PLAYER!state?",p1State.playing)
              sendMessage(player)}, 500)
-     
+
         setTimeout(() => { setCubeVisible(!cubeVisible)
             let cube_position = '#cube' + p1State.currentPosition.toString()
             $(cube_position).css('visibility', 'hidden') 
@@ -356,9 +346,9 @@ gameStart()
     const setStep2 = (position, goTo) => {
         let interval = setInterval(function () {
             if (position <= goTo) {             ///<=====set steps forward here   max step number=  content.data.length-1
-                let currentStep = '#step' + position.toString()
+                let currentStep = '#stepP2' + position.toString()
                 if (position > 0) {
-                    let stepback = '#step' + (position - 1).toString()
+                    let stepback = '#stepP2' + (position - 1).toString()
                     $(function () {
                         $(stepback).css('visibility', 'hidden')
                     })
@@ -368,21 +358,8 @@ gameStart()
                 })
                 if (position === goTo) {
                     //update current position
-                    afterRoll(position)
+                    // afterRoll(position)
                 }
-                //show questionmark for given step----------------------------
-                if (position > 0 && position === goTo) {
-                    let current_question = '#q' + position.toString()
-                    $(function () {
-                        setTimeout(() => { $(current_question).css('visibility', 'visible') }, 1000)
-                    })
-                    $(function () {
-                        $(current_question).click(function () {
-                            $(current_question).css('visibility', 'hidden')
-                        })
-                    })
-                }
-                //---------------------------------------------------------------
                 position++;
             } else {
                 clearInterval(interval);
@@ -391,7 +368,6 @@ gameStart()
     }
     return (
         <div className='relative grid justify-items-stretch'>
-
             {!loginComplete&& 
             <div className=' flex flex-col absolute bg-green-300 p-8 rounded-xl justify-self-center'>
                { localUrl.indexOf('?')<0? <div className='flex flex-col'>
@@ -419,7 +395,6 @@ gameStart()
             
             {/* //game grid */}
             <div className='grid grid-cols-5 ' >
-
                 {content.map(step => (
                     <div key={step.fields.id} className='relative ' >
 
@@ -432,33 +407,32 @@ gameStart()
                         <img style={{
                             marginTop: step.fields.id === 4 || step.fields.id === 14 || step.fields.id === 24 || step.fields.id === 34 || step.fields.id === 44 || step.fields.id === 9 || step.fields.id === 19 || step.fields.id === 29 || step.fields.id === 39 || step.fields.id === 49 ?
                                 '2rem' : '0rem'
-                        }} id={'step' + step.fields.id.toString()} alt='figure' src={figure} className=' absolute -top-6 w-16 h-16 invisible'    ></img>
+                        }} id={'step' + step.fields.id.toString()} alt='figure' src={figure} className=' absolute -top-6 w-16 h-16 invisible'></img>
+                         <img style={{
+                            marginTop: step.fields.id === 4 || step.fields.id === 14 || step.fields.id === 24 || step.fields.id === 34 || step.fields.id === 44 || step.fields.id === 9 || step.fields.id === 19 || step.fields.id === 29 || step.fields.id === 39 || step.fields.id === 49 ?
+                                '2rem' : '0rem'
+                        }} id={'stepP2' + step.fields.id.toString()} alt='figure2' src={figure2} className=' absolute -top-6 w-16 h-16 invisible'></img>
 
-                        <div >
+                        <div>
                                {/*HANDLE SHOW QUESTION DIV*/ }
                             <div className='relative grid justify-items-center items-center'>
-     
                                 <div onClick={e => { handleQuestionVisible(e) }}
                                     onMouseDown={() => { setP1State({...p1State, currentQuestion:[step.fields.question, step.fields.media]})}}//passing question data to popup window
                                     className=' text-3xl flex p-10  bg-blue-400 rounded-lg z-10 cursor-pointer absolute'
                                     style={{ visibility: 'hidden' }}
                                     id={'q' + step.fields.id.toString()}>
                                     <span className='animate-ping'>?</span>
-                                    {otherPlayerQ? <span>this is other question</span>:<span></span>}
                                 </div>
-
                                  {/*HANDLE SHOW CUBE DIV*/ }
                                  {/*Show cube at current location, id is a combination of the current locatio + cube, get the idea adn set visibility */ }
                             <div  className='text-xl text-black absolute -top-14   ritgh-0'
                                   id={'cube' + step.fields.id.toString()}
-                                  style={{ visibility: 'hidden' }}
-                                  > cube                                  
-                                  
+                                  style={{ visibility: 'hidden' }} >                                
                                   {cubeVisible && !questionVisible &&
                                     <div id='cubeFrame' className='bg-green-200 rounded-xl  p-6 absolute z-40 '>
                                   {
                                    othePlayerPlaying &&update!=="updated" ?
-                                   <div>Player 2 is rolling
+                                   <div>Player 2'turn
                                    </div> :
                                    <Cube currentRoll={admin?p1State.currentRoll:p2State.currentRoll} onMouseDown={() => stopRoll()} onClick={startRoll} ref={rollTo} />
                                   }
@@ -469,26 +443,19 @@ gameStart()
                         </div>
                     </div>
                 ))}
-
             </div>
             {questionVisible && <div className='absolute grid bg-blue-500 w-full p-3 items-center' style={{ top: '0px', bottom: '0px', width: "100%" }}>
                 <div className='bg-blue-200 rounded-xl p-3 shadow-2xl'>
-
                     <div id='mainquestion' className='flex justify-end items-center'>
                         <span onClick={e => { handleQuestionClose_CubeVisible() }} className=' grid items-center  justify-items-center w-11 h-11 rounded-full bg-white hover:bg-gray-200 text-xl text-blue-500 cursor-pointer'>X</span>
                     </div>
-
                     <div className='grid justify-items-center'>
-
                         <p className=' text-gray-600 text-3xl font-semibold my-2'>{p1State.currentQuestion[0]}</p>
                         {p1State.currentQuestion[1] && <ReactPlayer url={p1State.currentQuestion[1]} />}
                     </div>
-
                 </div>
             </div>
-
             }
-
         </div>
     )
 }
