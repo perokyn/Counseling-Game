@@ -317,24 +317,55 @@ gameStart()
     }
     //===================FIGURE STEP LOGIC=============================================
     const setStep = (position, goTo) => {
-
         let interval = setInterval(function () {
-
             if (position <= goTo) {             ///<=====set steps forward here   max step number=  content.data.length-1
-
                 let currentStep = '#step' + position.toString()
-
                 if (position > 0) {
                     let stepback = '#step' + (position - 1).toString()
                     $(function () {
                         $(stepback).css('visibility', 'hidden')
-
                     })
                 }
                 $(function () {
                     $(currentStep).css('visibility', 'visible')
                 })
-
+                if (position === goTo) {
+                    //update current position
+                    afterRoll(position)
+                }
+                //show questionmark for given step----------------------------
+                if (position > 0 && position === goTo) {
+                    let current_question = '#q' + position.toString()
+                    $(function () {
+                        setTimeout(() => { $(current_question).css('visibility', 'visible') }, 1000)
+                    })
+                    $(function () {
+                        $(current_question).click(function () {
+                            $(current_question).css('visibility', 'hidden')
+                        })
+                    })
+                }
+                //---------------------------------------------------------------
+                position++;
+            } else {
+                clearInterval(interval);
+            }
+        }, 1000);
+    }
+    //==================FIGURE2 STEP LOGIC==============================================
+    const setStep2 = (position, goTo) => {
+        let interval = setInterval(function () {
+            if (position <= goTo) {             ///<=====set steps forward here   max step number=  content.data.length-1
+                let currentStep = '#step' + position.toString()
+                if (position > 0) {
+                    let stepback = '#step' + (position - 1).toString()
+                    $(function () {
+                        $(stepback).css('visibility', 'hidden')
+                    })
+                }
+                $(function () {
+                    $(currentStep).css('visibility', 'visible')
+                })
                 if (position === goTo) {
                     //update current position
                     afterRoll(position)
