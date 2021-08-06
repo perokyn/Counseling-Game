@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import BaseStepSquare from '../components/BaseStepSquare'
 import $ from "jquery";
-import figure from '../assets/figure.png'
+import figure from '../assets/figure3.png'
 import figure2 from '../assets/figure2.png'
 import game from '../assets/game.png'
 import Cube from '../components/cubeTest'
@@ -411,7 +411,7 @@ gameStart()
                          <img style={{
                             marginTop: step.fields.id === 4 || step.fields.id === 14 || step.fields.id === 24 || step.fields.id === 34 || step.fields.id === 44 || step.fields.id === 9 || step.fields.id === 19 || step.fields.id === 29 || step.fields.id === 39 || step.fields.id === 49 ?
                                 '2rem' : '0rem'
-                        }} id={'stepP2' + step.fields.id.toString()} alt='figure2' src={figure2} className=' absolute -top-6 w-16 h-16 invisible'></img>
+                        }} id={'stepP2' + step.fields.id.toString()} alt='figure2' src={figure2} className=' absolute -top-6 left-32 w-16 h-16 invisible'></img>
 
                         <div>
                                {/*HANDLE SHOW QUESTION DIV*/ }
@@ -429,10 +429,10 @@ gameStart()
                                   id={'cube' + step.fields.id.toString()}
                                   style={{ visibility: 'hidden' }} >                                
                                   {cubeVisible && !questionVisible &&
-                                    <div id='cubeFrame' className='bg-green-200 rounded-xl  p-6 absolute z-40 '>
+                                    <div id='cubeFrame' className='  p-6 absolute z-40 '>
                                   {
                                    othePlayerPlaying &&update!=="updated" ?
-                                   <div>Player 2'turn
+                                   <div className='text-md w-44 absolute bg-green-200 rounded-xl p-2 right-3 top-20'>Player 2's turn
                                    </div> :
                                    <Cube currentRoll={admin?p1State.currentRoll:p2State.currentRoll} onMouseDown={() => stopRoll()} onClick={startRoll} ref={rollTo} />
                                   }
