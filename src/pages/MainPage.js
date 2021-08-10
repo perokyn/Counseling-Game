@@ -92,7 +92,7 @@ const generateCode=()=>{
           }
     }
   
-//TO DO remember to learn how to set state fetures and not upodate the whole state!!!! SPREAD OPERATOR!!!{...p1State, currentPosition=position}
+
     const [p1State, setP1State] = useState({
         id:'1',
         playing: false,
@@ -158,24 +158,7 @@ if(localUrl.indexOf('?')>0){
         console.log("MEMBER LIST",members)
        });
 
-    room.on('message', message => {//maybe add get message function on question closed-->get the player name form the current client and compare it tothe data in the messgae
-        // console.log("message yaaay", message, "Is playing after close question",message.data.content.playing)
-        // console.log("player name", message.data.name.player.id, "Local Player ID",player.player.id)
-        // console.log("Other players current question:", message.data.content.currentQuestion, "Other players LOCATION",message.data.content.currentPosition)
-    //Add message check statements heer message.data.name.player.id
-    // if(message.data.name.player.id!==player.player.id && !message.data.content.playing){
-         
-    //     console.log('Other pLayer palying1:', othePlayerPlaying)
-    //     console.log("Othe people palying should be closed")
-    //     setTimeout(()=>{setOthePlayerPlaying(!othePlayerPlaying)
-    //         setUpdate("updated")
-    //     console.log('Other pLayer palying:', othePlayerPlaying)},1000)
-    //     // }else if(message.data.name.player.id!==player.player.id && message.data.content.playing===true ){
-    //     //     console.log('PLAYING STOP ROLL PRESSED')
-    //     //CONTINUE FROM HERE 08/07
-            
-    //     //initate second player steps 
-    // }
+    room.on('message', message => {
     if(message.data.name.player.id!==player.player.id ){
     switch (message.data.content.playing) {
         case true:
