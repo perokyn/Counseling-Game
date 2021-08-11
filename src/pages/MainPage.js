@@ -38,10 +38,7 @@ const MainPage = (props) => {
     const[othePlayerPlaying, setOthePlayerPlaying]=useState(false)
     const[update, setUpdate]=useState("")
     const[otherPlayerQ,setotherPLayerQ]=useState(false)
-//    const refresh=useRef()
-//     const simulateClick=(e)=>{//CONTINUE FOR HERE TO SIMULATE CLICK
-//         e.click()
-//     }
+
 let members=[]
 
 const setClientCode=(e)=>{
