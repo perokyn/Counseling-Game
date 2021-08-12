@@ -19,7 +19,6 @@ const sendMessage_out = (drone,player,data) => {
       });}
     }
     
-
 const MainPage = (props) => {
    
     const localUrl=props.location.toString()
