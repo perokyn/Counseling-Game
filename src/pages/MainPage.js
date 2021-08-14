@@ -38,7 +38,6 @@ const MainPage = (props) => {
     const[update, setUpdate]=useState("")
     const[otherPlayerQ,setotherPLayerQ]=useState(false)
     let members=[]
-    
 const setClientCode=(e)=>{
 
     setCode(e.target.value)
