@@ -43,6 +43,8 @@ const setClientCode=(e)=>{
     setCode(e.target.value)
 }
 
+
+
     const [player, setPlayer] = useState({})
            const setPlayerName= e=> {
             setPlayer({
