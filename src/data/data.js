@@ -18,7 +18,6 @@ export const data={"data":
        "question":"Cats are fun?"
         },
         
-               
         {"text":"super",
         "value":3,
         "question":"Cat and cat"
