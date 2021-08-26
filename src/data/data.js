@@ -27,8 +27,6 @@ export const data={"data":
          "question":"Cat and cat"
           },
 
-
-
           {"text":"hello",
          "value":9,
          "question":"how are you ?"
