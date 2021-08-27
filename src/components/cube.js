@@ -35,7 +35,6 @@ rolling dice
         onClick={props.onClick}>
           Roll
           </button>
-       
        }
         
       </div>
