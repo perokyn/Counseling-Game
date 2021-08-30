@@ -28,7 +28,6 @@ rolling dice
     Stop Roll
     </button>  
     }
-        
        {!showDice&& !showRoll&&
        <button onMouseUp={()=>setTimeout(()=>{setShowDice(!showDice)},1000)}  id='start' 
         className='bg-green-400 text-white text-sm font semibold rounded-xl p-3 mt-3 mx-1'  
