@@ -1,8 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react'
 import BaseStepSquare from '../components/BaseStepSquare'
 import $ from "jquery";
-import figure from '../assets/figure3.png'
-import figure2 from '../assets/figure2.png'
+import figure from '../assets/figure1.png'
+import figure2 from '../assets/figure4.png'
 import game from '../assets/game.png'
 import Cube from '../components/cubeTest'
 import ReactPlayer from 'react-player/youtube'

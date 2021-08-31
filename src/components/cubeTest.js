@@ -1,5 +1,5 @@
 import React, { useState , SetStateAction} from 'react'
-import {TestDrone} from './testDrone_old'
+import dice from '../assets/dice.gif'
 
 export const sendMessage_out = (drone,data) => {
     if(drone){ 
@@ -99,7 +99,15 @@ const sendMessage = () => {
     }
 
 
+const counter=()=>{
 
+let num =1;
+ 
+setTimeout(()=>{num++
+  console.log=("counter", num)}, 200)
+console.log("counter pressed")
+
+}
 
 
   return (
@@ -108,12 +116,12 @@ const sendMessage = () => {
    
     {showRoll &&
     <p className="color-black bg-white rounded xl p-3">
-    {props.currentRoll}
+    <span className='text-sm'>You rolled: </span>{props.currentRoll}
     </p>  
     }
 {showDice ?
     <p style={{color:'black',backgroundColor:"whitesmoke",padding:'2px'}}>
-rolling dice
+      <img alt="rolling dice" src={dice}></img>
     </p>  :<p></p>
     }
     
@@ -124,19 +132,20 @@ rolling dice
     <button onMouseDown={props.onMouseDown} onClick={handleStopRoll} id='stop'
     onMouseUp={()=>sendMessage()}
     
-    className='bg-purple-400 text-white text-sm font semibold rounded-xl p-3 mt-3 mx-1'> 
-    Stop Roll
+    className='bg-purple-400 text-white text-2xl font semibold rounded-xl p-8 mt-3 mx-1 border-4 border-indigo-600'> 
+    <span className='animate-pulse'>Stop Roll</span>
     </button>  
     }
         
        
        {!showDice&& !showRoll&&
+       
        <button onMouseUp={()=>setTimeout(()=>{setShowDice(!showDice)},1000)}  id='start' 
-        className='bg-green-400 text-white text-sm font semibold rounded-xl p-3 mt-3 mx-1'  
-        onClick={props.onClick}>
-          Roll
+        className='bg-green-400 text-white text-2xl font semibold rounded-xl p-8 mt-3 mx-1 border-4 border-indigo-600 '  
+        onClick={props.onClick} onMouseDown={()=>counter}>
+          <span className='animate-pulse'>Roll</span>
           </button>
-
+         
        
        }
         
