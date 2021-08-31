@@ -158,8 +158,9 @@ if(localUrl.indexOf('?')>0){
         case true:
           console.log('PLAYING TRUE: STart P2steps to:', message.data.content.currentPosition);
           console.log('SET STEPS P2steps to:', (message.data.content.currentPosition+message.data.content.currentRoll));
+          console.log("Question: ", message.data)
           setotherPLayerQ(!otherPlayerQ)
-          console.log("CLIENT POSITION BEFORE Roll:", p2State.currentPosition, p2State.currentRoll)
+          console.log("CLIENT POSITION BEFORE Roll& Q:", p2State.currentPosition, p2State.currentRoll)
           setStep2(message.data.content.currentPosition, message.data.content.currentPosition+message.data.content.currentRoll)
 
           break
@@ -195,6 +196,8 @@ if(localUrl.indexOf('?')>0){
                 }
     }
     }
+
+ 
 //++===ON GAME START========================
 //show cube at first step
 const gameStart=()=>{
@@ -241,13 +244,14 @@ gameStart()
     const handleQuestionVisible = (e) => {
         setQuestionVisible(!questionVisible)
         // console.log("rolltoCalled", e.target.id)
+        // sendQuestion()
         $(function () {
             $('html, body').animate({
                 scrollTop: $('#mainquestion').offset().top - 20
             }, 2000);
         });
     }
-    //========Update visnility state for cube and questions
+    //========Update visnibity state for cube and questions
     const handleQuestionClose_CubeVisible = () => {
           setotherPLayerQ(!otherPlayerQ)
       if(admin){ console.log(" ADMIN UPDATE CLOSE QUESTION REACHED","update:",update)
@@ -264,7 +268,7 @@ gameStart()
             if(!cubeVisible){let cube_position = '#cube' + p1State.currentPosition.toString()
               $(cube_position).css('visibility', 'visible') 
               sendMessage(player)
-              console.log("PLAYER robject: ",p1State,"UPDATED:",update,"Othe rpeople:",othePlayerPlaying)
+              console.log("PLAYER object: ",p1State,"UPDATED:",update,"Othe rpeople:",othePlayerPlaying)
             }     
         }, 2000)
 
@@ -395,6 +399,7 @@ gameStart()
                             <div className='relative grid justify-items-center items-center'>
                                 <div onClick={e => { handleQuestionVisible(e) }}
                                     onMouseDown={() => { setP1State({...p1State, currentQuestion:[step.fields.question, step.fields.media]})}}//passing question data to popup window
+                                  
                                     className=' text-3xl flex p-10  bg-blue-400 rounded-lg z-10 cursor-pointer absolute'
                                     style={{ visibility: 'hidden' }}
                                     id={'q' + step.fields.id.toString()}>
