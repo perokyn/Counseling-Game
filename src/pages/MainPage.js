@@ -149,7 +149,6 @@ if(localUrl.indexOf('?')>0){
         console.log("MEMBER LIST",members)
        });
 
-       
     room.on('message', message => {
     if(message.data.name.player.id!==player.player.id ){
     switch (message.data.content.playing) {
