@@ -86,6 +86,8 @@ const generateCode=()=>{
           }
     }
   
+
+    
     const [p1State, setP1State] = useState({
         id:'1',
         playing: false,
