@@ -38,7 +38,7 @@ const MainPage = (props) => {
     const[update, setUpdate]=useState("")
     const[otherPlayerQ,setotherPLayerQ]=useState(false)
     let members=[]
-    console.log("QUESTION length: ", questions.length)//SET end message at steps=length of questions!
+    // console.log("QUESTION length: ", questions.length)//SET end message at steps=length of questions!
 const setClientCode=(e)=>{
 
     setCode(e.target.value)
@@ -163,6 +163,12 @@ if(localUrl.indexOf('?')>0){
           console.log("Question: ", message.data)
           setotherPLayerQ(!otherPlayerQ)
           console.log("CLIENT POSITION BEFORE Roll& Q:", p2State.currentPosition, p2State.currentRoll)
+          //game end check:
+          if(message.data.content.currentPosition+message.data.content.currentRoll>3){
+            setP2State({...p2State,finished:true});
+            alert("Winner!")//CONTINUE FORM HERE
+          }
+          //-------------------------------------------
           setStep2(message.data.content.currentPosition, message.data.content.currentPosition+message.data.content.currentRoll)
 
           break
@@ -230,8 +236,9 @@ gameStart()
       if(admin){setStep(p1State.currentPosition, p1State.currentRoll + p1State.currentPosition)   
     }
       else if(!admin){
-          console.log("CLIENT POSITION after Roll:", p2State.currentPosition, p2State.currentRoll)
+          
         setStep(p2State.currentPosition, p2State.currentRoll + p2State.currentPosition)} 
+        console.log("CLIENT POSITION after Roll:", p2State.currentPosition, p2State.currentRoll)
       
     }
 
