@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import './App.css';
 import HomePage from './pages/Home'
-import {TestDrone} from './components/testDrone'
+
 function App() {
 
   const[data, setdata]=useState()
