@@ -38,6 +38,7 @@ const MainPage = (props) => {
     const[update, setUpdate]=useState("")
     const[otherPlayerQ,setotherPLayerQ]=useState(false)
     let members=[]
+    console.log("QUESTION length: ", questions.length)//SET end message at steps=length of questions!
 const setClientCode=(e)=>{
 
     setCode(e.target.value)
@@ -96,6 +97,7 @@ const generateCode=()=>{
         CurrentQuestion: '',
         questionVisible: false,
         numofRoll: 0,
+        finished:false
     })
     //===PLAYERE 2 LOGIC======================\\
     //p2 state
@@ -107,7 +109,8 @@ const generateCode=()=>{
         currentRoll: 0,
         setCurrentQuestion: '',
         questionVisible: false,
-        numofRoll: 0
+        numofRoll: 0,
+        finished:false
     })
     
     
