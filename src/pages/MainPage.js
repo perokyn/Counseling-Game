@@ -37,6 +37,7 @@ const MainPage = (props) => {
     const[othePlayerPlaying, setOthePlayerPlaying]=useState(false)
     const[update, setUpdate]=useState("")
     const[otherPlayerQ,setotherPLayerQ]=useState(false)
+    const[gameFinsih, setGameFinsih]=useState(false)
     let members=[]
     // console.log("QUESTION length: ", questions.length)//SET end message at steps=length of questions!
 const setClientCode=(e)=>{
@@ -165,8 +166,8 @@ if(localUrl.indexOf('?')>0){
           console.log("CLIENT POSITION BEFORE Roll& Q:", p2State.currentPosition, p2State.currentRoll)
           //game end check:
           if(message.data.content.currentPosition+message.data.content.currentRoll>3){
-            setP2State({...p2State,finished:true});
-            alert("Winner!")//CONTINUE FORM HERE
+            setGameFinsih(!gameFinsih)
+            // alert("Winner!")//CONTINUE FORM HERE
           }
           //-------------------------------------------
           setStep2(message.data.content.currentPosition, message.data.content.currentPosition+message.data.content.currentRoll)
@@ -382,6 +383,7 @@ gameStart()
                <img alt='3d characters' src={game}></img>
                 </div>
             </div>
+            {gameFinsih&&<div className='absolute grid bg-blue-500 w-full p-3 items-center z-50 text-6xl text-center' style={{ top: '0px', bottom: '0px', width: "100%" }}>We have a winner</div>}
             
             {/* //game grid */}
             <div className='grid grid-cols-5 ' >
