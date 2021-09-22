@@ -383,6 +383,7 @@ gameStart()
                <img alt='3d characters' src={game}></img>
                 </div>
             </div>
+            
             {gameFinsih&&<div className='absolute grid bg-blue-500 w-full p-3 items-center z-50 text-6xl text-center' style={{ top: '0px', bottom: '0px', width: "100%" }}>We have a winner</div>}
             
             {/* //game grid */}
