@@ -7,6 +7,8 @@ import game from '../assets/game.png'
 import Cube from '../components/cubeTest'
 import ReactPlayer from 'react-player/youtube'
 
+import Confetti from 'react-confetti'
+
 const sendMessage_out = (drone,player,data) => {
     if(drone){ 
         console.log("attempting message")
@@ -39,7 +41,8 @@ const MainPage = (props) => {
     const[otherPlayerQ,setotherPLayerQ]=useState(false)
     const[gameFinsih, setGameFinsih]=useState(false)
     let members=[]
-    // console.log("QUESTION length: ", questions.length)//SET end message at steps=length of questions!
+  
+  
 const setClientCode=(e)=>{
 
     setCode(e.target.value)
@@ -167,6 +170,7 @@ if(localUrl.indexOf('?')>0){
           //game end check:
           if(message.data.content.currentPosition+message.data.content.currentRoll>3){
             setGameFinsih(!gameFinsih)
+           
             // alert("Winner!")//CONTINUE FORM HERE
           }
           //-------------------------------------------
@@ -383,8 +387,11 @@ gameStart()
                <img alt='3d characters' src={game}></img>
                 </div>
             </div>
-            
-            {gameFinsih&&<div className='absolute grid bg-blue-500 w-full p-3 items-center z-50 text-6xl text-center' style={{ top: '0px', bottom: '0px', width: "100%" }}>We have a winner</div>}
+               {/* HANDLE FINISH GAME */}
+            {gameFinsih&&<div id="game-finish" className='absolute grid bg-blue-500 w-full p-3 items-center z-50 text-6xl text-center' style={{ top: '0px', bottom: '0px', width: "100%" }}>We have a winner<Confetti 
+      width={window.innerWidth + 'px'}
+      height={window.innerHeight + 'px'} ></Confetti></div>
+    }
             
             {/* //game grid */}
             <div className='grid grid-cols-5 ' >
@@ -438,7 +445,7 @@ gameStart()
                     </div>
                 ))}
             </div>
-            {questionVisible && <div className='absolute grid bg-blue-500 w-full p-3 items-center' style={{ top: '0px', bottom: '0px', width: "100%" }}>
+            {questionVisible && <div id='finish_screen' className='absolute grid bg-blue-500 w-full p-3 items-center' style={{ top: '0px', bottom: '0px', width: "100%" }}>
                 <div className='bg-blue-200 rounded-xl p-3 shadow-2xl'>
                     <div id='mainquestion' className='flex justify-end items-center'>
                         <span onClick={e => { handleQuestionClose_CubeVisible() }} className=' grid items-center  justify-items-center w-11 h-11 rounded-full bg-white hover:bg-gray-200 text-xl text-blue-500 cursor-pointer'>X</span>
