@@ -387,9 +387,10 @@ gameStart()
                <img alt='3d characters' src={game}></img>
                 </div>
             </div>
+            
                {/* HANDLE FINISH GAME */}
             {gameFinsih&&<div id="game-finish" className='absolute grid bg-blue-500 w-full p-3 items-center z-50 text-6xl text-center' style={{ top: '0px', bottom: '0px', width: "100%" }}>We have a winner<Confetti 
-      width={window.innerWidth + 'px'}
+      width={window.innerWidth + 'px'} 
       height={window.innerHeight + 'px'} ></Confetti></div>
     }
             
