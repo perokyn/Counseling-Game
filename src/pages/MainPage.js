@@ -168,10 +168,8 @@ if(localUrl.indexOf('?')>0){
           setotherPLayerQ(!otherPlayerQ)
           console.log("CLIENT POSITION BEFORE Roll& Q:", p2State.currentPosition, p2State.currentRoll)
           //game end check:
-          if(message.data.content.currentPosition+message.data.content.currentRoll>3){
+          if(message.data.content.currentPosition+message.data.content.currentRoll>=(questions.length-1)){
             setGameFinsih(!gameFinsih)
-           
-            // alert("Winner!")//CONTINUE FORM HERE
           }
           //-------------------------------------------
           setStep2(message.data.content.currentPosition, message.data.content.currentPosition+message.data.content.currentRoll)
@@ -214,9 +212,12 @@ if(localUrl.indexOf('?')>0){
 //++===ON GAME START========================
 //show cube at first step
 const gameStart=()=>{
-if(p1State.currentPosition===0 && cubeVisible){
+if(p1State.currentPosition===0 &&  cubeVisible &&loginComplete){
     let cube_position = '#cube' + p1State.currentPosition.toString()
     $(cube_position).css('visibility', 'visible')
+    $('#stepP20').css('visibility', 'visible')
+    $('#step0').css('visibility', 'visible')
+    
 }
 }
 gameStart()
@@ -340,6 +341,7 @@ gameStart()
     //==================FIGURE2 STEP LOGIC==============================================
     const setStep2 = (position, goTo) => {
         let interval = setInterval(function () {
+           
             if (position <= goTo) {             ///<=====set steps forward here   max step number=  content.data.length-1
                 let currentStep = '#stepP2' + position.toString()
                 if (position > 0) {
