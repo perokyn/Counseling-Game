@@ -170,7 +170,7 @@ if(localUrl.indexOf('?')>0){
           setotherPLayerQ(!otherPlayerQ)
           console.log("CLIENT POSITION BEFORE Roll& Q:", p2State.currentPosition, p2State.currentRoll)
           //game end check:
-          if(message.data.content.currentPosition+message.data.content.currentRoll>=(questions.length-1)){
+          if(message.data.content.currentPosition+message.data.content.currentRoll>(questions.length-1)){
             setGameFinsih(!gameFinsih)
           }
           //-------------------------------------------
@@ -240,6 +240,7 @@ gameStart()
         }  
     }
     const setSteps = () => {
+        if(p1State.currentRoll + p1State.currentPosition>questions.length){setGameFinsih(!gameFinsih)}
       
       if(admin){setStep(p1State.currentPosition, p1State.currentRoll + p1State.currentPosition)   
     }
@@ -413,20 +414,20 @@ gameStart()
                         <div style={{
                             marginTop: step.fields.id === 4 || step.fields.id === 14 || step.fields.id === 24 || step.fields.id === 34 || step.fields.id === 44 || step.fields.id === 9 || step.fields.id === 19 || step.fields.id === 29 || step.fields.id === 39 || step.fields.id === 49 ?
                                 '2rem' : '0rem'
-                        }} id={'step' + step.fields.id.toString()}  className=' absolute -top-12 w-16 h-16 invisible'>
+                        }} id={'step' + step.fields.id.toString()}  className=' absolute -top-12 invisible'>
 
                            <p className='text-sm bg-black p-2 text-center rounded-xl border border-indigo-600'>{player.player.id}</p>
-                            <img alt='figure' src={figure}></img>
+                            <img alt='figure' src={figure} className="w-16 h-16"></img>
                         </div>
                         
                          <div style={{
                             marginTop: step.fields.id === 4 || step.fields.id === 14 || step.fields.id === 24 || step.fields.id === 34 || step.fields.id === 44 || step.fields.id === 9 || step.fields.id === 19 || step.fields.id === 29 || step.fields.id === 39 || step.fields.id === 49 ?
                                 '2rem' : '0rem'
-                        }} id={'stepP2' + step.fields.id.toString()} className=' absolute -top-12 left-32 w-16 h-16 invisible'>
+                        }} id={'stepP2' + step.fields.id.toString()} className=' absolute -top-12 left-32  invisible'>
 
                             
-                            {player2Name&&<p className='text-sm bg-black p-2 text-center rounded-xl border border-indigo-600' style={{borderStyle:"inset",borderWidth:'2px'}}>{player2Name}</p>}
-                            <img alt='figure2' src={figure2}></img>
+                            {player2Name?<p className='text-sm bg-black p-2 text-center rounded-xl border border-indigo-600' style={{borderStyle:"inset",borderWidth:'2px'}}>{player2Name}</p>:<p></p>}
+                            <img alt='figure2' src={figure2} className="w-16 h-16"></img>
                         </div>
 
                         <div>
@@ -435,8 +436,8 @@ gameStart()
                                 <div onClick={e => { handleQuestionVisible(e) }}
                                     onMouseDown={() => { setP1State({...p1State, currentQuestion:[step.fields.question, step.fields.media]})}}//passing question data to popup window
                                   
-                                    className=' text-3xl flex p-10  bg-blue-400 rounded-lg z-10 cursor-pointer absolute'
-                                    style={{ visibility: 'hidden' }}
+                                    className=' text-3xl flex p-10  bg-blue-400 hover:bg-blue-600 rounded-lg z-10 cursor-pointer absolute' 
+                                    style={{ visibility: 'hidden',borderStyle:"inset",borderWidth:'2px' }}
                                     id={'q' + step.fields.id.toString()}>
                                     <span className='animate-ping'>?</span>
                                 </div>
@@ -449,7 +450,7 @@ gameStart()
                                     <div id='cubeFrame' className='  p-6 absolute z-40 '>
                                   {
                                    othePlayerPlaying &&update!=="updated" ?
-                                   <div className='text-md w-44 absolute bg-green-200 rounded-xl p-2 right-3 top-20'>Player 2's turn
+                                   <div className='text-sm text-center w-44 absolute bg-green-200 rounded-xl p-2 right-3 top-20'  style={{borderStyle:"inset",borderWidth:'4px'}}>{ player2Name?player2Name+"'s turn":"Please wait"}
                                    </div> :
                                    <Cube currentRoll={admin?p1State.currentRoll:p2State.currentRoll} onMouseDown={() => stopRoll()} onClick={startRoll} ref={rollTo} />
                                   }
