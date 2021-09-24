@@ -215,7 +215,7 @@ const gameStart=()=>{
 if(p1State.currentPosition===0 &&  cubeVisible &&loginComplete){
     let cube_position = '#cube' + p1State.currentPosition.toString()
     $(cube_position).css('visibility', 'visible')
-    $('#stepP20').css('visibility', 'visible')
+   // $('#stepP20').css('visibility', 'visible')
     $('#step0').css('visibility', 'visible')
     
 }
@@ -340,6 +340,7 @@ gameStart()
     }
     //==================FIGURE2 STEP LOGIC==============================================
     const setStep2 = (position, goTo) => {
+        
         let interval = setInterval(function () {
            
             if (position <= goTo) {             ///<=====set steps forward here   max step number=  content.data.length-1
@@ -411,10 +412,14 @@ gameStart()
                             marginTop: step.fields.id === 4 || step.fields.id === 14 || step.fields.id === 24 || step.fields.id === 34 || step.fields.id === 44 || step.fields.id === 9 || step.fields.id === 19 || step.fields.id === 29 || step.fields.id === 39 || step.fields.id === 49 ?
                                 '2rem' : '0rem'
                         }} id={'step' + step.fields.id.toString()} alt='figure' src={figure} className=' absolute -top-6 w-16 h-16 invisible'></img>
-                         <img style={{
+                         <div style={{
                             marginTop: step.fields.id === 4 || step.fields.id === 14 || step.fields.id === 24 || step.fields.id === 34 || step.fields.id === 44 || step.fields.id === 9 || step.fields.id === 19 || step.fields.id === 29 || step.fields.id === 39 || step.fields.id === 49 ?
                                 '2rem' : '0rem'
-                        }} id={'stepP2' + step.fields.id.toString()} alt='figure2' src={figure2} className=' absolute -top-6 left-32 w-16 h-16 invisible'></img>
+                        }} id={'stepP2' + step.fields.id.toString()} className=' absolute -top-12 left-32 w-16 h-16 invisible'>
+
+                            <p className='text-sm bg-black p-2 text-center rounded-xl'>Name</p>
+                            <img alt='figure2' src={figure2}></img>
+                        </div>
 
                         <div>
                                {/*HANDLE SHOW QUESTION DIV*/ }
