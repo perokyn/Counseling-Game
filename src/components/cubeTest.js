@@ -120,8 +120,8 @@ console.log("counter pressed")
     </p>  
     }
 {showDice ?
-    <p style={{color:'black',backgroundColor:"whitesmoke",padding:'2px'}}>
-      <img alt="rolling dice" src={dice}></img>
+    <p style={{color:'black',backgroundColor:"whitesmoke",padding:'2px',}} className="rounded-xl">
+      <img alt="rolling dice" src={dice} className="rounded-xl"></img>
     </p>  :<p></p>
     }
     
@@ -132,7 +132,7 @@ console.log("counter pressed")
     <button onMouseDown={props.onMouseDown} onClick={handleStopRoll} id='stop'
     onMouseUp={()=>sendMessage()}
     
-    className='bg-purple-400 text-white text-2xl font semibold rounded-xl p-8 mt-3 mx-1 border-4 border-indigo-600'> 
+    className='bg-purple-400  hover:bg-purple-600 text-white text-2xl font semibold rounded-xl p-8 mt-3 mx-1 border-2 border-whitesmoke'> 
     <span className='animate-pulse'>Stop Roll</span>
     </button>  
     }
@@ -142,7 +142,7 @@ console.log("counter pressed")
        
        <button onMouseUp={()=>setTimeout(()=>{setShowDice(!showDice)},1000)}  id='start' 
         className='bg-green-400 text-white text-2xl font semibold rounded-xl p-8 mt-3 mx-1 border-4 border-indigo-600 '  
-        onClick={props.onClick} onMouseDown={()=>counter}>
+        onClick={props.onClick} onMouseDown={()=>counter} style={{borderStyle:"inset",borderWidth:'4px'}}>
           <span className='animate-pulse'>Roll</span>
           </button>
          

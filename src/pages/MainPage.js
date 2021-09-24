@@ -40,6 +40,7 @@ const MainPage = (props) => {
     const[update, setUpdate]=useState("")
     const[otherPlayerQ,setotherPLayerQ]=useState(false)
     const[gameFinsih, setGameFinsih]=useState(false)
+    const[player2Name,setPlayer2Name]=useState("")
     let members=[]
   
   
@@ -48,7 +49,7 @@ const setClientCode=(e)=>{
     setCode(e.target.value)
 }
 
-    const [player, setPlayer] = useState({})
+    const [player, setPlayer] = useState({player:{id:""}})
            const setPlayerName= e=> {
             setPlayer({
                       player: {
@@ -160,6 +161,7 @@ if(localUrl.indexOf('?')>0){
 
     room.on('message', message => {
     if(message.data.name.player.id!==player.player.id ){
+        setPlayer2Name(message.data.name.player.id)
     switch (message.data.content.playing) {
         case true:
           console.log('PLAYING TRUE: STart P2steps to:', message.data.content.currentPosition);
@@ -408,16 +410,22 @@ gameStart()
                         <div style={step.fields.id === 9 || step.fields.id === 19 || step.fields.id === 29 || step.fields.id === 39 || step.fields.id === 49 ?
                             { backgroundColor: 'green', height: '2rem', borderTopLeftRadius: '3rem' } : { display: "hidden" }}></div>
 
-                        <img style={{
+                        <div style={{
                             marginTop: step.fields.id === 4 || step.fields.id === 14 || step.fields.id === 24 || step.fields.id === 34 || step.fields.id === 44 || step.fields.id === 9 || step.fields.id === 19 || step.fields.id === 29 || step.fields.id === 39 || step.fields.id === 49 ?
                                 '2rem' : '0rem'
-                        }} id={'step' + step.fields.id.toString()} alt='figure' src={figure} className=' absolute -top-6 w-16 h-16 invisible'></img>
+                        }} id={'step' + step.fields.id.toString()}  className=' absolute -top-12 w-16 h-16 invisible'>
+
+                           <p className='text-sm bg-black p-2 text-center rounded-xl border border-indigo-600'>{player.player.id}</p>
+                            <img alt='figure' src={figure}></img>
+                        </div>
+                        
                          <div style={{
                             marginTop: step.fields.id === 4 || step.fields.id === 14 || step.fields.id === 24 || step.fields.id === 34 || step.fields.id === 44 || step.fields.id === 9 || step.fields.id === 19 || step.fields.id === 29 || step.fields.id === 39 || step.fields.id === 49 ?
                                 '2rem' : '0rem'
                         }} id={'stepP2' + step.fields.id.toString()} className=' absolute -top-12 left-32 w-16 h-16 invisible'>
 
-                            <p className='text-sm bg-black p-2 text-center rounded-xl'>Name</p>
+                            
+                            {player2Name&&<p className='text-sm bg-black p-2 text-center rounded-xl border border-indigo-600' style={{borderStyle:"inset",borderWidth:'2px'}}>{player2Name}</p>}
                             <img alt='figure2' src={figure2}></img>
                         </div>
 
