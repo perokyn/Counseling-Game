@@ -251,7 +251,6 @@ gameStart()
       
     }
 
-    
     const afterRoll = (position) => {
         if (p1State.currentPosition > 0) { setCubeVisible(!cubeVisible)   }   
      //setCurrentPosition(position)///this was currentPosition +postion before, DO NOT EVER MODIFY CURRENTPOS, IT is being updated after every roll end with position++. ONLY update currentroll by adding currentposition to it!!
