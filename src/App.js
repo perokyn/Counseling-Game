@@ -24,7 +24,6 @@ if (data){console.log("data is in")}else{
     }).firstPage()
       
   setdata(records)
-  
     /*for (const record of records) {
       console.log(record.fields)
     }*/
