@@ -32,9 +32,7 @@ if (data){console.log("data is in")}else{
 }
 //check if the url has the genrated code to identify client
 const location=window.location.href
-
   //console.log("state", data)
-  
   return (
     <div className="text-gray-300 text-4xl font-bold grid justify-items-center bg-gray-400">
   {/* <TestDrone data={"hello Propss :)"}/> */}
