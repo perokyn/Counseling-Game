@@ -29,7 +29,6 @@ if (data){console.log("data is in")}else{
       console.log(record.fields)
     }*/
   })()
-
 }
 //check if the url has the genrated code to identify client
 const location=window.location.href
