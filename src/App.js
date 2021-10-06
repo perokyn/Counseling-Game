@@ -23,7 +23,6 @@ if (data){console.log("data is in")}else{
       view: 'Grid view',
     }).firstPage()
       
-    
   setdata(records)
     /*for (const record of records) {
       console.log(record.fields)
