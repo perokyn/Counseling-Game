@@ -45,4 +45,5 @@ const location=window.location.href
     </div>
   );
 }
+
 export default App;
