@@ -125,7 +125,6 @@ console.log("counter pressed")
     </p>  :<p></p>
     }
     
-
       <div className='flex jsutify-between'>
      
       {showDice &&
