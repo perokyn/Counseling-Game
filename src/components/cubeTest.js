@@ -124,7 +124,6 @@ console.log("counter pressed")
       <img alt="rolling dice" src={dice} className="rounded-xl"></img>
     </p>  :<p></p>
     }
-    
       <div className='flex jsutify-between'>
      
       {showDice &&
