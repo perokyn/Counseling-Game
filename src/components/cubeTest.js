@@ -125,7 +125,6 @@ console.log("counter pressed")
     </p>  :<p></p>
     }
       <div className='flex jsutify-between'>
-     
       {showDice &&
     <button onMouseDown={props.onMouseDown} onClick={handleStopRoll} id='stop'
     onMouseUp={()=>sendMessage()}
