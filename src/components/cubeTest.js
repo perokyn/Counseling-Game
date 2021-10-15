@@ -128,7 +128,6 @@ console.log("counter pressed")
       {showDice &&
     <button onMouseDown={props.onMouseDown} onClick={handleStopRoll} id='stop'
     onMouseUp={()=>sendMessage()}
-    
     className='bg-purple-400  hover:bg-purple-600 text-white text-2xl font semibold rounded-xl p-8 mt-3 mx-1 border-2 border-whitesmoke'> 
     <span className='animate-pulse'>Stop Roll</span>
     </button>  
