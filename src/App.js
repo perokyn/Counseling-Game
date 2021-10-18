@@ -38,10 +38,7 @@ const location=window.location.href
   {/* <TestDrone data={"hello Propss :)"}/> */}
      <div className='flex mx-2 p-6'>
        {data?<HomePage data={data} location={location}/>:<div className='text-4xl text-red-200'>Loading Data from Airtable...</div>}
-     
-
      </div>
-    
     </div>
   );
 }
