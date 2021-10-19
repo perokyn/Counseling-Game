@@ -76,8 +76,6 @@ setDrone({drone:drone})
         
        });
 
-    
-
 }
 
 if (room){
