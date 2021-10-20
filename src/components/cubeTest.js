@@ -71,7 +71,6 @@ setDrone({drone:drone})
         console.log("MEMBER LIST",members)
        if(members.length>1){
         setAdmin(!admin)
-
        }
         
        });
