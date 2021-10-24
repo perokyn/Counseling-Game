@@ -2,8 +2,6 @@ import React, {useState} from 'react'
 
 
 
-
-
 const BaseStepSquare=React.forwardRef((props, ref)=>{
 
     
