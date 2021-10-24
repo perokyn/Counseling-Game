@@ -18,7 +18,6 @@ const BaseStepSquare=React.forwardRef((props, ref)=>{
 return(
 
 
-
     <div onClick={props.handleClick}  className='flex p-3 border-2 border-gray-800 rounded-xl ' style={{backgroundColor:newColor}}>
 <div ref={props.ref}>
   
