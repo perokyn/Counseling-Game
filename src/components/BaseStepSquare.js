@@ -19,7 +19,6 @@ return(
 
 {props.question}
 </div>
-
 </div>
     </div>
 )
