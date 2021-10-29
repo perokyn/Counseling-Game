@@ -16,7 +16,6 @@ return(
 <div ref={props.ref}>
   
 <div className='text-sm font-bold text-white'>
-
 {props.question}
 </div>
 </div>
