@@ -23,5 +23,4 @@ return(
 )
 })
 
-
 export default BaseStepSquare
