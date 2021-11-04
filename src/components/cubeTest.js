@@ -14,8 +14,6 @@ export const sendMessage_out = (drone,data) => {
       });}
     }
 
-
-
 //CONTINUE FROM HERE, this might not be the best solution to create and send message from here..
 const Cube = React.forwardRef((props, ref) => {
     const [room, setRoom]=useState()
