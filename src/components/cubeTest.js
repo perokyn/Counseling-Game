@@ -32,7 +32,6 @@ const handleStopRoll=()=>{
 }
 
 
-
 const [player, setPlayer] = useState(
 
     {
