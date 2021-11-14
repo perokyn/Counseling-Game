@@ -30,6 +30,7 @@ const handleStopRoll=()=>{
   setShowRoll(!showRoll)
   setShowDice(!showDice)
 }
+
 const [player, setPlayer] = useState(
     {
         player: {
