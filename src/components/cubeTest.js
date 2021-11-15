@@ -37,9 +37,7 @@ const [player, setPlayer] = useState(
 
             id: "player2"
         }
-
     }
-
 )
 
 
