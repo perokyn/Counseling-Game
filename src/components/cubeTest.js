@@ -25,7 +25,6 @@ const Cube = React.forwardRef((props, ref) => {
 
 const[showRoll, setShowRoll]=useState(false)
 const[showDice, setShowDice]=useState(false)
-
 const handleStopRoll=()=>{
   setShowRoll(!showRoll)
   setShowDice(!showDice)
