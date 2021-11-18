@@ -38,7 +38,6 @@ const [player, setPlayer] = useState(
     }
 )
 
-
 const createRoom=()=>{
     const drone = new window.Scaledrone("DJHRuXNgQyi58qY0", {
        
