@@ -44,7 +44,6 @@ const createRoom=()=>{
     });
 setDrone({drone:drone})
 
-
     drone.on('open', error => {
         if (error) {
             return console.error(error);
@@ -53,7 +52,6 @@ setDrone({drone:drone})
         player1.id = drone.clientId;
         //this.setState({member});
     });
-
 
 
      const room = drone.subscribe('observable-room');
