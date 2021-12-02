@@ -45,8 +45,6 @@ const createRoom=()=>{
 setDrone({drone:drone})
 
 
-
-
     drone.on('open', error => {
         if (error) {
             return console.error(error);
