@@ -61,7 +61,6 @@ setDrone({drone:drone})
        if(members.length>1){
         setAdmin(!admin)
        }
-        
        });
 
 }
