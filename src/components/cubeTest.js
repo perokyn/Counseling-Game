@@ -62,7 +62,6 @@ setDrone({drone:drone})
         setAdmin(!admin)
        }
        });
-
 }
 
 if (room){
