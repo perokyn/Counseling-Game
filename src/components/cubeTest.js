@@ -1,6 +1,7 @@
 import React, { useState , SetStateAction} from 'react'
 import dice from '../assets/dice.gif'
 
+
 export const sendMessage_out = (drone,data) => {
     if(drone){ 
         
@@ -62,7 +63,7 @@ setDrone({drone:drone})
         setAdmin(!admin)
        }
        });
-       
+
 }
 
 
