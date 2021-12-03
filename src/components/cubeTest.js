@@ -4,7 +4,6 @@ import dice from '../assets/dice.gif'
 
 export const sendMessage_out = (drone,data) => {
     if(drone){ 
-        
         console.log("attempting message")
         drone.drone.publish({
         room: 'observable-room',
