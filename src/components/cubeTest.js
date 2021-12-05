@@ -66,7 +66,6 @@ setDrone({drone:drone})
 
 
 if (room){
-    
     room.room.on('message', message => {
     console.log("message yaaay", message)
 });
