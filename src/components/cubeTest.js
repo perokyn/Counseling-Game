@@ -71,7 +71,6 @@ if (room){
 });
 }
 
-
 const sendMessage = () => {
 
     if(drone){ 
