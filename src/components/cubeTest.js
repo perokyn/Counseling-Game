@@ -72,6 +72,7 @@ if (room){
 }
 
 const sendMessage = () => {
+  
     if(drone){ 
                 
         sendMessage_out(drone,props.currentRoll)
