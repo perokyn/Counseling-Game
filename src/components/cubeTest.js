@@ -70,7 +70,6 @@ if (room){
     console.log("message yaaay", message)
 });
 }
-
 const sendMessage = () => {
   
     if(drone){ 
