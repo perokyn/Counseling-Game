@@ -92,6 +92,7 @@ console.log("counter pressed")
   return (
     <div ref={ref}  >
    
+   
     {showRoll &&
     <p className="color-black bg-green-200 rounded-xl p-3" style={{borderStyle:"inset",borderWidth:'4px'}}>
     <span className='text-sm'>You rolled: </span>{props.currentRoll}
