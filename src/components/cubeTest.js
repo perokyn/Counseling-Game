@@ -77,7 +77,6 @@ const sendMessage = () => {
         sendMessage_out(drone,props.currentRoll)
     }
     
-    
     }
 
 const counter=()=>{
