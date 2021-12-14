@@ -90,7 +90,6 @@ console.log("counter pressed")
 
 }
 
-
   return (
     <div ref={ref}  >
        {showRoll &&
