@@ -52,7 +52,7 @@ setDrone({drone:drone})
         player1.id = drone.clientId;
         //this.setState({member});
     });
-
+//t=);
 
     const room = drone.subscribe('observable-room');
      setRoom({room:room})
