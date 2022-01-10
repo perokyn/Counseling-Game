@@ -84,6 +84,7 @@ const sendMessage = () => {
 const counter=()=>{
 let num =1;
 
+
 setTimeout(()=>{num++
   console.log=("counter", num)}, 200)
 console.log("counter pressed")
