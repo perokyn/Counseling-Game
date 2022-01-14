@@ -117,11 +117,10 @@ console.log("counter pressed")
         onClick={props.onClick} onMouseDown={()=>counter} style={{borderStyle:"inset",borderWidth:'4px'}}>
           <span className='animate-pulse'>Roll</span>
           </button>
-         
+       
        
        }
         
-
       </div>
     </div>
   )
