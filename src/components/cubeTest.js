@@ -120,7 +120,6 @@ console.log("counter pressed")
        
        }
         
-        
       </div>
     </div>
   )
