@@ -108,6 +108,7 @@ console.log("counter pressed")
     <span className='animate-pulse'>Stop Roll</span>
     </button>  
     }
+    
         
        {!showDice&& !showRoll&&
        
