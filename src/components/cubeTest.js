@@ -108,8 +108,7 @@ console.log("counter pressed")
     <span className='animate-pulse'>Stop Roll</span>
     </button>  
     }
-    
-        
+
        {!showDice&& !showRoll&&
        
        <button onMouseUp={()=>setTimeout(()=>{setShowDice(!showDice)},1000)}  id='start' 
