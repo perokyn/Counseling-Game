@@ -109,6 +109,7 @@ console.log("counter pressed")
     </button>  
     }
 
+
        {!showDice&& !showRoll&&
        
        <button onMouseUp={()=>setTimeout(()=>{setShowDice(!showDice)},1000)}  id='start' 
