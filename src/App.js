@@ -3,7 +3,6 @@ import './App.css';
 import HomePage from './pages/Home'
 
 function App() {
-
   const[data, setdata]=useState()
   
   const Airtable = require('airtable');
