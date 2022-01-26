@@ -19,8 +19,7 @@ if (data){console.log("data is in")}else{
     const records = await base('Counseling')
     .select({
       view: 'Grid view',
-    }).firstPage()
-      
+    }).firstPage()  
     
   setdata(records)
     /*for (const record of records) {
