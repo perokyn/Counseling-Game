@@ -12,6 +12,7 @@ function App() {
   });
   
   
+  
 const base = require('airtable').base('appC9kYVpX4ewyzZM')
 
 if (data){console.log("data is in")}else{
