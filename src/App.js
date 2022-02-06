@@ -42,5 +42,4 @@ const location=window.location.href
   );
 }
 
-
 export default App;
