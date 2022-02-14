@@ -478,4 +478,5 @@ gameStart()
         </div>
     )
 }
+
 export default MainPage
