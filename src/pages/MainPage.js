@@ -427,7 +427,6 @@ gameStart()
                                 '2rem' : '0rem'
                         }} id={'stepP2' + step.fields.id.toString()} className=' absolute -top-12 left-32  invisible'>
 
-                            
                             {player2Name?<p className='text-sm bg-black p-2 text-center rounded-xl border border-indigo-600' style={{borderStyle:"inset",borderWidth:'2px'}}>{player2Name}</p>:<p></p>}
                             <img alt='figure2' src={figure2} className="w-16 h-16"></img>
                         </div>
