@@ -402,8 +402,6 @@ gameStart()
       width={window.innerWidth + 'px'} 
       height={window.innerHeight + 'px'} ></Confetti></div>
              }
-
-
             {/* //game grid */}
             <div className='grid grid-cols-5 ' >
                 {content.map(step => (
