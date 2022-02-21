@@ -479,5 +479,4 @@ gameStart()
     )
 }
 
-
 export default MainPage
