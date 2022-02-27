@@ -240,6 +240,8 @@ gameStart()
         }  
     }
     
+
+    
     const setSteps = () => {
         if(p1State.currentRoll + p1State.currentPosition>questions.length){setGameFinsih(!gameFinsih)}
       
