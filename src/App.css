@@ -92,7 +92,7 @@
   left: 0;
   right: 0;
   bottom: 1px;
-  background-color: #ccc;
+  background-color: rgb(117, 114, 114);
   -webkit-transition: .4s;
   transition: .4s;
 }

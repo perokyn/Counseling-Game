@@ -374,8 +374,8 @@ gameStart()
     return (
         <div className='relative grid justify-items-stretch'>
             {!loginComplete&& 
-            <div style={{position:"absolute",zIndex:3, width:"100%",backgroundColor:"gray",height:"100%",opacity:1,display:"flex",justifyItems:"center",padding:"30px",borderRadius:"10px"}}>
-            <div className=' flex flex-col h-96 bg-green-300 p-8 rounded-xl opacity-100 mx-auto'>
+            <div style={{position:"absolute",zIndex:3, width:"100%",backgroundColor:"rgb(26, 213, 219)",height:"100%",opacity:1,display:"flex",justifyItems:"center",padding:"30px",borderRadius:"10px"}}>
+            <div className=' flex flex-col h-96 bg-blue-500 p-8 rounded-xl opacity-100 mx-auto'>
                { localUrl.indexOf('?')<0? <div className='flex flex-col'>
                <textarea id="playerName"placeholder="player name " className=" p-2 text-sm h-10  rounded-xl mb-3" onChange={e=>{setPlayerName(e)}}></textarea>
                 <div className='flex'>
@@ -385,16 +385,16 @@ gameStart()
                    </label>
                     <div className='text-sm text-white pl-3 text-align-center'>{userStarts}</div>
                 </div>
-                <button className='p-3 bg-gray-500 rounded-xl mb-3 text-xl text-white mt-3' onClick={()=>generateCode()}>Generate link</button>
+                <button className='p-3 bg-pink-500 hover:bg-pink-400 rounded-xl mb-3 text-xl text-white mt-3' onClick={()=>generateCode()}>Generate link</button>
                 <textarea placeholder={clientLink} value={clientLink} readOnly={true} className=" p-2 text-sm h-30  rounded-xl mb-3"></textarea>
                 </div>:<div className=' flex flex-col '><textarea id="playerName"placeholder="player " className=" p-2 text-sm h-10  rounded-xl mb-3" onChange={e=>{setPlayerName(e)}}></textarea>
                 <textarea id="clientLink"placeholder="your code " className=" p-2 text-sm h-10  rounded-xl mb-3" onChange={e=>setClientCode(e)} ></textarea></div>}
-                <button className='p-3 bg-blue-200 rounded-xl  text-xl text-white mt-3' onClick={()=>createRoom()}>Login</button>
+                <button className='p-3 bg-green-400 rounded-xl hover:bg-green-300  text-xl text-white mt-3' onClick={()=>createRoom()}>Login</button>
             </div>
             </div>
             }
             <div className=' flex mb-3 '>
-                <div className='p-3'>
+                <div className='p-3 text-blue-500'>
                     Welcome to the game of All about You
                <img alt='3d characters' src={game}></img>
                 </div>

@@ -35,8 +35,8 @@ const location=window.location.href
   return (
     <div className="text-gray-300 text-4xl font-bold grid justify-items-center bg-gray-400">
   {/* <TestDrone data={"hello Propss :)"}/> */}
-     <div className='flex mx-2 p-6'>
-       {data?<HomePage data={data} location={location}/>:<div className='text-4xl text-red-200'>Loading Data from Airtable...</div>}
+     <div className='flex mx-2 p-6 bg-blue-200'>
+       {data?<HomePage data={data} location={location}/>:<div className='text-4xl text-blue-600'>Loading Data from Airtable...</div>}
      </div>
     </div>
   );
