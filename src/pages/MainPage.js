@@ -33,6 +33,7 @@ const MainPage = (props) => {
     const [cubeVisible, setCubeVisible] = useState(true)
     const content = questions
     const [clientLink, setclientLink] = useState('Generate link and forward it to your client')
+    const [airtableCode, setairtableCode] = useState('Enter your AIR table key:')
     const [clientCode, setCode] = useState(0)
     const [room, setRoom] = useState()
     const [drone, setDrone] = useState()
@@ -380,7 +381,7 @@ const MainPage = (props) => {
         <div className='relative grid justify-items-stretch'>
             {!loginComplete &&
                 <div style={{ position: "absolute", zIndex: 3, width: "100%", backgroundColor: "rgb(26, 213, 219)", height: "100%", opacity: 1, display: "flex", justifyItems: "center", padding: "30px", borderRadius: "10px" }}>
-                    <div className=' flex flex-col h-96 bg-blue-500 p-8 rounded-xl opacity-100 mx-auto'>
+                    <div className=' flex flex-col h-2/6 bg-blue-500 p-8 rounded-xl opacity-100 mx-auto'>
                         {localUrl.indexOf('?') < 0 ? <div className='flex flex-col'>
                             <textarea id="playerName" placeholder="player name " className=" p-2 text-sm h-10  rounded-xl mb-3" onChange={e => { setPlayerName(e) }}></textarea>
                             <div className='flex'>
@@ -390,6 +391,7 @@ const MainPage = (props) => {
                                 </label>
                                 <div className='text-sm text-white pl-3 text-align-center'>{userStarts}</div>
                             </div>
+                            <textarea placeholder={airtableCode} value={airtableCode} readOnly={true} className=" p-2 text-sm h-10  rounded-xl mt-3 mb-3"></textarea>
                             <button className='p-3 bg-pink-500 hover:bg-pink-400 rounded-xl mb-3 text-xl text-white mt-3' onClick={() => generateCode()}>Generate link</button>
                             <textarea placeholder={clientLink} value={clientLink} readOnly={true} className=" p-2 text-sm h-30  rounded-xl mb-3"></textarea>
                         </div> : <div className=' flex flex-col '><textarea id="playerName" placeholder="player " className=" p-2 text-sm h-10  rounded-xl mb-3" onChange={e => { setPlayerName(e) }}></textarea>
