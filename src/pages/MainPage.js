@@ -391,7 +391,7 @@ const MainPage = (props) => {
                                 </label>
                                 <div className='text-sm text-white pl-3 text-align-center'>{userStarts}</div>
                             </div>
-                            <textarea placeholder={airtableCode} value={airtableCode} readOnly={true} className=" p-2 text-sm h-10  rounded-xl mt-3 mb-3"></textarea>
+                            <textarea placeholder={airtableCode}   className=" p-2 text-sm h-10  rounded-xl mt-3 mb-3" onChange={value => setairtableCode(value)}></textarea>
                             <button className='p-3 bg-pink-500 hover:bg-pink-400 rounded-xl mb-3 text-xl text-white mt-3' onClick={() => generateCode()}>Generate link</button>
                             <textarea placeholder={clientLink} value={clientLink} readOnly={true} className=" p-2 text-sm h-30  rounded-xl mb-3"></textarea>
                         </div> : <div className=' flex flex-col '><textarea id="playerName" placeholder="player " className=" p-2 text-sm h-10  rounded-xl mb-3" onChange={e => { setPlayerName(e) }}></textarea>
