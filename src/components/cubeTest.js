@@ -54,9 +54,6 @@ setDrone({drone:drone})
         //this.setState({member});
     });
 //t=);
-
-
-
     const room = drone.subscribe('observable-room');
      setRoom({room:room})
      room.on('members', m => {
@@ -68,7 +65,6 @@ setDrone({drone:drone})
        });
 
 }
-
 
 if (room){
     room.room.on('message', message => {
