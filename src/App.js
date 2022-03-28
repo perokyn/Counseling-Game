@@ -7,11 +7,11 @@ function App() {
   
   const Airtable = require('airtable');
   Airtable.configure({
-      endpointUrl: '',
+      endpointUrl: 'https://api.airtable.com',
       apiKey: ''             //old key7CMgeXJp3gxPkG 
   });
   
-const base = require('airtable').base('appC9kYVpX4ewyzZM')
+const base = require('airtable').base('')
 
 if (data){console.log("data is in")}else{
 
@@ -34,9 +34,6 @@ const location=window.location.href
   return (
     <div className="text-gray-300 text-4xl font-normal grid justify-items-center">
   {/* <TestDrone data={"hello Propss :)"}/> */}
-
-
-
   {/* animejs wont work in camel case section, no access to div */}
      <div className='flex mx-2  '>
        { data?<HomePage data={data} location={location}/>:
