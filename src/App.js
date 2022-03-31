@@ -12,9 +12,7 @@ function App() {
   });
   
 const base = require('airtable').base('')
-
 if (data){console.log("data is in")}else{
-
   ;(async () => {
     const records = await base('Counseling')
     .select({
