@@ -1,14 +1,14 @@
 import React, {useState} from 'react'
 import './App.css';
 import HomePage from './pages/Home'
-
+import Loading from './pages/Loading';
 function App() {
   const[data, setdata]=useState()
   
   const Airtable = require('airtable');
   Airtable.configure({
       endpointUrl: 'https://api.airtable.com',
-      apiKey: ''             //old key7CMgeXJp3gxPkG 
+      apiKey: ''             //old  
   });
   
 const base = require('airtable').base('')
