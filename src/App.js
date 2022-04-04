@@ -11,6 +11,7 @@ function App() {
       apiKey: ''             //old  
   });
 const base = require('airtable').base('')
+
 if (data){console.log("data is in")}else{
 
   ;(async () => {
