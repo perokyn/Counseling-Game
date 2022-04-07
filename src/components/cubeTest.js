@@ -1,7 +1,6 @@
 import React, { useState , SetStateAction} from 'react'
 import dice from '../assets/dice.gif'
-
-
+//remember to add anime js and also to use enumeration for action codes
 export const sendMessage_out = (drone,data) => {
     if(drone){ 
         console.log("attempting message")
