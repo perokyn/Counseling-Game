@@ -7,12 +7,10 @@ function App() {
   
   const Airtable = require('airtable');
   Airtable.configure({
-      endpointUrl: '',
-      apiKey: ''            
+      endpointUrl: 'https://api.airtable.com',
+      apiKey: ''             //old  
   });
-  
 const base = require('airtable').base('')
-
 if (data){console.log("data is in")}else{
 
   ;(async () => {
