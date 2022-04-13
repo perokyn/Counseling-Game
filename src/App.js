@@ -12,15 +12,11 @@ function App() {
   });
 const base = require('airtable').base('')
 if (data){console.log("data is in")}else{
-
-
-  
   ;(async () => {
     const records = await base('Counseling')
     .select({
       view: 'Grid view',
     }).firstPage()
-      
    setTimeout(()=>{setdata(records)},1000) 
   
     /*for (const record of records) {
