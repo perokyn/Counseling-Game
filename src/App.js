@@ -7,11 +7,11 @@ function App() {
   
   const Airtable = require('airtable');
   Airtable.configure({
-      endpointUrl: '',
+      endpointUrl: 'https://api.airtable.com',
       apiKey: ''             //old  
   });
   
-const base = require('').base('')
+const base = require('airtable').base('')
 
 if (data){console.log("data is in")}else{
 
@@ -21,7 +21,7 @@ if (data){console.log("data is in")}else{
       view: 'Grid view',
     }).firstPage()
       
-   setTimeout(()=>{setdata(records)},1000) 
+ 
   
     /*for (const record of records) {
       console.log(record.fields)
@@ -36,10 +36,7 @@ const location=window.location.href
   {/* <TestDrone data={"hello Propss :)"}/> */}
   {/* animejs wont work in camel case section, no access to div */}
      <div className='flex mx-2  '>
-       { data?<HomePage data={data} location={location}/>:
- <div className="absolute ">
- <div>Loading AirTable data ...</div>
-  </div>}
+      
      </div>
     </div>
   );
