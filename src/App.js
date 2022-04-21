@@ -8,10 +8,10 @@ function App() {
   const Airtable = require('airtable');
   Airtable.configure({
       endpointUrl: '',
-      apiKey: ''             //old 
+      apiKey: ''             
   });
   
-const base = require('').base('')
+const base = require('airtable').base('')
 
 if (data){console.log("data is in")}else{
 
@@ -23,9 +23,7 @@ if (data){console.log("data is in")}else{
       
    setTimeout(()=>{setdata(records)},1000) 
   
-    /*for (const record of records) {
-      console.log(record.fields)
-    }*/
+    
   })()
 }
 //check if the url has the genrated code to identify client
