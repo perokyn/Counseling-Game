@@ -8,7 +8,7 @@ function App() {
   const Airtable = require('airtable');
   Airtable.configure({
       endpointUrl: '',
-      apiKey: ''             //old  
+      apiKey: ''              
   });
   
 const base = require('').base('')
@@ -16,16 +16,19 @@ const base = require('').base('')
 if (data){console.log("data is in")}else{
 
   ;(async () => {
-    const records = await base('Counseling')
+    const records = await base('')
     .select({
-      view: 'Grid view',
+      view: '',
     }).firstPage()
       
-   setTimeout(()=>{setdata(records)},1000) 
+   setTimeout(()=>{setdata(records)},6000) 
   
+    /*for (const record of records) {
+      console.log(record.fields)
+    }*/
   })()
 }
-
+//check if the url has the genrated code to identify client
 const location=window.location.href
   //console.log("state", data)
   return (
