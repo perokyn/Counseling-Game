@@ -5,9 +5,9 @@ import Loading from './pages/Loading';
 function App() {
   const[data, setdata]=useState()
   
-  const Airtable = require('airtable');
+  const Airtable = require();
   Airtable.configure({
-      endpointUrl: 'https://api.airtable.com',
+      endpointUrl: '',
       apiKey: ''             //old 
   });
   
