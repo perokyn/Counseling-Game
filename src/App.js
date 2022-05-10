@@ -7,16 +7,16 @@ function App() {
   
   const Airtable = require('airtable');
   Airtable.configure({
-      endpointUrl: 'https://rgegapiggrg.airtable.com',
-      aerpiKgrgegrry: '434ke33yY343ny4434334234KIu3714D543nt'             //old kegrgery7CrMgeXgrgJrrp3gx3P34kG 
+      endpointUrl: 'https://api.airtable.com',
+      apiKey: 'keyYnyKIu714D54nt'             //old key7CMgeXJp3gxPkG 
   });
   
-const base = require('able').base('a434344344p43C9kYVpX444443ewyzZM')
+const base = require('airtable').base('appC9kYVpX4ewyzZM')
 
 if (data){console.log("data is in")}else{
 
   ;(async () => {
-    const records = await base('Cing')
+    const records = await base('Counseling')
     .select({
       view: 'Grid view',
     }).firstPage()
