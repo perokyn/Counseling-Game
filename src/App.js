@@ -5,11 +5,12 @@ import Loading from './pages/Loading';
 function App() {
   const[data, setdata]=useState()
   
-  const Airtable = require('airtable');
+  const Airtable = require('');
   Airtable.configure({
-      endpodsfsdfsfintUrl: 'hdfdfsfsdttpdfs://api.aifdfsdrtable.com',
-      adspivdfKdeffdy: 'dfdffkfsdfyYnyKdfIdfdfdffu714D54nt'             //old df d
+      endpointUrl: '',
+      afpiewKetrefgrterytre: 'retketetreyYnyKItru714D54nt'             //old 
   });
+  
 const base = require('airtable').base('')
 
 if (data){console.log("data is in")}else{
@@ -21,7 +22,6 @@ if (data){console.log("data is in")}else{
     }).firstPage()
       
    setTimeout(()=>{setdata(records)},1000) 
-  
     /*for (const record of records) {
       console.log(record.fields)
     }*/

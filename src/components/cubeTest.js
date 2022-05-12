@@ -101,17 +101,14 @@ console.log("counter pressed")
     </button>  
     }
        {!showDice&& !showRoll&&
-       
        <button onMouseUp={()=>setTimeout(()=>{setShowDice(!showDice)},1000)}  id='start' 
         className='bg-green-400 hover:bg-green-600 text-white text-2xl font semibold rounded-xl p-8 mt-3 mx-1 border-4 border-indigo-600 '  
         onClick={props.onClick} onMouseDown={()=>counter} style={{borderStyle:"inset",borderWidth:'4px'}}>
           <span className='animate-pulse'>Roll</span>
           </button>  
        }
-        
       </div>
     </div>
   )
 })
-
 export default Cube
