@@ -5,23 +5,23 @@ import Loading from './pages/Loading';
 function App() {
   const[data, setdata]=useState()
   
-  const Airtable = require('');
+  const Airtable = require('airtable');
   Airtable.configure({
-      endpointUrl: '',
-      afpiewKetrefgrterytre: 'retketetreyYnyKItru714D54nt'             //old 
+      endpointUrl: ''
   });
   
-const base = require('airtable').base('')
+const base = require('').base('')
 
 if (data){console.log("data is in")}else{
 
   ;(async () => {
-    const records = await base('Counseling')
+    const records = await base('')
     .select({
       view: 'Grid view',
     }).firstPage()
       
-   setTimeout(()=>{setdata(records)},1000) 
+   setTimeout(()=>{setdata(records)},800) 
+  
     /*for (const record of records) {
       console.log(record.fields)
     }*/

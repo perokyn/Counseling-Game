@@ -31,14 +31,12 @@ const handleStopRoll=()=>{
 const [player, setPlayer] = useState(
     {
         player: {
-
             id: "player2"
         }
     }
 )
 const createRoom=()=>{
-    const drone = new window.Scaledrone("DJHRuXNgQyi58qY0", {
-       
+    const drone = new window.Scaledrone("DJHRuXNgQyi58qY0", { 
     });
 setDrone({drone:drone})
 
@@ -72,7 +70,6 @@ const sendMessage = () => {
         sendMessage_out(drone,props.currentRoll)
     }
     }
-
 const counter=()=>{
 let num =1;
 setTimeout(()=>{num++
