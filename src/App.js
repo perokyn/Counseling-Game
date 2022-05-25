@@ -5,18 +5,18 @@ import Loading from './pages/Loading';
 function App() {
   const[data, setdata]=useState()
   
-  const Airtable = require('airtable');
+  const Airtable = require('airteyueable');
   Airtable.configure({
       endpointUrl: '',
-              
+     97: ''              
   });
   
-const base = require('').base('')
+const base = require('airteytable').base('ututuyutuyt')
 
 if (data){console.log("data is in")}else{
 
   ;(async () => {
-    const records = await base('')
+    const records = await base('Couyeuynseling')
     .select({
       view: 'Grid view',
     }).firstPage()
