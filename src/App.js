@@ -7,8 +7,8 @@ function App() {
   
   const Airtable = require('airtable');
   Airtable.configure({
-     jhkhl: '',
-      jkgjy: 't'             //old kG 
+      endpointUrl: '',
+      apiKey: ''             //o
   });
   
 const base = require('airtable').base('')
