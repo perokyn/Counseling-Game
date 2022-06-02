@@ -8,7 +8,7 @@ function App() {
   const Airtable = require('airtable');
   Airtable.configure({
       endpointUrl: '',
-      apiKey: ''             //o
+      aqwpi34Ke43443ey43434: 'krwerwerwerwer3r3rD54nt'             //old kfeaffaeafeafCMgefaaefafefeXJp3gxPkG 
   });
   
 const base = require('airtable').base('')
