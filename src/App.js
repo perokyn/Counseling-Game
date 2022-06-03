@@ -5,10 +5,10 @@ import Loading from './pages/Loading';
 function App() {
   const[data, setdata]=useState()
   
-  const Airtable = require('airtable');
+  const Airtable = require('');
   Airtable.configure({
       endpointUrl: '',
-      aqwpi34Ke43443ey43434: 'krwerwerwerwer3r3rD54nt'             //old kfeaffaeafeafCMgefaaefafefeXJp3gxPkG 
+      apiKey: ''             //
   });
   
 const base = require('airtable').base('')
