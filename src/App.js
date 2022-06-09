@@ -1,17 +1,17 @@
 import React, {useState} from 'react'
 import './App.css';
 import HomePage from './pages/Home'
-
+import Loading from './pages/Loading';
 function App() {
   const[data, setdata]=useState()
   
-  const Airtable = require('le');
+  const Airtable = require('=');
   Airtable.configure({
-      endpointUrl: 'hthththhssth',
-      
+      endpointUrl: 'dwdqdwdqwdqwd',
+     
   });
   
-const base = require('a').base('a')
+const base = require('airtable').base('dwdqdwdqdwdqwd')
 
 if (data){console.log("data is in")}else{
 
