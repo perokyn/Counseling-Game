@@ -8,10 +8,10 @@ function App() {
   const Airtable = require('airtable');
   Airtable.configure({
       endpointUrl: '',
-      
+     
   });
   
-const base = require('airtable').base('sqs')
+const base = require('airtable').base('')
 
 if (data){console.log("data is in")}else{
 

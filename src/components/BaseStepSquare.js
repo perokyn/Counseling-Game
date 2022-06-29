@@ -1,14 +1,10 @@
 import React, {useState} from 'react'
 
 const BaseStepSquare=React.forwardRef((props, ref)=>{
-
     const randomColor =()=>{
-        
     const color=Math.floor(Math.random()*16777215).toString(16);
-   
     return "#" + color.toString();
   }
-
     const newColor=randomColor()
 return(
 
