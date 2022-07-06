@@ -8,7 +8,7 @@ function App() {
   const Airtable = require('airtable');
   Airtable.configure({
       endpointUrl: '',
-      apiKey: ''             //old  
+     iii:'ioi'
   });
   
 const base = require('airtable').base('')
@@ -16,7 +16,7 @@ const base = require('airtable').base('')
 if (data){console.log("data is in")}else{
 
   ;(async () => {
-    const records = await base('')
+    const records = await base('Counseling')
     .select({
       view: 'Grid view',
     }).firstPage()
