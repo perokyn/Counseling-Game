@@ -7,16 +7,15 @@ function App() {
   
   const Airtable = require('airtable');
   Airtable.configure({
-      endpointUrl: '',
       
   });
   
-const base = require('airtable').base('fefwfe')
+const base = require('airtable').base('jyrjryrj7yrrjyy')
 
 if (data){console.log("data is in")}else{
 
   ;(async () => {
-    const records = await base('fewwfw')
+    const records = await base('Counseling')
     .select({
       view: 'Grid view',
     }).firstPage()
