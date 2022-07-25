@@ -5,13 +5,13 @@ import Loading from './pages/Loading';
 function App() {
   const[data, setdata]=useState()
   
-  const Airtable = require('ar32r3');
+  const Airtable = require('airtable');
   Airtable.configure({
       endpointUrl: '',
-      
+              
   });
   
-const base = require('ar323r32r2').base('ar3r23r23')
+const base = require('agggrabagaegle').base('grageag')
 
 if (data){console.log("data is in")}else{
 
