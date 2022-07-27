@@ -7,27 +7,27 @@ function App() {
   
   const Airtable = require('airtable');
   Airtable.configure({
-      endpointUrl: '',
-     
+      endpointUrl: 'https://api.airtable.com',
+                   //old k
   });
   
-const base = require('adwqd').base('dwdqdwqd')
+//const base = require('airtable').base('')
 
-if (data){console.log("data is in")}else{
+// if (data){console.log("data is in")}else{
 
-  ;(async () => {
-    const records = await base('dwqd')
-    .select({
-      view: 'Grid view',
-    }).firstPage()
+//   ;(async () => {
+//     const records = await base('Counseling')
+//     .select({
+//       view: 'Grid view',
+//     }).firstPage()
       
-   setTimeout(()=>{setdata(records)},1000) 
+//    setTimeout(()=>{setdata(records)},1000) 
   
-    /*for (const record of records) {
-      console.log(record.fields)
-    }*/
-  })()
-}
+//     /*for (const record of records) {
+//       console.log(record.fields)
+//     }*/
+//   })()
+// }
 //check if the url has the genrated code to identify client
 const location=window.location.href
   //console.log("state", data)
