@@ -11,7 +11,7 @@ function App() {
       
   });
   
-const base = require('airtable').base('ddwqdqwddqw')
+const base = require('ddd').base('fdfdsdfsfs')
 
 if (data){console.log("data is in")}else{
 
