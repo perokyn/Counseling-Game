@@ -5,13 +5,13 @@ import Loading from './pages/Loading';
 function App() {
   const[data, setdata]=useState()
   
-  const Airtable = require('airtable');
+  const Airtable = require('');
   Airtable.configure({
-      endpointUrl: 'fefwfewfwf',
+  endpointUrl: '',
       
   });
   
-const base = require('airtable').base('1234')
+const base = require('airtable').base('')
 
 if (data){console.log("data is in")}else{
 
