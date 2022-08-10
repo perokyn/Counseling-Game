@@ -18,9 +18,8 @@ const handleStopRoll=()=>{
 {showDice ?
     <p style={{color:'black',backgroundColor:"whitesmoke"}}>
 rolling dice
-    </p>  :<p></p>
+    </p> :<p></p>
     }
-    
       <div className='flex jsutify-between'>
       {showDice &&
     <button onMouseDown={props.onMouseDown} onClick={handleStopRoll} id='stop'
@@ -35,11 +34,9 @@ rolling dice
           <span className='animate-ping'>Rolls</span>
           </button>
        }
-        
       </div>
     </div>
   )
 })
-
 
 export default Cube
