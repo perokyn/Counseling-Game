@@ -4,7 +4,6 @@ import anime from 'animejs';
 
 function Loading() {
 
-
 anime ({
   targets: 'div.box',
   translateY: [
@@ -23,7 +22,6 @@ anime ({
   elasticity: 200 
  
 }); 
-
 return(
  <div id="boxes">
         <div class="box red"></div>
@@ -33,6 +31,4 @@ return(
   </div>
 )
 }
-
-
 export default Loading;
