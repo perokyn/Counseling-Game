@@ -1,11 +1,9 @@
 
 import React, { Component, useState, useEffect } from "react";
 
-
 ///   TO_DO TRANSPLANT this to MainPage and connection is ready between the two players :)
 //SOLVE MULTIPLE RENDERINGS IN MAIN PAGE it causes multiple signups to scaledrone!
 //JUSt call this function and do not render it with main page
-
 export const sendMessage_out = (drone,data) => {
     if(drone){ 
         console.log("attempting message")

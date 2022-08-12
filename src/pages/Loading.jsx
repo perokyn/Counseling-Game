@@ -20,7 +20,6 @@ anime ({
   autoplay: true,
   loop: true,
   elasticity: 200 
- 
 }); 
 return(
  <div id="boxes">
