@@ -21,9 +21,7 @@ const sendMessage_out = (drone, player, data) => {
         });
     }
 }
-
 const MainPage = (props) => {
-
     const localUrl = props.location.toString()
     const [userStarts, setUserStarts] = useState('Admin starts')
     const [questions, setQuestions] = useState(props.data)
@@ -65,7 +63,6 @@ const MainPage = (props) => {
             setOthePlayerPlaying(!othePlayerPlaying)
         }
     }
-
     //Generate link and code for client
     const generateCode = () => {
         let start //variable to check by client to show the cube or not
@@ -74,7 +71,6 @@ const MainPage = (props) => {
         } else { start = 0 }
         setclientLink(props.location + '?' + (Math.floor(Math.random() * 10000) + 10000).toString().substring(1) + start)
     }
-
     //compare client and url code to complete login                    
     const compareCode = () => {
         if (localUrl.indexOf('?') > 0) {
