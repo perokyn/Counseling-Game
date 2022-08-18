@@ -1,9 +1,6 @@
 import React, {useState} from 'react'
-
 import anime from 'animejs';
-
 function Loading() {
-
 anime ({
   targets: 'div.box',
   translateY: [
