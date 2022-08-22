@@ -43,12 +43,10 @@ const MainPage = (props) => {
     const [player2Name, setPlayer2Name] = useState("")
     let members = []
 
-
     const setClientCode = (e) => {
 
         setCode(e.target.value)
     }
-
     const [player, setPlayer] = useState({ player: { id: "" } })
     const setPlayerName = e => {
         setPlayer({
@@ -90,8 +88,6 @@ const MainPage = (props) => {
             }
         }
     }
-
-
     const [p1State, setP1State] = useState({
         id: '1',
         playing: false,
