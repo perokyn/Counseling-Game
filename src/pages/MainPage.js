@@ -100,6 +100,7 @@ const MainPage = (props) => {
         finished: false
     })
     //===PLAYERE 2 LOGIC======================\\
+    //==========================================
     //p2 state
     const [p2State, setP2State] = useState({
         id: '2',
