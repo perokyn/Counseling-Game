@@ -18,6 +18,7 @@ anime ({
   loop: true,
   elasticity: 200 
 }); 
+// loading page inserted
 return(
  <div id="boxes">
         <div class="box red"></div>
@@ -27,4 +28,5 @@ return(
   </div>
 )
 }
+
 export default Loading;
