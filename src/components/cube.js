@@ -1,6 +1,5 @@
 import React, { useState , SetStateAction} from 'react'
-import {TestDrone} from './testDrone_old'
-
+// import {TestDrone} from './testDrone_old'
 const Cube = React.forwardRef((props, ref) => {
 const[showRoll, setShowRoll]=useState(false)
 const[showDice, setShowDice]=useState(false)
