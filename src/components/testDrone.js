@@ -32,7 +32,6 @@ export const TestDrone = (props) => {
              
         }
     },[])
-    
     const [player, setPlayer] = useState(
         {
             player: {
@@ -41,9 +40,6 @@ export const TestDrone = (props) => {
             }
         }
     )
-
-
-
     const createRoom=()=>{
         const drone = new window.Scaledrone("DJHRuXNgQyi58qY0", { 
         });
@@ -54,7 +50,6 @@ export const TestDrone = (props) => {
             }
             const player1 = { ...player.player };
             player1.id = drone.clientId;
-            //this.setState({member});
         });
         const room = drone.subscribe('observable-room');
          setRoom({room:room})
