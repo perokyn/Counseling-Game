@@ -81,7 +81,6 @@ if(drone){
     sendMessage_out(drone,props.data)
 }
 }
-
     // const sendMessage = () => {
     //     if(drone){ 
             
@@ -92,16 +91,10 @@ if(drone){
     //           name: "player",
     //           content: "lets wrokout"
     //         }
-    //       });}
-       
+    //       });}  
 
     // }
-
-
-
     return (
-
-
 
         <div className='p-10 bg=green-200 text-xl text-white font-bol'> Scaledrone text
             <button className='rounded-xl p-3 bg-blue-400'
@@ -112,11 +105,6 @@ if(drone){
                 <button className='rounded-xl p-3 bg-blue-400'
                  onClick={(e) => { createRoom() }}>
                  Login</button>
-
-                
-
-
-
         </div>
     )
 }
