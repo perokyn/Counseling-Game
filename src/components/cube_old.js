@@ -3,22 +3,11 @@ import $ from "jquery";
 import Emitter from '../utils/SpecialEvents'
 
 const Cube = React.forwardRef((props, ref) => {
-
-
-
 const[timesRolled, setTimesRolled]=useState(0)
-
-
   let incr = 1
-
   const roll = () => {
     //console.log("startshow called",`show${incr}`)
-
-
-
     $('#cube').attr("class", `show${incr}`);
-
-
 
     if (incr === 6) {
       incr = 1
@@ -27,7 +16,6 @@ const[timesRolled, setTimesRolled]=useState(0)
       incr++
 
     }
-
 
 
 
