@@ -8,7 +8,6 @@ const[timesRolled, setTimesRolled]=useState(0)
   const roll = () => {
     //console.log("startshow called",`show${incr}`)
     $('#cube').attr("class", `show${incr}`);
-
     if (incr === 6) {
       incr = 1
 
@@ -16,18 +15,9 @@ const[timesRolled, setTimesRolled]=useState(0)
       incr++
 
     }
-
-
-
   }
 
-
-
-
-
-
-
-
+// formatted
   $(function () {
 
     let timing = 500;
