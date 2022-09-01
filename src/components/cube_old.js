@@ -16,20 +16,13 @@ const[timesRolled, setTimesRolled]=useState(0)
 
     }
   }
-
 // formatted
   $(function () {
-
     let timing = 500;
     let interval
-
     $("#start").click(function () {
-
-
       interval = setInterval(function () {
-
         roll()
-
       }, timing)
 
     });
