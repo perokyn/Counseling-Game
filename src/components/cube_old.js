@@ -28,17 +28,13 @@ const[timesRolled, setTimesRolled]=useState(0)
     });
 
     $("#stop").click(function () {
-
-      clearInterval(interval);
-
+      clearInterval(interval)
       const className = $('#cube').attr('class');
       console.log("current umber ",className ) 
       setTimesRolled(timesRolled+1)//keeping track number of rolls plus initiate re-render even if the rolled number === to value stored in currentRoll
-
       Emitter.emit('ROLLED', [className,timesRolled])
 
     });
-
   });
 
 
