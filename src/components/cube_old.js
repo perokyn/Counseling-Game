@@ -26,7 +26,7 @@ const[timesRolled, setTimesRolled]=useState(0)
       }, timing)
 
     });
-
+// UPDATED FOR FORMATE
     $("#stop").click(function () {
       clearInterval(interval)
       const className = $('#cube').attr('class');
