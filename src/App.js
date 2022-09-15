@@ -29,7 +29,7 @@ const location=window.location.href
   //console.log("state", data)
   return (
     <div className="text-gray-300 text-4xl font-normal grid justify-items-center">
-  {/* <TestDrone data={"hello Propss :)"}/> */}
+
   {/* animejs wont work in camel case section, no access to div */}
      <div className='flex mx-2  '>
        { data?<HomePage data={data} location={location}/>:
@@ -40,4 +40,5 @@ const location=window.location.href
     </div>
   );
 }
+
 export default App;
