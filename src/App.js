@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import './App.css';
 import HomePage from './pages/Home'
-import Loading from './pages/Loading';
+// import Loading from './pages/Loading';
 function App() {
   const[data, setdata]=useState()
   
@@ -29,7 +29,6 @@ const location=window.location.href
   //console.log("state", data)
   return (
     <div className="text-gray-300 text-4xl font-normal grid justify-items-center">
-
   {/* animejs wont work in camel case section, no access to div */}
      <div className='flex mx-2  '>
        { data?<HomePage data={data} location={location}/>:
