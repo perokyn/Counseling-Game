@@ -4,13 +4,11 @@ import HomePage from './pages/Home'
 // import Loading from './pages/Loading';
 function App() {
   const[data, setdata]=useState()
-  
+
   const Airtable = require('');
   Airtable.configure({
-  endpointUrl: '',
-      
+  endpointUrl: '',  
   });
-  
 const base = require('airtable').base('')
 if (data){console.log("data is in")}else{
   ;(async () => {
