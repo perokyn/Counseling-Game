@@ -4,7 +4,6 @@ import HomePage from './pages/Home'
 // import Loading from './pages/Loading';
 function App() {
   const[data, setdata]=useState()
-
   const Airtable = require('');
   Airtable.configure({
   endpointUrl: '',  
@@ -24,7 +23,7 @@ if (data){console.log("data is in")}else{
 }
 //check if the url has the genrated code to identify client
 const location=window.location.href
-  //console.log("state", data)
+  //console.log("state", data)//
   return (
     <div className="text-gray-300 text-4xl font-normal grid justify-items-center">
   {/* animejs wont work in camel case section, no access to div */}
