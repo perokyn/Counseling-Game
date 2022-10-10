@@ -70,14 +70,10 @@ if (room){
         console.log("message yaaay", message)
     });
 }
-
-
-
-
+//----------------------------------------------------------------
 //CONENCTION SUCCESSFUL CONTINUE FROM HERE BY PASSING ROLL NUMBERS
 const sendMessage = () => {
-if(drone){ 
-            
+if(drone){     
     sendMessage_out(drone,props.data)
 }
 }
